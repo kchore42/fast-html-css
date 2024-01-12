@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body{
     margin: 0;
     padding: 0;
@@ -35,3 +36,9 @@ body{
     display: block;
     clear: both;
 }
+=======
+body {
+    background: yellowgreen;
+
+}
+>>>>>>> bf35154370c3b8dd7fc8589205f6d91dfc6e5eb9
