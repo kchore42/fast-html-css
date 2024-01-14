@@ -40,7 +40,7 @@ embeded
 <body>
     <div style="color: red;">안녕하세요!</div>
 </body>
-</html>
+</html> ㅁㅇㄹ ㄴㄹㄴㅇㄹㄴ 
 EUC-KR: 완성형
     박  영 웅
 UTF-8: 조합형
