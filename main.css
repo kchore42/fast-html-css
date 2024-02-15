@@ -1,44 +1,6 @@
-<<<<<<< HEAD
-body{
-    margin: 0;
-    padding: 0;
+b {
+    font-weight: normal;
 }
-.header {
-    background: white;
-    border-bottom: 1px solid lightgray;
+em {
+    font-style: normal;
 }
-.container {
-    width: 980px;
-    margin: auto;
-    padding: 20px 0;
-}
-.container-left{
-    padding-top: 20px;
-    padding-bottom: 20px;
-
-}
-.logo {
-    float:left
-}
-.logo img {
-    display: block;
-}
-.menu {
-    float:left
-}
-.menu-item {
-        float: left;
-        /* margin-left: 10px; */
-        padding: 8px 10px;
-}
-.clearfix::after {
-    content: "";
-    display: block;
-    clear: both;
-}
-=======
-body {
-    background: yellowgreen;
-
-}
->>>>>>> bf35154370c3b8dd7fc8589205f6d91dfc6e5eb9
