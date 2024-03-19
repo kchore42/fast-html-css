@@ -1,11 +1,11 @@
-table {
-    border-collapse: collapse;
+input {
+    width: 100px;
+    outline: none;
+    border: 1px solid lightgray;
+    padding: 5px 10px;
+    transition: 0.4s;
 }
-td {
-    border: 1px solid red;
-    padding: 10px;
-}
-th {
-    border: 1px solid red;
-    padding: 10px;
+input:focus {
+    border-color: red;
+    width: 200px;
 }
