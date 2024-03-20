@@ -1,6 +1,6 @@
-.fruits {
+ul {
     font-size: 40px;
 }
-.fruits li:not(.strawberry){
-    color: red;
+ul li::after {
+    content: url("");
 }
