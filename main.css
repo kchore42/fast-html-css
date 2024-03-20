@@ -1,10 +1,4 @@
-div {
-    font-size: 100;
-}
-div::before {
-    content: "<";
-}
-    
-div::after {
-    content:">";
+[disabled] {
+    opacity: 0.5; /* 20% */ 
+    color: red;
 }
