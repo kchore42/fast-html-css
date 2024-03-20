@@ -1,6 +1,10 @@
-ul {
-    font-size: 400px;
+div {
+    font-size: 100;
 }
-ul li::after {
-    content: url("https://heropy.blog/css/images/logo.png");
+div::before {
+    content: "<";
+}
+    
+div::after {
+    content:">";
 }
