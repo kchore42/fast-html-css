@@ -1,4 +1,4 @@
-[disabled] {
-    opacity: 0.5; /* 20% */ 
+[type="password"] {
+    opacity: 0.5;
     color: red;
 }
