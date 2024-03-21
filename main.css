@@ -1,4 +1,4 @@
-[type="password"] {
-    opacity: 0.5;
-    color: red;
+[class^="btn-"] {
+    font-weight: bold;
+    border-radius: 20px;;
 }
