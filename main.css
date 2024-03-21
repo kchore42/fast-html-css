@@ -1,12 +1,18 @@
+html {
+    font-size: 10px;
+}
 body * {
     border: 2px solid;
 }
 .container {
-    width: 600px;
+    width: 60em;
+    font-size: 15px;
 }
 .parent {
-    width: 300px;
+    width: 30em;
+    font-size: 2em; 
 }
 .child {
-    width: 150px;
+    width: 20rem;
+    font-size: 2em;
 }
