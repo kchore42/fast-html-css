@@ -1,15 +1,3 @@
-.parent {
-  width: 300px;
-  height: 250px;
-  background: blue;
-}
-.parent .child {
-  width: 100px;
-  height: 100px;
-  background: tomato;
+p {
   font-size: 40px;
-  opacity: 1;
-}
-.parent .child:nth-child(1) {
-  display: none;
 }
