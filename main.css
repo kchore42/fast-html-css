@@ -1,6 +1,7 @@
-span {
-  display: block;
+input {
   width: 200px;
   height: 200px;
+  margin: 50px o;
+  padding: 20px;
   background: orange;
 }
