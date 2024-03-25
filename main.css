@@ -1,13 +1,6 @@
-.parent {
-
+div {
+  width: 60px;
+  height: 80px;
+  background: tomato;
+  padding: 10px 20px;s
 }
-.child {
-    width: 100px;
-    height: 100px;
-    background: tomato;
-    float: left;
-    margin: ;
-    padding: ;
-    
-}
-ddfd
