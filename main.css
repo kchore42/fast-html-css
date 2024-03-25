@@ -1,7 +1,16 @@
-input {
-  width: 200px;
-  height: 200px;
-  margin: 50px o;
-  padding: 20px;
-  background: orange;
+.parent {
+  width: 300px;
+  height: 250px;
+  border: 4px solid;
+  overflow: visible;
+}
+.parent .child {
+  width: 100px;
+  height: 100px;
+  background: tomato;
+  border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
 }
