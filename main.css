@@ -1,2 +1,14 @@
-div {
-word-spacing: 30px;
+article {
+
+}
+article .picture {
+  width: 200px;
+  height: 150px;
+  background: tomato;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+article .text {
+  clear: left;
+}
