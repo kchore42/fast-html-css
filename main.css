@@ -1,17 +1,7 @@
-.clearfix::after {
-  content: "";
-  clear:both;
-  display: block;
-}
-.float-box {
+span {
   width: 100px;
   height: 100px;
-  background: orange;
-  margin: 10px;
-  float:left
-}
-.new-box {
-  width: 250px;
-  height: 250px;
-  background: red;
+  margin: 20px;
+  background: tomato;
+  float: left;
 }
