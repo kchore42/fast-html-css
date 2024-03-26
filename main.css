@@ -1,7 +1,16 @@
-span {
-  width: 100px;
+.parent {
+  width: 400px;
+  height: 300px;
+  border: 4px dashed lightgray;
+  position: relative;
+}
+.child {
+  width: 150px;
   height: 100px;
-  margin: 20px;
   background: tomato;
-  float: left;
+  border: 4px dashed red;
+  border-radius: 10px;
+  position: absolute;
+  right: 50px;
+  bottom: 100px;
 }
