@@ -1,15 +1,17 @@
-.box {
-  width: 150px;
-  height: 100px;
-  background: tomato;
-  color: white;
-  font-size: 30px;
-  margin: 10px;
-  float: right;
+.clearfix::after {
+  content: "";
+  clear:both;
+  display: block;
 }
-.box4 {
-  width: 200px;
-  height: 150px;
+.float-box {
+  width: 100px;
+  height: 100px;
   background: orange;
-  clear: both;
+  margin: 10px;
+  float:left
+}
+.new-box {
+  width: 250px;
+  height: 250px;
+  background: red;
 }
