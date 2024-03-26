@@ -1,15 +1,3 @@
 div {
-  font-size: 60px;
-}
-.serif {
-  font-family: serif;
-}
-.sans-serif {
-  font-family: sans-serif;
-}
-.monospace {
-  font-family: monospace;
-}
-.cursive {
-  font-family: cursive;
+  text-align: justify;
 }
