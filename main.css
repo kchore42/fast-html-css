@@ -7,7 +7,8 @@
   align-items: center;
   font-size: 30px;
   transition: 1s;
+  margin: 100px;
 }
 .box:hover {
-  transform: translate(30px, 30px);
+  transform: skewY(20deg);
 }
