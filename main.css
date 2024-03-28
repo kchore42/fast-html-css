@@ -2,17 +2,12 @@
   width: 100px;
   height: 100px;
   background: tomato;
-  margin: 50px;
-  transition: 2s steps(4);
-
-  /* transition-property: width, background; 
-  /* (??) */
-  transition-duration: 1s; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  transition: 1s;
 }
 .box:hover {
-  width: 300px;
-  background: dodgerblue;
+  transform: translate(30px, 30px);
 }
-
-
-transition - property, duration, timig-function, delay
