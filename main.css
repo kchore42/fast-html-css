@@ -1,15 +1,13 @@
-section {
-  height: 3000px;
+.container {
+  width: 400px;
+  height: 300px;
+  border: 4px solid red ;
+  margin: 50px;
+  overflow: auto;
+  background-image: url(https://heropy.blog/css/images/logo.png);
+  background-size: 50%;
+  background-attachment: local;
 }
-.section2 {
-  background-image: url(https://image.istarbucks.co.kr/upload/common/img/main/2024/2024_4_dreamy_pick_img.png);
-  background-size: auto 100%;
-  background-position: right bottom;
-  background-attachment: fixed;
-}
-.section3 {
-  background-image: url(https://image.istarbucks.co.kr/common/img/menu/menu_bimg2.jpg);
-  background-size: auto 100%;
-  background-position: right bottom;
-  background-attachment: fixed;
+.for-scroll {
+  height: 2000px;
 }
