@@ -12,3 +12,11 @@
 .box:hover {
   transform: translate(200px, 100px) skewY(20deg);
 }
+
+img {
+    width: 300px;
+    border: 1px solid lightgray;
+    transition: 1s;
+    transform: perspective(500px) rotateY(45deg);
+
+}
