@@ -3,7 +3,8 @@
   height: 100px;
   background: tomato;
   margin: 50px;
-  transition: width 1s, background 1s;
+  transition: 2s ease;
+
   /* transition-property: width, background; 
   /* (??) */
   transition-duration: 1s; */
@@ -12,3 +13,6 @@
   width: 300px;
   background: dodgerblue;
 }
+
+
+transition - property, duration, timig-function, delay
