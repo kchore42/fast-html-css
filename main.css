@@ -5,7 +5,8 @@
   height: 350px;
   border: 2px dashed lightgray;
   background-size: 100px;
-  background-repeat: repeat-x;
+  background-repeat: no-repeat;
+  background-position: 100% 100px ; 
 }
 
   background: 색상 이미지경로 반복 위치 스크롤특성;
