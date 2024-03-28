@@ -10,5 +10,5 @@
   margin: 100px;
 }
 .box:hover {
-  transform: skewY(20deg);
+  transform: translate(200px, 100px) skewY(20deg);
 }
