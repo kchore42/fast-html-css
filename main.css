@@ -1,7 +1,13 @@
-span {
-  width: 400px;
-  height: 400px;
-  background: tomato;
-  margin:  50px;
-  position: fixed;
+.box {
+  background-image: 
+    url(https://heropy.blog/css/images/vendor_icons/css3.png);
+    background-repeat: no-repeat;
+  width: 700px;
+  height: 500px;
+  border: 2px dashed lightgray;
 }
+
+  background: 색상 이미지경로 반복 위치 스크롤특성;
+  background-color
+  background-image: url(경로);
+  width: 120px;
