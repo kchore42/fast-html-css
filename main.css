@@ -1,10 +1,11 @@
 .box {
   background-image: 
-    url(https://heropy.blog/css/images/vendor_icons/css3.png);
-    background-repeat: no-repeat;
-  width: 700px;
-  height: 500px;
+    url(https://heropy.blog/css/images/logo.png);
+  width: 550px;
+  height: 350px;
   border: 2px dashed lightgray;
+  background-size: 100px;
+  background-repeat: repeat-x;
 }
 
   background: 색상 이미지경로 반복 위치 스크롤특성;
