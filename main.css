@@ -1,10 +1,29 @@
+.perspective {
+  width: 200px;
+  perspective: 500px;
+  padding: 70px;
+}
+.grand-parent {
+  width: 200px;
+  border: 3px solid dodgerblue;
+  transition: 1s;
+  transform: rotateX(-45deg);
+  transform-style: preserve-3d;
 
+}
+.parent {
+  width: 200px;
+  border: 3px solid tomato;
+  transition: 1s;
+  transform: rotateY(45deg)
+}
 img {
-    width: 200px;
-    border: 1px solid lightgray;
-    transition: 1s;
-    transform: rotate(45deg);
-    transform-origin: 100% 100%; = bottom right
+  width: 200px;
+  border: 3px solid lightgray;
+  transition: 1s;
+  transform: rotate(45deg);
+  
 
-
-    x축과 y축은 반대 방향ㅠㅐ
+}
+    x축과 y축은 반대 방향
+    trnasform 기본값 flat
