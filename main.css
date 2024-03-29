@@ -1,22 +1,10 @@
-.box {
-  width: 100px;
-  height: 100px;
-  background: tomato;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
-  transition: 1s;
-  margin: 100px;
-}
-.box:hover {
-  transform: translate(200px, 100px) skewY(20deg);
-}
 
 img {
-    width: 300px;
+    width: 200px;
     border: 1px solid lightgray;
     transition: 1s;
-    transform: perspective(500px) rotateY(45deg);
+    transform: rotate(45deg);
+    transform-origin: 100% 100%; = bottom right
 
-}
+
+    x축과 y축은 반대 방향ㅠㅐ
