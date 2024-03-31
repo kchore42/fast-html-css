@@ -22,8 +22,9 @@ img {
   border: 3px solid lightgray;
   transition: 1s;
   transform: rotate(45deg);
-  
+
 
 }
     x축과 y축은 반대 방향
     trnasform 기본값 flat
+    ex
