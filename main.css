@@ -1,32 +1,8 @@
-.perspective {
-  width: 200px;
-  perspective: 600px;
-  perspective-origin: 200% 100%;
-  padding: 70px;
-}
-.grand-parent {
-  width: 200px;
-  border: 3px solid dodgerblue;
-  transition: 1s;
-  transform: rotateX(-45deg);
-  transform-style: preserve-3d;
-
-}
-.parent {
-  width: 200px;
-  border: 3px solid tomato;
-  transition: 1s;
-  transform: rotateY(45deg)
-}
 img {
   width: 200px;
-  border: 3px solid lightgray;
+  border: 1px solid lightgray;
   transition: 1s;
-  transform: rotate(45deg);
-
-
+  transform: perspective(400px) rotateY(180deg);
+  backface-visibility: hidden;
 }
-    x축과 y축은 반대 방향
-    trnasform 기본값 flat
-    perspective 속성은 관찰 대상의 부모(조상)요소에 적용하여 하위 요소들을 관찰하는 원근 거리를 설정
-    transform: perspective()변환 함수는 관찰 대상에 직접 적용하여 그 대상을 관찰하는 원근 거리를 설정
+    backface-visibility 3D 변환으로 회전된 요소의 뒷면 숨김을 설정
