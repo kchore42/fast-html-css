@@ -1,9 +1,39 @@
-img {
-  width: 200px;
+.cards {
+width: 150px;
+}
+.card {
+  width: 150px
+  height: 220px;
+  position: relative;
+}
+.card .face {
+  width: 150px;
+  height: 220px;
   border: 1px solid lightgray;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: 1s;
-  transform: perspective(400px) rotateY(180deg);
+  position: absolute;
   backface-visibility: hidden;
 }
-  matrix(a,b,,c,d,e,f)
-  요소의 2차원 변환효과를 지정 / sclae(), skew(), translate() rotate()
+.card .face-front{
+  transform: rotateY(0deg);
+}
+.card:hover .face-front{
+  transform: rotateY(180deg);
+  
+}
+.card .face-back{ 
+  transform: rotateY(180deg);
+}
+.card:hover .face-back{
+  transform: rotateY(0deg);
+}
+.card .face-front img {
+  width: 90px;
+}
+.card .face-back img {
+  height: 120px;
+} 
