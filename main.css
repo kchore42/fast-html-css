@@ -5,4 +5,5 @@ img {
   transform: perspective(400px) rotateY(180deg);
   backface-visibility: hidden;
 }
-    backface-visibility 3D 변환으로 회전된 요소의 뒷면 숨김을 설정
+  matrix(a,b,,c,d,e,f)
+  요소의 2차원 변환효과를 지정 / sclae(), skew(), translate() rotate()
