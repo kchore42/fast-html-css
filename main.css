@@ -1,6 +1,7 @@
 .perspective {
   width: 200px;
-  perspective: 500px;
+  perspective: 600px;
+  perspective-origin: 200% 100%;
   padding: 70px;
 }
 .grand-parent {
