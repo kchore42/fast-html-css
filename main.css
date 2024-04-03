@@ -1,49 +1,17 @@
-.cards {
- padding:20px;
+.box {
+  width: 100px;
+  height: 100px;
+  background: tomato;
 }
-.card {
-  width: 150px;
-  height: 220px;
-  position: relative;
-  float: left;
-  margin-right: 15px;
+.box:hover {
+  animation: first-animation 2s infinite alternate;
 }
-.card :last-child {
-  margin-right: 0;
+
+@keyframes first-animation {
+  0% {
+    width: 100px;
+  }
+  100% {
+    width: 500px;
+  }
 }
-.card .face {
-  width: 150px;
-  height: 220px;
-  border: 1px solid lightgray;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 1s;
-  position: absolute;
-  backface-visibility: hidden;
-  background-color: white;
-}
-.card .face-front{
-  background-image: ;
-  background: url( https://heropy.blog/css/images/pattern.png);
-  transform: rotateY(0deg);
-}
-.card:active .face-front{
-  transform: rotateY(-180deg);
-  
-}
-.card .face-back{ 
-  transform: rotateY(180deg);
-}
-.card:active .face-back{
-  transform: rotateY(0deg);
-}
-.card .face-front img {
-  width: 90px;
-  filter: grayscale();
-  opacity: .7;
-}
-.card .face-back img {
-  height: 120px;
-} 
