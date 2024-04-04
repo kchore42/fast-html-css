@@ -1,40 +1,29 @@
 .box {
-  width: 150px;
+  width: 100px;
   height: 100px;
+  background: tomato;
   border-radius: 10px;
-  margin: 10px;
-  color: white;
-  font-size: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.box1{ background: tomato;}
-.box2{ background: dodgerblue;}
-.box3{ background: yellowgreen;}
-
-.box1:hover {
-  animation: size-up 1s 2 alternate linear 0s;
+  margin: 30px;
+  animation: movemove 2s;
   animation-timing-function: linear;
-  animation-delay: 0s;
-
-}
-.box2:hover {
-  animation: size-up 1s 2 alternate;
-  animation-timing-function: linear;
-  animation-delay: 1s;
-}
-.box3:hover {
-  animation: size-up 1s 2 alternate;
-  animation-timing-function: linear;
-  animation-delay: -1s;
+  animation-iteration-count: 2;
+  animation-direction: alternate-reverse;
 }
 
-@keyframes size-up {
+@keyframes movemove {
   0% {
-    width: 150px;
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(100px, 0);
+  } 
+  50% {
+    transform: translate(100px, 100px);
+  } 
+  75% {
+    transform: translate(0, 100px);
   }
   100% {
-    width: 500px;
+    transform: translate(o, o);
   }
 }
