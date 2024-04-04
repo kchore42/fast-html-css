@@ -1,6 +1,6 @@
 .container {
  border: 2px solid red;
- display:flex
+ display:inline-flex
 }
 .container .item {
   width: 100px;
@@ -8,3 +8,5 @@
   border: 2px solid;
   border-radius: 10px;
 }
+
+display: inline-flex
