@@ -6,6 +6,9 @@
   "header header header"
   "main mains aside"
   ". footer footer";
+  row-gap: 30px;
+  column-gap: 15px;
+  gap: 30px 15px;
 
 }
 .item {
