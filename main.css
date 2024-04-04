@@ -6,12 +6,6 @@
   height: 100px;
   background: tomato;
   border: 4px dashed red;
-  flex-grow: 1;
-  flex-basis: 0;
-}
-.container .item3 {
-  flex-grow: 2;
+  flex: 1; (다름 flex 1 1 auto)
 }
 
-
-Flex Items 속성 - flex-shrink: 감소너비
