@@ -10,3 +10,13 @@
 }
 
 display: inline-flex
+Flex Container 속성 - flex-row, flex-direction
+Row: 수평
+Column: 수직
+
+주축과 교차축, 시작잠과 끝점
+
+Main start(flex-start)
+Main end(flex-end)
+
+Flex-warp:nowarp(default), warp, warp-reverse
