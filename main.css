@@ -1,8 +1,10 @@
-p {
-  color: red;
-  text-align: justify;
-  columns: 150px 3;
-  column-gap: 30px;
-  column-rule: 2px solid blue;
+.container {
+ border: 2px solid red;
+ display:flex
 }
-다단(Multi Columns)
+.container .item {
+  width: 100px;
+  height: 100px;
+  border: 2px solid;
+  border-radius: 10px;
+}
