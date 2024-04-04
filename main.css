@@ -1,24 +1,40 @@
 .box {
-  width: 100px;
+  width: 150px;
   height: 100px;
-  background: tomato;
   border-radius: 10px;
+  margin: 10px;
+  color: white;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.box:hover {
-  animation-name: my-animation;
-  animation-duration: 0.3s;
+.box1{ background: tomato;}
+.box2{ background: dodgerblue;}
+.box3{ background: yellowgreen;}
+
+.box1:hover {
+  animation: size-up 1s 2 alternate linear 0s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+
+}
+.box2:hover {
+  animation: size-up 1s 2 alternate;
+  animation-timing-function: linear;
+  animation-delay: 1s;
+}
+.box3:hover {
+  animation: size-up 1s 2 alternate;
+  animation-timing-function: linear;
+  animation-delay: -1s;
 }
 
-@keyframes my-animation {
+@keyframes size-up {
   0% {
-    width: 100px;
-  }
-  75% {
-    width: 500px;
-    background: dodgerblue;
+    width: 150px;
   }
   100% {
-    width: 300px;
-    background: yellowgreen;
+    width: 500px;
   }
 }
