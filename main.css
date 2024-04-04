@@ -3,14 +3,15 @@
  display:flex;
 }
 .container .item {
-  width: 100px;
   height: 100px;
   background: tomato;
   border: 4px dashed red;
-}
-.item1 {
   flex-grow: 1;
+  flex-basis: 0;
 }
-.item2 {
-  width: 100px;
+.container .item3 {
+  flex-grow: 2;
 }
+
+
+Flex Items 속성 - flex-shrink: 감소너비
