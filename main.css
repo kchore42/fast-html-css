@@ -5,7 +5,8 @@
   border-radius: 10px;
 }
 .box:hover {
-  animation: my-animation 3s infinite alternate;
+  animation-name: my-animation;
+  animation-duration: 0.3s;
 }
 
 @keyframes my-animation {
