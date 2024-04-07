@@ -2,8 +2,8 @@
   width: 600px;
   display: grid;
   grid-template-columns: repeat(2, 100px 200px)
-  
 }
 .item {
   border:10px solid red; 
 }
+가나
