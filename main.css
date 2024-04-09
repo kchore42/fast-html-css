@@ -6,3 +6,11 @@
 .item {
   border:10px solid red; 
 }
+
+.item {
+  grid-row-start: span 3; 
+  grid-row-end:4
+}
+span이 end에 있으면 + 개념
+span이 start에 있으면 - 개념
+grid-area: grid-row-start / grid-coiumn-start/ grid-row-end/ grid-column-end
