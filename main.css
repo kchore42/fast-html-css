@@ -23,3 +23,5 @@ aside {
 footer {
   grid-area: footer;
 }
+
+grid는 row 다음(/) column
