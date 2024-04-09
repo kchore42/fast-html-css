@@ -28,3 +28,6 @@ grid는 row 다음(/) column
 Grid containers 속성: align-items, justify-items
 Grid Containers 속성: align-self, justify-self
 단일 그리드 아이템을 수직(열 축) 정렬 / 수평 (행 축) 정렬
+Grid Items 속성: order, z-index
+그리드 아이템이 자동 배치되는 순서를 변경할 수 있다
+순서가 작을수록 앞서 배치 (기본값 0기준), 음수 가능 
