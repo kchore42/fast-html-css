@@ -1,21 +1,13 @@
-!default
-!default 플래그는 할당되지 않은 변수의 초깃값을 설정
-즉, 할당되어있는 변수가 있다면 변수가 기존 할당 값을 사용
+#{}
 
-SCSS:
+#{}를 이용해서 코드의 어디든지 변수 값을 넣을 수 있음
+이를 문자 보간(Interpolation)
+
+Sass의 내장 함수 unquote()는 문자에서 따옴표를 제거
 
 SCSS
-$color-primary: red;
-
-.box {
-  $color-primary: blue !default;
-  background: $color-primary;
-}
-Compiled to:
-
+$family: unquote("Droid+Sans");
+@import url("http://fonts.googleapis.com/css?family=#{$family}");
 CSS
-.box {
-  background: red;
-}
-'변수와 값을 설정하겠지만, 혹시 기존 변수가 있을 경우는 현재 설정하는 변수의 값은 사용하지 않겠다'는 의미
-
+@import url("http://fonts.googleapis.com/css?family=Droid+Sans");
+Sass의 내장 함수 unquote()는 문자에서 따옴표를 제거합니다.
