@@ -1,39 +1,21 @@
-변수 유효범위
-변수는 사용 가능한 유효범위(Scope)
-선언된 블록({}) 내에서만 유효범위
-
-변수 $color는 .box1의 블록 안에서 설정되었기 때문에, 블록 밖의 .box2에서는 사용할 수 없음
-
-SCSS
-.box1 {
-  $color: #111;
-  background: $color;
-}
-// Error
-.box2 {
-  background: $color;
-}
-
-변수 재 할당
-다음과 같이 변수에 변수를 다시 할당(Reassignment)할 수 있습니다.
+!default
+!default 플래그는 할당되지 않은 변수의 초깃값을 설정
+즉, 할당되어있는 변수가 있다면 변수가 기존 할당 값을 사용
 
 SCSS:
 
 SCSS
-$red: #FF0000;
-$blue: #0000FF;
-
-$color-primary: $blue;
-$color-danger: $red;
+$color-primary: red;
 
 .box {
-  color: $color-primary;
-  background: $color-danger;
+  $color-primary: blue !default;
+  background: $color-primary;
 }
 Compiled to:
 
 CSS
 .box {
-  color: #0000FF;
-  background: #FF0000;
+  background: red;
 }
+'변수와 값을 설정하겠지만, 혹시 기존 변수가 있을 경우는 현재 설정하는 변수의 값은 사용하지 않겠다'는 의미
+
