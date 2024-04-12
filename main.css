@@ -1,33 +1,22 @@
-중첩된 속성
-font-, margin- 등과 같이 동일한 네임 스페이스를 가지는 속성들
+$변수이름: 속성값;
 
 SCSS:
 
 SCSS
+$color-primary: #e96900;
+$url-images: "/assets/images/";
+$w: 200px;
+
 .box {
-  font: {
-    weight: bold;
-    size: 10px;
-    family: sans-serif;
-  };
-  margin: {
-    top: 10px;
-    left: 20px;
-  };
-  padding: {
-    bottom: 40px;
-    right: 30px;
-  };
+  width: $w;
+  margin-left: $w;
+  background: $color-primary url($url-images + "bg.jpg");
 }
 Compiled to:
 
 CSS
 .box {
-  font-weight: bold;
-  font-size: 10px;
-  font-family: sans-serif;
-  margin-top: 10px;
-  margin-left: 20px;
-  padding-bottom: 40px;
-  padding-right: 30px;
+  width: 200px;
+  margin-left: 200px;
+  background: #e96900 url("/assets/images/bg.jpg");
 }
