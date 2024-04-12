@@ -1,9 +1,26 @@
-.container {
-  border: 10px solid lightgray;
-  display: grid;
-  grid-template-columns: 3fr 1fr 100px 25%;
+중첩
+Sass 중첩(Nesting) 기능
+상위 선택자의 반복을 피하고 좀 더 편리하게 복잡한 구조를 작성할 수 있음
+SCSS:
+.section {
+  width: 100%;
+  .list {
+    padding: 20px;
+    li {
+      float: left;
+    }
+  }
 }
-.item {
-  border: 10px solid red;
+
+Compiled to:
+
+CSS
+.section {
+  width: 100%;
 }
-asdss
+.section .list {
+  padding: 20px;
+}
+.section .list li {
+  float: left;
+}
