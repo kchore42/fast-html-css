@@ -1,54 +1,36 @@
-@include
-선언된 Mixin을 사용(포함)하기 위해서는 @include가 필요합니다.
-위에서 선언한 Mixin을 사용해 보겠습니다.
+인수
+Mixin은 함수(Functions)처럼 인수(Arguments)를 가질 수 있습니다.
+하나의 Mixin으로 다양한 결과를 만들 수 있습니다.
 
 SCSS
 // SCSS
-@include 믹스인이름;
+@mixin 믹스인이름($매개변수) {
+  스타일;
+}
+@include 믹스인이름(인수);
 
 // Sass
-+믹스인이름
+=믹스인이름($매개변수)
+  스타일
+
++믹스인이름(인수)
+매개변수(Parameters)란 변수의 한 종류로, 제공되는 여러 데이터 중 하나를 가리키기 위해 사용된다.
+제공되는 여러 데이터들을 전달인수(Arguments) 라고 부른다.
+
 SCSS:
 
 SCSS
-// SCSS
-h1 {
-  @include large-text;
-}
-div {
-  @include large-text;
+@mixin dash-line($width, $color) {
+  border: $width dashed $color;
 }
 
-// Sass
-h1
-  +large-text
-div
-  +large-text
-  
+.box1 { @include dash-line(1px, red); }
+.box2 { @include dash-line(4px, blue); }
 Compiled to:
 
-h1 {
-  font-size: 22px;
-  font-weight: bold;
-  font-family: sans-serif;
-  color: orange;
+.box1 {
+  border: 1px dashed red;
 }
-h1::after {
-  content: "!!";
-}
-h1 span.icon {
-  background: url("/images/icon.png");
-}
-
-div {
-  font-size: 22px;
-  font-weight: bold;
-  font-family: sans-serif;
-  color: orange;
-}
-div::after {
-  content: "!!";
-}
-div span.icon {
-  background: url("/images/icon.png");
+.box2 {
+  border: 4px dashed blue;
 }
