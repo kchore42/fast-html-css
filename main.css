@@ -1,57 +1,54 @@
-재활용
-Sass Mixins는 스타일 시트 전체에서 재사용 할 CSS 선언 그룹을 정의하는 아주 훌륭한 기능
-약간의 Mixin(믹스인)으로 다양한 스타일을 만들어낼 수 있습니다.
-
-우선, Mixin은 두 가지만 기억
-선언하기(@mixin)
-포함하기(@include) 
-
-만들어서(선언), 사용(포함)하는 거죠!
-
-@mixin
-기본적인 Mixin 선언은 아주 간단합니다.
-@mixin 지시어를 이용하여 스타일을 정의합니다.
+@include
+선언된 Mixin을 사용(포함)하기 위해서는 @include가 필요합니다.
+위에서 선언한 Mixin을 사용해 보겠습니다.
 
 SCSS
 // SCSS
-@mixin 믹스인이름 {
-  스타일;
+@include 믹스인이름;
+
+// Sass
++믹스인이름
+SCSS:
+
+SCSS
+// SCSS
+h1 {
+  @include large-text;
+}
+div {
+  @include large-text;
 }
 
 // Sass
-=믹스인이름
-  스타일
-SCSS
-// SCSS
-@mixin large-text {
+h1
+  +large-text
+div
+  +large-text
+  
+Compiled to:
+
+h1 {
   font-size: 22px;
   font-weight: bold;
   font-family: sans-serif;
   color: orange;
 }
+h1::after {
+  content: "!!";
+}
+h1 span.icon {
+  background: url("/images/icon.png");
+}
 
-// Sass
-=large-text
-  font-size: 22px
-  font-weight: bold
-  font-family: sans-serif
-  color: orange
-
-Mixin은 선택자를 포함 가능하고 상위(부모) 요소 참조(& 같은)도 할 수 있습니다
-
-@mixin large-text {
-  font: {
-    size: 22px;
-    weight: bold;
-    family: sans-serif;
-  }
+div {
+  font-size: 22px;
+  font-weight: bold;
+  font-family: sans-serif;
   color: orange;
-
-  &::after {
-    content: "!!";
-  }
-
-  span.icon {
-    background: url("/images/icon.png");
-  }
+}
+div::after {
+  content: "!!";
+}
+div span.icon {
+  background: url("/images/icon.png");
 }
