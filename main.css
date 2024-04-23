@@ -1,20 +1,21 @@
-동시에 여러 개의 List 데이터를 반복 처리할 수도 있습니다.
-단, 각 데이터의 Length가 같아야 합니다.
-
-SCSS:
+Map 데이터를 반복할 경우 하나의 데이터에 두 개의 변수가 필요
 
 SCSS
-$apple: (apple, korea);
-$orange: (orange, china);
-$banana: (banana, japan);
+@each $key변수, $value변수 in 데이터 {
+  // 반복 내용
+}
+SCSS
+$fruits-data: (
+  apple: korea,
+  orange: china,
+  banana: japan
+);
 
-@each $fruit, $country in $apple, $orange, $banana {
+@each $fruit, $country in $fruits-data {
   .box-#{$fruit} {
     background: url("/images/#{$country}.png");
   }
 }
-Compiled to:
-
 .box-apple {
   background: url("/images/korea.png");
 }
