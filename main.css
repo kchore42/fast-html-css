@@ -1,89 +1,26 @@
-함수
-자신의 함수(Functions)를 정의하여 사용할 수 있음.
-함수와 Mixins은 거의 유사하지만 반환되는 내용이 다름
+if 함수
+조건의 값(true, false)에 따라 두 개의 표현식 중 하나만 반환
+조건부 삼항 연산자(conditional ternary operator)와 비슷
 
-Mixin은 위에서 살펴본 대로 지정한 스타일(Style)을 반환하는 반면,
-함수는 보통 연산된(Computed) 특정 값을 @return 지시어를 통해 반환
+*조건 (삼항) 연산자는 JavaScript에서 세 개의 피연산자를 받는 유일한 연산자
+앞에서부터 조건문, 물음표(?), 조건문이 참(truthy)일 경우 실행할 표현식, 콜론(:), 조건문이 거짓(falsy)일 경우 실행할 표현식이 배치. 
+해당 연산자는 if...else문의 대체재로 빈번히 사용
 
-// Mixins
-@mixin 믹스인이름($매개변수) {
-  스타일;
-}
-
-// Functions
-@function 함수이름($매개변수) {
-  @return 값
-}
-사용하는 방법에도 차이가 있음.
-Mixin은 @include 지시어를 사용하는 반면,
-함수는 함수이름으로 바로 사용
+조건의 값이 true이면 표현식1을,
+조건의 값이 false이면 표현식2를 실행
 
 SCSS
-// Mixin
-@include 믹스인이름(인수);
-
-// Functions
-함수이름(인수)
+if(조건, 표현식1, 표현식2)
 SCSS:
 
 SCSS
-$max-width: 980px;
-
-@function columns($number: 1, $columns: 12) {
-  @return $max-width * ($number / $columns)
-}
-
-.box_group {
-  width: $max-width;
-
-  .box1 {
-    width: columns();  // 1
-  }
-  .box2 {
-    width: columns(8);
-  }
-  .box3 {
-    width: columns(3);
-  }
+$width: 555px;
+div {
+  width: if($width > 300px, $width, null);
 }
 Compiled to:
 
 CSS
-.box_group {
-  /* 총 너비 */
-  width: 980px;
-}
-.box_group .box1 {
-  /* 총 너비의 약 8.3% */
-  width: 81.66667px;
-}
-.box_group .box2 {
-  /* 총 너비의 약 66.7% */
-  width: 653.33333px;
-}
-.box_group .box3 {
-  /* 총 너비의 25% */
-  width: 245px;
-}
-
-위와 같이 함수는 @include 같은 별도의 지시어 없이 사용하기 때문에 내가 지정한 함수와 내장 함수(Built-in Functions)의 이름이 충돌할 수 있음.
-따라서 내가 지정한 함수에는 별도의 접두어를 붙여주는 것이 좋음.
-
-내장 함수란, 응용 프로그램에 내장되어 있으며 최종 사용자가 액세스 할 수 있는 기능
-예를 들어, 대부분의 스프레드 시트 응용 프로그램은 행이나 열의 모든 셀을 추가하는 내장 SUM 함수를 지원
-
-예를 들어, 색의 빨강 성분을 가져오는 내장 함수로 이미 red()가 있음.
-같은 이름을 사용하여 함수를 정의하면 이름이 충돌하기 때문에 별도의 접두어를 붙여 extract-red() 같은 이름을 만들 수 있음.
-
-SCSS
-// 내가 정의한 함수
-@function extract-red($color) {
-  // 내장 함수
-  @return rgb(red($color), 0, 0);
-}
-
 div {
-  color: extract-red(#D55A93);
+  width: 555px;
 }
-혹은 모든 내장 함수의 이름을 다 알고 있을 수 없기 때문에 특별한 이름을 접두어로 사용할 수도 있음.
-my-custom-func-red()
