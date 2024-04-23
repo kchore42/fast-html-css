@@ -1,26 +1,142 @@
-if 함수
-조건의 값(true, false)에 따라 두 개의 표현식 중 하나만 반환
-조건부 삼항 연산자(conditional ternary operator)와 비슷
 
-*조건 (삼항) 연산자는 JavaScript에서 세 개의 피연산자를 받는 유일한 연산자
-앞에서부터 조건문, 물음표(?), 조건문이 참(truthy)일 경우 실행할 표현식, 콜론(:), 조건문이 거짓(falsy)일 경우 실행할 표현식이 배치. 
-해당 연산자는 if...else문의 대체재로 빈번히 사용
+@if
+@if 지시어는 조건에 따른 분기 처리가 가능하며, if 문(if statements)과 유사
 
-조건의 값이 true이면 표현식1을,
-조건의 값이 false이면 표현식2를 실행
+if 문은 지정한 조건이 참인 경우 명령문(statement)을 실행. 
+조건이 거짓인 경우 또 다른 명령문이 실행 될 수 있음.
+
+같이 사용할 수 있는 지시어는 @else, if가 있습니다.
+추가 지시어를 사용하면 좀 더 복잡한 조건문을 작성할 수 있음.
 
 SCSS
-if(조건, 표현식1, 표현식2)
+// @if
+@if (조건) {
+  /* 조건이 참일 때 구문 */
+}
+
+// @if @else
+@if (조건) {
+  /* 조건이 참일 때 구문 */
+} @else {
+  /* 조건이 거짓일 때 구문 */
+}
+
+// @if @else if
+@if (조건1) {
+  /* 조건1이 참일 때 구문 */
+} @else if (조건2) {
+  /* 조건2가 참일 때 구문 */
+} @else {
+  /* 모두 거짓일 때 구문 */
+}
+조건에 ()는 생략이 가능하기 때문에, () 없이 작성하는 방법이 좀 더 편리할 수 있음.
+
+SCSS
+$bg: true;
+div {
+  @if $bg {
+    background: url("/images/a.jpg");
+  }
+}
 SCSS:
 
 SCSS
-$width: 555px;
+$color: orange;
 div {
-  width: if($width > 300px, $width, null);
+  @if $color == strawberry {
+    color: #FE2E2E;
+  } @else if $color == orange {
+    color: #FE9A2E;
+  } @else if $color == banana {
+    color: #FFFF00;
+  } @else {
+    color: #2A1B0A;
+  }
 }
 Compiled to:
 
 CSS
 div {
-  width: 555px;
+  color: #FE9A2E;
+}
+조건에는 논리 연산자 and, or, not을 사용할 수 있음.
+
+SCSS:
+
+SCSS
+@function limitSize($size) {
+  @if $size >= 0 and $size <= 200px {
+    @return 200px;
+  } @else {
+    @return 800px;
+  }
+}
+
+div {
+  width: limitSize(180px);
+  height: limitSize(340px);
+}
+Compiled to:
+
+CSS
+div {
+  width: 200px;
+  height: 800px;
+}
+다른 예제도 살펴봅시다!
+Sass의 내장 함수 unitless()는 숫자에 단위가 있는지 여부를 반환
+
+SCSS:
+
+SCSS
+@mixin pCenter($w, $h, $p: absolute) {
+  @if
+    $p == absolute
+    or $p == fixed
+    // or not $p == relative
+    // or not $p == static
+  {
+    width: if(unitless($w), #{$w}px, $w);
+    height: if(unitless($h), #{$h}px, $h);
+    position: $p;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+}
+
+.box1 {
+  @include pCenter(10px, 20px);
+}
+.box2 {
+  @include pCenter(50, 50, fixed);
+}
+.box3 {
+  @include pCenter(100, 200, relative);
+}
+Compiled to:
+
+CSS
+.box1 {
+  width: 10px;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.box2 {
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
