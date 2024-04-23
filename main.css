@@ -1,42 +1,26 @@
-@each
-@each는 List와 Map 데이터를 반복할 때 사용
-for in 문과 유사
-
-for...in 문은 상속된 열거 가능한 속성들을 포함하여 
-객체에서 문자열로 키가 지정된 모든 열거 가능한 속성에 대해 반복 
-(Symbol로 키가 지정된 속성은 무시.)
-
-SCSS
-@each $변수 in 데이터 {
-  // 반복 내용
-}
-List 데이터를 반복
+동시에 여러 개의 List 데이터를 반복 처리할 수도 있습니다.
+단, 각 데이터의 Length가 같아야 합니다.
 
 SCSS:
 
 SCSS
-// List Data
-$fruits: (apple, orange, banana, mango);
+$apple: (apple, korea);
+$orange: (orange, china);
+$banana: (banana, japan);
 
-.fruits {
-  @each $fruit in $fruits {
-    li.#{$fruit} {
-      background: url("/images/#{$fruit}.png");
-    }
+@each $fruit, $country in $apple, $orange, $banana {
+  .box-#{$fruit} {
+    background: url("/images/#{$country}.png");
   }
 }
 Compiled to:
 
-CSS
-.fruits li.apple {
-  background: url("/images/apple.png");
+.box-apple {
+  background: url("/images/korea.png");
 }
-.fruits li.orange {
-  background: url("/images/orange.png");
+.box-orange {
+  background: url("/images/china.png");
 }
-.fruits li.banana {
-  background: url("/images/banana.png");
-}
-.fruits li.mango {
-  background: url("/images/mango.png");
+.box-banana {
+  background: url("/images/japan.png");
 }
