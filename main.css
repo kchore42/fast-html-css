@@ -1,27 +1,24 @@
-Map 데이터를 반복할 경우 하나의 데이터에 두 개의 변수가 필요
+@while
+@while은 조건이 false로 평가될 때까지 내용을 반복
+while 문과 유사하게 잘못된 조건으로 인해 컴파일 중 무한 루프에 빠질 수 있음.
+사용을 권장하지 않는다.
 
 SCSS
-@each $key변수, $value변수 in 데이터 {
+@while 조건 {
   // 반복 내용
 }
 SCSS
-$fruits-data: (
-  apple: korea,
-  orange: china,
-  banana: japan
-);
+$i: 6;
 
-@each $fruit, $country in $fruits-data {
-  .box-#{$fruit} {
-    background: url("/images/#{$country}.png");
+@while $i > 0 {
+  .item-#{$i} {
+    width: 2px * $i;
   }
+  $i: $i - 2;
 }
-.box-apple {
-  background: url("/images/korea.png");
-}
-.box-orange {
-  background: url("/images/china.png");
-}
-.box-banana {
-  background: url("/images/japan.png");
-}
+CSS
+.item-6 { width: 12px; }
+.item-4 { width: 8px; }
+.item-2 { width: 4px; }
+
+almost
