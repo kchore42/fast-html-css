@@ -1,17 +1,11 @@
-내장 함수 - List 함수
+내장 함수 - Map 함수
 
-모든 List 내장 함수는 기존 List 데이터를 갱신하지 않고 새 List 데이터를 반환
+모든 Map 내장 함수는 기존 Map 데이터를 갱신하지 않고 새 Map 데이터를 반환합니다.
 
-모든 List 내장 함수는 Map 데이터에서도 사용할 수 있습니다.
+map-get($map, $key) : Map에서 특정 key의 value를 반환합니다.
 
-length($list) : List의 개수를 반환합니다.
+map-merge($map1, $map2) : 두 개의 Map을 병합하여 새로운 Map를 만듭니다.
 
-nth($list, $n) : List에서 n번째 값을 반환합니다.
+map-keys($map) : Map에서 모든 key를 List로 반환합니다.
 
-set-nth($list, $n, $value) : List에서 n번째 값을 다른 값으로 변경합니다.
-
-join($list1, $list2, [$separator]) : 두 개의 List를 하나로 결합합니다.
-
-zip($lists...) : 여러 List들을 하나의 다차원 List로 결합합니다.
-
-index($list, $value) : List에서 특정 값의 index를 반환합니다.
+map-values($map) : Map에서 모든 value를 List로 반환합니다.
