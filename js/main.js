@@ -1,23 +1,18 @@
+let a = 1 + 2 - (3 * 4) / 4;
+console.log(a);
 
-console.log('Hello JavaScript');
-let value = 1;
-console. log(value);
+let a = 1:
+console.log (a--);
+console.log (a);
 
-상수의 특징 한 번 설정하면 바꾸지 못 함
+let a = 1:
+console.log (a++);
+console.log (a);
+console.log (++a);
 
-const a = = 1;
-
-var a = 1; 
-권장은 let
-
-let text = 'Hello' 
-let text = "자바스크립트";
-
-아무거나 사용해도 됨 '', "", ;도 마찬가지
-
-let good = true;
-let loading =false;
-
-let good = null;
-let something = undefined;
-
+let a = 1;
+a + = 3;
+a - = 3;
+a * = 3;
+a / = 3;
+console.log(a)
