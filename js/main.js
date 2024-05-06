@@ -1,45 +1,63 @@
-// Not !
-// And &&
-// OR ||
+두 값이 일치하는지 확인
+const a = 1;
+const b = 1;
+const equals = a === b;
+console.log(equals);
 
-const a = !true;
-console.log(a);
+=== 는 두 값이 일치하는지 확인
+==  타입 검사까지는 하지 않는다는 것
 
-a 값은 false 
+const a = 1;
+const b = '1';
+const equals = a == b;
+console.log(equals);
+결과: true
 
-const b = !false;
-console.log(b);
+const a = 0;
+const b = false;
+const equals = a == b;
+console.log(equals);
+결과: true
 
-b 값은 true
+const a = null;
+const b = undefined;
+const equals = a == b;
+console.log(equals);
+결과: true
 
+== 대신 === 를 사용 할 것을 권장
 
-ND 연산자는 양쪽의 값이 둘 다 true 일때만 결과물이 true
+두 값이 일치하지 않는지 확인 할 때에는 !==
 
-const a = true && true;
-console.log(a);
+const value = 'a' !== 'b';
+결과물은 true 
 
-다음과 같은 상황엔 모두 false
+!= 를 사용하게 되면 타입 검사를 하지 않음.
 
-let f = false && false;
-f = false && true;
-f = true && false;
+console.log(1 != '1');
+console.log(1 !== '1');
 
-OR 연산자는 양쪽의 값 중 하나라도 true 라면 결과물이 true/  그리고, 두 값이 둘 다 false 일 때에만 false
+처음엔 false, 두번째에서는 true
 
-반면 상황엔 false 
+두 값이 일치하지 않는지 확인 할 때에도, !== 를 사용 할 것을 권장
 
-let f = false || false;
+*크고 작음
 
-연산 순서
-순서는 NOT -> AND -> OR 
+const a = 10;
+const b = 15;
+const c = 15;
 
-const value = !((true && false) || (true && false) || !false);
+console.log(a < b); // true
+console.log(b > a); // true
+console.log(b >= c); // true
+console.log(a <= c); // true
+console.log(b < c); // false;
 
-!((true && false) || (true && false) || true);
+/*
+  여러줄로 주석 작성하기
+*/
 
-!(false || false || true);
-
-!true;
-결국 결과값 false 
-
-
+//문자열 붙이기
+const a = '안녕';
+const b = '하세요';
+console.log(a + b); // 안녕하세요
