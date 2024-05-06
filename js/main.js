@@ -1,63 +1,91 @@
-두 값이 일치하는지 확인
-const a = 1;
-const b = 1;
-const equals = a === b;
-console.log(equals);
+if 문
 
-=== 는 두 값이 일치하는지 확인
-==  타입 검사까지는 하지 않는다는 것
+if문은, "~~하다면 ~~를 해라" 를 의미
 
 const a = 1;
-const b = '1';
-const equals = a == b;
-console.log(equals);
-결과: true
+if (a + 1 === 2) {
+  console.log('a + 1 이 2 입니다.');
+}
+
+
+++ 는 특정 변수에 1을 바로 더해줌
 
 const a = 0;
-const b = false;
-const equals = a == b;
-console.log(equals);
-결과: true
+if (a + 1 === 2) {
+  console.log('a + 1 이 2 입니다.');
+}
+결과는, 아무것도 출력되지 않습니다.
 
-const a = null;
-const b = undefined;
-const equals = a == b;
-console.log(equals);
-결과: true
+if문을 사용하면, 이렇게 특정 조건이 만족 될 때에만 특정 코드를 실행 시킬 수 있습니다.
 
-== 대신 === 를 사용 할 것을 권장
+if (조건) {
+  코드;
+}
+조건이 만족됐을 때 실행시킬 코드가 { } 로 감싸져있는데요, 이를 코드 블록이라고 합니다.
 
-두 값이 일치하지 않는지 확인 할 때에는 !==
+만약에 조건이 true 가 된다면 우리가 지정한 코드가 실행되는 것이고, false 가 된다면 코드가 실행되지 않습니다.
 
-const value = 'a' !== 'b';
-결과물은 true 
+우리가 이전에 let 과 const 를 배울 때, 다른 블록 범위에서는 똑같은 이름으로 선언 할 수도 있다고 배웠었습니다
 
-!= 를 사용하게 되면 타입 검사를 하지 않음.
+const a = 1;
+if (true) {
+  const a = 2;
+  console.log('if문 안의 a 값은 ' + a);
+}
+console.log('if문 밖의 a 값은 ' + a);
+위 코드에서는 if문에 조건을 true 로 설정했기 때문에 코드 블록 내부의 코드가 무조건 실행이 됩니다.
 
-console.log(1 != '1');
-console.log(1 !== '1');
+결과는 다음과 같습니다
 
-처음엔 false, 두번째에서는 true
+const a = 1;
+if (true) {
+  const a = 2;
+  console.log('if문 안의 a 값은 ' + a);
+}
+console.log('if문 밖의 a 값은 ' + a);
+위 코드에서는 if문에 조건을 true 로 설정했기 때문에 코드 블록 내부의 코드가 무조건 실행이 됩니다.
 
-두 값이 일치하지 않는지 확인 할 때에도, !== 를 사용 할 것을 권장
+결과는 다음과 같습니다
 
-*크고 작음
+"if문의 안의 a 값은 2"
+"if문 밖의 a 값은 1"
+
+if-else 문
+if-else문은 "~~하다면 ~~하고, 그렇지 않다면 ~~해라." 를 의미합니다.
 
 const a = 10;
-const b = 15;
-const c = 15;
+if (a > 15) {
+  console.log('a 가 15 큽니다.');
+} else {
+  console.log('a 가 15보다 크지 않습니다.');
+}
+위 코드의 결과는 다음과 같습니다.
 
-console.log(a < b); // true
-console.log(b > a); // true
-console.log(b >= c); // true
-console.log(a <= c); // true
-console.log(b < c); // false;
+"a 가 10보다 크지 않습니다."
 
-/*
-  여러줄로 주석 작성하기
-*/
 
-//문자열 붙이기
-const a = '안녕';
-const b = '하세요';
-console.log(a + b); // 안녕하세요
+if-else if 문
+if-else if 문은 여러 조건에 따라 다른 작업을 해야 할 때 사용합니다.
+
+예시 코드를 따라 적어보세요.
+
+const a = 10;
+if (a === 5) {
+  console.log('5입니다!');
+} else if (a === 10) {
+  console.log('10입니다!');
+} else {
+  console.log('5도 아니고 10도 아닙니다.');
+}
+결과는 다음과 같습니다.
+
+"10입니다!"
+
+a = 5 -> "5입니다!"
+a = 7 -> "5도 아니고 10도 아닙니다."
+
+
+
+
+"if문의 안의 a 값은 2"
+"if문 밖의 a 값은 1"
