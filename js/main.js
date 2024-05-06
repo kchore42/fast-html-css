@@ -1,13 +1,25 @@
-템플릿 리터럴을 사용하여 구현을 해봅시다.
-
-function hello(name) {
-  console.log(`Hello, ${name}!`);
-}
-hello('velopert');
-
-function hello(name) {
-    return(`Hello, ${name}!`);
+function getGrade(score) {
+    if (score === 100) {
+      return 'A+';
+    } else if (score >= 90) {
+      return 'A';
+    } else if (score === 89) {
+      return 'B+';
+    } else if (score >= 80) {
+      return 'B';
+    } else if (score === 79) {
+      return 'C+';
+    } else if (score >= 70) {
+      return 'C';
+    } else if (score === 69) {
+      return 'D+';
+    } else if (score >= 60) {
+      return 'D';
+    } else {
+      return 'F';
+    }
   }
   
-  const result = hello('velopert');
-  console.log(result)
+  const grade = getGrade(90);
+  console.log(grade);
+  grade 가 90 일 때에는 결과가 A
