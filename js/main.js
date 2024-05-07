@@ -1,51 +1,84 @@
-map
-map 은 배열 안의 각 원소를 변환 할 때 사용 되며, 이 과정에서 새로운 배열이 만들어진다.
+indexOf
+indexOf 는 원하는 항목이 몇번째 원소인지 찾아주는 함수
 
-만약에 배열 안의 모든 숫자를 제곱해서 새로운 배열을 만들고 싶다면 어떻게 해야 할까요?
+예를 들어서 다음과 같은 배열이 있을 때
 
-for 구문
-const array = [1, 2, 3, 4, 5, 6, 7, 8];
+const superheroes = ['아이언맨', '캡틴 아메리카', '토르', '닥터 스트레인지'];
+토르가 몇번째 항목인지 알고싶다고 가정해봅시다.
 
-const squared = [];
-for (let i = 0; i < array.length; i++) {
-  squared.push(array[i] * array[i]);
-}
+그렇다면, 이렇게 입력 할 수 있습니다.
 
-console.log(squared);
+const superheroes = ['아이언맨', '캡틴 아메리카', '토르', '닥터 스트레인지'];
+const index = superheroes.indexOf('토르');
+console.log(index);
+결과는 2가 나타납니다.
 
+index 값은 0 부터 시작하기 때문에 0: 아이언맨 1: 캡틴 아메리카 2: 토르
 
-forEach 구문
+이렇게 돼서 2라는 값이 나타나는 것
 
-const array = [1, 2, 3, 4, 5, 6, 7, 8];
+findIndex
+만약에 배열 안에 있는 값이 숫자, 문자열, 또는 불리언이라면 찾고자하는 항목이 몇번째 원소인지 알아내려면 indexOf 를 사용하면 됩니다. 
+하지만, 배열 안에 있는 값이 객체이거나, 배열이라면 indexOf 로 찾을 수 없습니다.
 
-const squared = [];
+const todos = [
+  {
+    id: 1,
+    text: '자바스크립트 입문',
+    done: true
+  },
+  {
+    id: 2,
+    text: '함수 배우기',
+    done: true
+  },
+  {
+    id: 3,
+    text: '객체와 배열 배우기',
+    done: true
+  },
+  {
+    id: 4,
+    text: '배열 내장함수 배우기',
+    done: false
+  }
+];
 
-array.forEach(n => {
-  squared.push(n * n);
-});
+여기서 만약 id 가 3 인 객체가 몇번째인지 찾으러면, findIndex 함수에 검사하고자 하는 조건을 반환하는 함수를 넣어서 찾을 수 있습니다.
 
-console.log(squared);
+const index = todos.findIndex(todo => todo.id === 3);
+console.log(index);
 
-결과는 다음과 같다.
+결과는 2가 나타납니다.
 
-[1, 4, 9, 16, 25, 36, 49, 64];
+find
+find 함수는 findIndex 랑 비슷한데, 찾아낸 값이 몇번째인지 알아내는 것이 아니라, 찾아낸 값 자체를 반환합니다.
 
-만약 map 을 사용하면 이를 더 짧은 코드를 사용하여 구현 할 수 있습니다.
+const todos = [
+  {
+    id: 1,
+    text: '자바스크립트 입문',
+    done: true
+  },
+  {
+    id: 2,
+    text: '함수 배우기',
+    done: true
+  },
+  {
+    id: 3,
+    text: '객체와 배열 배우기',
+    done: true
+  },
+  {
+    id: 4,
+    text: '배열 내장함수 배우기',
+    done: false
+  }
+];
+const todo - todos.find(todo => todo.id ===3);
+console.log(todo);
 
-const array = [1, 2, 3, 4, 5, 6, 7, 8];
+결과는 다음과 같습니다.
 
-const square = n => n * n;
-const squared = array.map(square);
-console.log(squared);
-
-
-map 함수의 파라미터로는 변화를 주는 함수를 전달해줍니다. 이를 변화함수라고 부르도록 하겠습니다.
-
-현재 우리의 변화함수 square 는 파라미터 n 을 받아와서 이를 제곱해줍니다.
-
-array.map 함수를 사용 할 때 square 를 변화함수로 사용함으로서, 내부의 모든 값에 대하여 제곱을 해서 새로운 배열을 생성
-
-변화 함수를 꼭 이름을 붙여서 선언 할 필요는 없습니다. 코드를 다음과 같이 작성해도 됩니다.
-
-const squared = array.map(n => n * n);
-console.log(squared);
+{id: 3, text: "객체와 배열 배우기", done: true}
