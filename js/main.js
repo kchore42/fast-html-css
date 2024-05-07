@@ -1,45 +1,25 @@
-filter
+splice
+splice 는 배열에서 특정 항목을 제거할 때 사용합니다.
 
-filter 함수는 배열에서 특정 조건을 만족하는 값들만 따로 추출하여 새로운 배열을 만듭니다. 
+const numbers = [10, 20, 30, 40];
+위 배열에서 30 을 지운다고 가정해봅시다. 그러면, 30이 몇번째 index 인지 알아낸 이후, 이를 splice 를 통해 지워줄 수 있습니다.
 
-우리가 방금 만들었던 todos 배열에서 done 값이 false 인 항목들만 따로 추출해서 새로운 배열을 만들기
+const numbers = [10, 20, 30, 40];
+const index = numbers.indexOf(30);
+numbers.splice(index, 1);
+console.log(numbers);
+결과는 다음과 같습니다.
 
-const todos = [
-  {
-    id: 1,
-    text: '자바스크립트 입문',
-    done: true
-  },
-  {
-    id: 2,
-    text: '함수 배우기',
-    done: true
-  },
-  {
-    id: 3,
-    text: '객체와 배열 배우기',
-    done: true
-  },
-  {
-    id: 4,
-    text: '배열 내장함수 배우기',
-    done: false
-  }
-];
+[10, 20, 40]
+splice 를 사용 할 때 첫번째 파라미터는 어떤 인덱스부터 지울지를 의미하고 두번째 파라미터는 그 인덱스부터 몇개를 지울지를 의미합니다.
 
-const taskNotDone = todos.filter(todo => todo.done === false);
-console.log(taskNotDone);
+slice
+slice 는 splice 랑 조금 비슷한데요, 배열을 잘라낼 때 사용하는데, 중요한 점은 기존의 배열은 건들이지 않는 다는 것입니다.
 
-todos 배열에서 done 값이 false 인 항목들만 따로 추출해서 새로운 배열
+const numbers = [10, 20, 30, 40];
+const sliced = numbers.slice(0, 2); // 0부터 시작해서 2전까지
 
-[
-  {
-    id: 4,
-    text: '배열 내장 함수 배우기',
-    done: false
-  }
-];
+console.log(sliced); // [10, 20]
+console.log(numbers); // [10, 20, 30, 40]
+slice 에는 두개의 파라미터를 넣게 되는데 첫번째 파라미터는 어디서부터 자를지, 그리고 두번째 파라미터는 어디까지 자를지 를 의미합니다.
 
-const tasksNotDone = todos.filter(todo => !todo.done);
-filter 에 넣어준 함수에서 true 를 반환하면 새로운 배열에 따로 추출을 해주는데요, 
-만약 todo.done 값이 false 라면, !false 가 되고 이 값은 true 이기 때문에, 이전의 todo.done === false 와 똑같이 작동하게 됩니다.
