@@ -1,25 +1,60 @@
-splice
-splice 는 배열에서 특정 항목을 제거할 때 사용합니다.
+shift 와 pop
+shift 와 pop 은 비슷하지만, 다릅니다.
+
+shift 는 첫번째 원소를 배열에서 추출해줍니다. (추출하는 과정에서 배열에서 해당 원소는 사라집니다.)
 
 const numbers = [10, 20, 30, 40];
-위 배열에서 30 을 지운다고 가정해봅시다. 그러면, 30이 몇번째 index 인지 알아낸 이후, 이를 splice 를 통해 지워줄 수 있습니다.
+const value = numbers.shift();
+console.log(value);
+console.log(numbers);
+
+결과는 다음과 같습니다.
+
+10
+[20, 30, 40]
+
+이번엔 pop 을 해볼까요?
 
 const numbers = [10, 20, 30, 40];
-const index = numbers.indexOf(30);
-numbers.splice(index, 1);
+const value = numbers.pop();
+console.log(value);
 console.log(numbers);
 결과는 다음과 같습니다.
 
-[10, 20, 40]
-splice 를 사용 할 때 첫번째 파라미터는 어떤 인덱스부터 지울지를 의미하고 두번째 파라미터는 그 인덱스부터 몇개를 지울지를 의미합니다.
+40
+[10, 20, 30]
+pop 은 push 의 반대로 생각하시면 됩니다. push 는 배열의 맨 마지막에 새 항목을 추가하고, pop 은 맨 마지막 항목을 추출합니다.
 
-slice
-slice 는 splice 랑 조금 비슷한데요, 배열을 잘라낼 때 사용하는데, 중요한 점은 기존의 배열은 건들이지 않는 다는 것입니다.
+
+unshift
+unshift 는 shift 의 반대입니다.
+
+배열의 맨 앞에 새 원소를 추가합니다.
 
 const numbers = [10, 20, 30, 40];
-const sliced = numbers.slice(0, 2); // 0부터 시작해서 2전까지
+numbers.unshift(5);
+console.log(numbers);
+결과는 다음과 같습니다.
 
-console.log(sliced); // [10, 20]
-console.log(numbers); // [10, 20, 30, 40]
-slice 에는 두개의 파라미터를 넣게 되는데 첫번째 파라미터는 어디서부터 자를지, 그리고 두번째 파라미터는 어디까지 자를지 를 의미합니다.
+[5, 10, 20, 30, 40]
 
+concat
+concat 은 여러개의 배열을 하나의 배열로 합쳐줍니다.
+
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const concated = arr1.concat(arr2);
+
+console.log(concated);
+결과는 다음과 같습니다.
+
+[1, 2, 3, 4, 5, 6];
+concat 함수는 arr1 과 arr2 에 변화를 주지 않습니다.
+
+join
+join 은 배열 안의 값들을 문자열 형태로 합쳐줍니다.
+
+const array = [1, 2, 3, 4, 5];
+console.log(array.join()); // 1,2,3,4,5
+console.log(array.join(' ')); // 1 2 3 4 5
+console.log(array.join(', ')); // 1, 2, 3, 4, 5
