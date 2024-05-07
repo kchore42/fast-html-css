@@ -1,15 +1,41 @@
-while
-while문은 특정 조건이 참이라면 계속해서 반복하는 반복문
-for 문은 특정 숫자를 가지고 숫자의 값을 비교하고, 증감해주면서 반복을 한다면, 
-while문은 조건을 확인만 하면서 반복한다
-때문에 조건문 내부에서 변화를 직접 주어야 합니다.
+반복문 - for...of, for...in
 
+for...of
+for...of문은 배열에 관한 반복문을 돌리기 위해서 만들어진 반복문
 
-let i = 0;
-while (i < 10) {
-  console.log(i);
-  i++;
+let numbers = [10, 20, 30, 40, 50];
+for (let number of numbers) {
+  console.log(number);
 }
-while 문을 사용 할 때에는 조건문이 언젠간 false 가 되도록 신경써야 함
 
-만약에 언젠간 false 로 전환이 되지 않는다면 반복문이 끝나지 않고 영원히 반복됨.
+
+객체를 위한 반복문 for...in
+
+const doggy = {
+  name: '멍멍이',
+  sound: '멍멍',
+  age: 2
+};
+
+console.log(Object.entries(doggy));
+console.log(Object.keys(doggy));
+console.log(Object.values(doggy));
+
+각 함수의 역할은 다음과 같습니다.
+
+Object.entries: [[키, 값], [키, 값]] 형태의 배열로 변환
+Object.keys: [키, 키, 키] 형태의 배열로 변환
+Object.values: [값, 값, 값] 형태의 배열로 변환
+
+객체가 지니고 있는 값에 대하여 반복을 하고 싶다면 위 함수들을 사용해도 되고, 
+for...in 구문을 사용해도 됨.
+
+const doggy = {
+  name: '멍멍이',
+  sound: '멍멍',
+  age: 2
+};
+
+for (let key in doggy) {
+  console.log(`${key}: ${doggy[key]}`);
+}
