@@ -1,35 +1,65 @@
-02. Truthy and Falsy
-이것은 자바스크립트 문법까지는 아니지만, 알아둬야 하는 개념입니다.
+단축평가 논리 계산 법
 
-Truthy: true 같은거... Falsy: false 같은거...
+true && true // true
+true && false // false
+true || false // true
+false || true // true
 
-라고 이해를 하면 되는데요
-
-function print(person) {
-  console.log(person.name);
-}
-
-const person = {
-  name: 'John'
+const dog = {
+  name: '멍멍이'
 };
 
-print(person);
-만약에 이러한 상황에서, 만약 print 함수가 다음과 같이 파라미터가 비어진 채로 실행됐다고 가정해봅시다.
-
-function print(person) {
-  console.log(person.name);
+function getName(animal) {
+  return animal.name;
 }
 
-const person = {
-  name: 'John'
+const name = getName(dog);
+console.log(name); // 멍멍이
+
+const dog = {
+  name: '멍멍이'
 };
 
-print();
+function getName(animal) {
+  if (animal) {
+    return animal.name;
+  }
+  return undefined;
+}
 
-Falsy 한 값은 이 외에도 몇개 더 있습니다.
+const name = getName();
+console.log(name);
 
-console.log(!undefined);
-console.log(!null);
-console.log(!0);
-console.log(!'');
-console.log(!NaN);
+const dog = {
+  name: '멍멍이'
+};
+
+function getName(animal) {
+  return animal && animal.name;
+}
+
+const name = getName();
+console.log(name); // undefined
+
+const dog = {
+  name: '멍멍이'
+};
+
+function getName(animal) {
+  return animal && animal.name;
+}
+
+const name = getName(dog);
+console.log(name); // 멍멍이
+이게 작동하는 이유는, A && B 연산자를 사용하게 될 때에는 A 가 Truthy 한 값이라면, B 가 결과값이 됩니다. 
+반면, A 가 Falsy 한 값이라면 결과는 A 가 됩니다.
+
+console.log(true && 'hello'); // hello
+console.log(false && 'hello'); // false
+console.log('hello' && 'bye'); // bye
+console.log(null && 'hello'); // null
+console.log(undefined && 'hello'); // undefined
+console.log('' && 'hello'); // ''
+console.log(0 && 'hello'); // 0
+console.log(1 && 'hello'); // hello
+console.log(1 && 1); // 1
