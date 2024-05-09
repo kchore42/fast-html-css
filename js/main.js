@@ -1,40 +1,35 @@
-삼향 연산자
+02. Truthy and Falsy
+이것은 자바스크립트 문법까지는 아니지만, 알아둬야 하는 개념입니다.
 
-condition ? ture : false
+Truthy: true 같은거... Falsy: false 같은거...
 
-const array = [];
-let next = array.length === 0 
-? '배열이 비어있습니다.'
-: '배열이 비어있지 않습니다.';
+라고 이해를 하면 되는데요
 
-console/log(text)
+function print(person) {
+  console.log(person.name);
+}
 
-const array = [];
-let text = array.length === 0 ? '배열이 비어있습니다' : '배열이 비어있지 않습니다.';
+const person = {
+  name: 'John'
+};
 
-console.log(text);
-삼항 연산자의 사용법은 다음과 같습니다.
+print(person);
+만약에 이러한 상황에서, 만약 print 함수가 다음과 같이 파라미터가 비어진 채로 실행됐다고 가정해봅시다.
 
-조건 
-? true일때 
-: false일때
-라인의 길이가 너묵 길어진다면 다음과 같이 작성하기도 합니다.
+function print(person) {
+  console.log(person.name);
+}
 
-const array = [];
-let text = array.length === 0 
-  ? '배열이 비어있습니다' 
-  : '배열이 비어있지 않습니다.';
+const person = {
+  name: 'John'
+};
 
-console.log(text);
-다음과 같이 삼항 연산자를 중첩해서 쓸 수도 있는데요
+print();
 
-const condition1 = false;
-const condition2 = false;
+Falsy 한 값은 이 외에도 몇개 더 있습니다.
 
-const value = condition1 
-  ? '와우!' 
-  : condition2 
-    ? 'blabla' 
-    : 'foo';
-
-console.log(value);
+console.log(!undefined);
+console.log(!null);
+console.log(!0);
+console.log(!'');
+console.log(!NaN);
