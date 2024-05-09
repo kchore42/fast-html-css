@@ -1,47 +1,24 @@
-class Animal {
-  constructor(type, name, sound) {
-    this.type = type;
+class Food {
+  constructor(name) {
     this.name = name;
-    this.sound = sound;
+    this.brands = [];
   }
-  say() {
-    console.log(this.sound);
+  addBrand(brand) {
+    this.brands.push(brand)
   }
-}
-
-const dog = new Animal('개', '멍멍이', '멍멍');
-const cat = new Animal('고양이', '야옹이', '야옹');
-
-dog.say();
-cat.say();
-
-class 를 사용했을때에는, 다른 클래스를 쉽게 상속 할 수 있습니다.
-
-class Animal {
-  constructor(type, name, sound) {
-    this.type = type;
-    this.name = name;
-    this.sound = sound;
-  }
-  say() {
-    console.log(this.sound);
+  print() {
+    console.log(`${this.name}을/를 파는 음식점들:`)
+    console.log(this.brands.join(', '));
   }
 }
 
-class Dog extends Animal {
-  constructor(name, sound) {
-    super('개', name, sound);
-  }
-}
+const pizza = new Food('피자');
+pizza.addBrand('피자헛');
+pizza.addBrand('도미노 피자');
 
-class Cat extends Animal {
-  constructor(name, sound) {
-    super('고양이', name, sound);
-  }
-}
+const chicken = new Food('치킨');
+chicken.addBrand('굽네치킨');
+chicken.addBrand('BBQ');
 
-const dog = new Dog('멍멍이', '멍멍');
-const cat = new Cat('야옹이', '야옹');
-
-dog.say();
-cat.say();
+pizza.print()
+chicken.print();
