@@ -1,45 +1,36 @@
-복습과 퀴즈
-
-for each 모든 것들을 출력하는 함수
-map 원소를 다른 형태로 변환
-
-const array = [1, 2, 3, 4, 5]
-const square = n => N * N
-indexOf 어디 있는지
-
-findindex 조건에 만족한 위치 확인
-find 객체 자체를 리턴
-filter
-splice 특정 항목 제거 
-slice 기존 배열 건들지 않음
-shfit 왼쪽 
-Pop
-unshift
-
-
-concat 배열 2개 합침
-join
-reduce / accumulator
-
-
-퀴즈
-숫자로 이루어진 배열이 주어졌을 때, 해당 숫자 배열안에 들어있는 숫자 중 3보다 큰 숫자로만 이루어진 배열을 새로 만들어서 반환해보세요.
-
-function biggerThanThree(numbers) {
-  /* 구현해보세요 */
+function Animal(type, name, sound) {
+  this.type = type;
+  this.name = name;
+  this.sound = sound;
 }
 
-const numbers = [1, 2, 3, 4, 5, 6, 7];
-console.log(biggerThanThree(numbers)); // [4, 5, 6, 7]
----------------------------------------------------------------
-퀴즈
-이제 지금까지 배운 것들을 활용하여 퀴즈를 풀어봅시다!
+const dog = new Animal('개', '멍멍이', '멍멍');
+const cat = new Animal('고양이', '야옹이', '야옹');
 
-숫자 배열이 주어졌을 때 10보다 큰 숫자의 갯수를 반환하는 함수를 만드세요.
+dog.say();
+cat.say();
 
-function countBiggerThanTen(numbers) {
-  /* 구현해보세요 */
+객체 생성시 대문자, new 사용
+
+프로토타입
+프로토타입은 다음과 같이 객체 생성자 함수 아래에 .prototype.[원하는키] = 코드를 입력하여 설정 할 수 있습니다.
+
+function Animal(type, name, sound) {
+  this.type = type;
+  this.name = name;
+  this.sound = sound;
 }
 
-const count = countBiggerThanTen([1, 2, 3, 5, 10, 20, 30, 40, 50, 60]);
-console.log(count); // 5
+Animal.prototype.say = function() {
+  console.log(this.sound);
+};
+Animal.prototype.sharedValue = 1;
+
+const dog = new Animal('개', '멍멍이', '멍멍');
+const cat = new Animal('고양이', '야옹이', '야옹');
+
+dog.say();
+cat.say();
+
+console.log(dog.sharedValue);
+console.log(cat.sharedValue);
