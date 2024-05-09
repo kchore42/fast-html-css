@@ -1,24 +1,40 @@
-class Food {
-  constructor(name) {
-    this.name = name;
-    this.brands = [];
-  }
-  addBrand(brand) {
-    this.brands.push(brand)
-  }
-  print() {
-    console.log(`${this.name}을/를 파는 음식점들:`)
-    console.log(this.brands.join(', '));
-  }
-}
+삼향 연산자
 
-const pizza = new Food('피자');
-pizza.addBrand('피자헛');
-pizza.addBrand('도미노 피자');
+condition ? ture : false
 
-const chicken = new Food('치킨');
-chicken.addBrand('굽네치킨');
-chicken.addBrand('BBQ');
+const array = [];
+let next = array.length === 0 
+? '배열이 비어있습니다.'
+: '배열이 비어있지 않습니다.';
 
-pizza.print()
-chicken.print();
+console/log(text)
+
+const array = [];
+let text = array.length === 0 ? '배열이 비어있습니다' : '배열이 비어있지 않습니다.';
+
+console.log(text);
+삼항 연산자의 사용법은 다음과 같습니다.
+
+조건 
+? true일때 
+: false일때
+라인의 길이가 너묵 길어진다면 다음과 같이 작성하기도 합니다.
+
+const array = [];
+let text = array.length === 0 
+  ? '배열이 비어있습니다' 
+  : '배열이 비어있지 않습니다.';
+
+console.log(text);
+다음과 같이 삼항 연산자를 중첩해서 쓸 수도 있는데요
+
+const condition1 = false;
+const condition2 = false;
+
+const value = condition1 
+  ? '와우!' 
+  : condition2 
+    ? 'blabla' 
+    : 'foo';
+
+console.log(value);
