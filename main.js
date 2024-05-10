@@ -1,62 +1,52 @@
-06. 비구조화 할당 (구조분해) 문법
+비구조화 할당 시 이름 바꾸기
 
-전에 배웠던 비구조화 할당 문법을 잘 활용하는 방법
+비구조화 할당을 하는 과정에서 선언 할 값의 이름을 바꾸는 방법
 
-이전에 배웠던것을 복습해보자면, 
-비구조화 할당 문법을 사용하면 다음과 같이 객체 안에 있는 값을 추출해서 변수 혹은 상수로 바로 선언해 줄 수 있었다.
+예를 들어서 다음과 같은 코드가 있다고 가정
 
-const object = { a: 1, b: 2 };
+const animal = {
+  name: '멍멍이',
+  type: '개'
+};
 
-const { a, b } = object;
+const nickname = animal.name;
 
-console.log(a); // 1
-console.log(b); // 2
+console.log(nickname); // 멍멍이
 
-그리고, 함수의 파라미터에서도 비구조화 할당을 할 수 있는것도 배웠다.
+위 코드에서는 animal.name 값을 nickname 값에 담고 있는데
 
-const object = { a: 1, b: 2 };
+이름이 같다면 그냥 우리가 이전에 배웠던 대로 비구조화 할당을 쓰면 되는데 지금은 이름이 서로 다르다.
 
-function print({ a, b }) {
-  console.log(a);
-  console.log(b);
-}
+이러한 상황에서는 : 문자를 사용해서 이름을 바꿔줄 수 있다.
 
-print(object);
+const animal = {
+  name: '멍멍이',
+  type: '개'
+};
 
-그런데 여기서 만약 b 값이 주어지지 않았다고 가정한다면
+const { name: nickname } = animal
+console.log(nickname);
 
-const object = { a: 1 };
+위 코드는 'animal 객체 안에 있는 name 을 nickname 이라고 선언하겠다.' 라는 의미
 
-function print({ a, b }) {
-  console.log(a);
-  console.log(b);
-}
+배열 비구조화 할당
 
-print(object);
-// 1
-// undefined
+비구조화 할당은 객체에만 할 수 있는 것이 아니라 배열에서 할 수 있다.
 
-두번째 출력에서 undefined가 나타남.
+예시 코드
 
-비구조화 할당 시 기본값 설정
+const array = [1, 2];
+const [one, two] = array;
 
-이러한 상황에 b 값에 기본 값을 주고 싶다면 이렇게 해줄 수 있다.
+console.log(one);
+console.log(two);
 
-const object = { a: 1 };
+이 문법은 배열 안에 있는 원소를 다른 이름으로 새로 선언해주고 싶을 때 사용하면 매우 유용.
 
-function print({ a, b = 2 }) {
-  console.log(a);
-  console.log(b);
-}
+객체 비구조화 할당과 마찬가지로, 기본값 지정이 가능.
 
-print(object);
-// 1
-// 2
-이는 꼭 함수의 파라미터에서만 할 수 있는 것은 아니다.
+const array = [1];
+const [one, two = 2] = array;
 
-const object = { a: 1 };
-
-const { a, b = 2 } = object;
-
-console.log(a); // 1
-console.log(b); // 2
+console.log(one);
+console.log(two);
