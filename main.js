@@ -1,52 +1,95 @@
-비구조화 할당 시 이름 바꾸기
+깊은 값 비구조화 할당
 
-비구조화 할당을 하는 과정에서 선언 할 값의 이름을 바꾸는 방법
+객체의 깊숙한 곳에 들어있는 값을 꺼내는 방법
 
-예를 들어서 다음과 같은 코드가 있다고 가정
+예를 들어 다음과 같은 객체가 있다고 가정
 
-const animal = {
-  name: '멍멍이',
-  type: '개'
+const deepObject = {
+  state: {
+    information: {
+      name: 'velopert',
+      languages: ['korean', 'english', 'chinese']
+    }
+  },
+  value: 5
+};
+여기서, name, languages, value 값들을 밖으로 꺼내주고 싶다면 어떻게 해야 할까? 
+
+이럴땐 두가지 해결 방법이 있다. 
+
+첫번째: 비구조화 할당 문법을 두 번 사용하는 것
+
+const deepObject = {
+  state: {
+    information: {
+      name: 'velopert',
+      languages: ['korean', 'english', 'chinese']
+    }
+  },
+  value: 5
 };
 
-const nickname = animal.name;
+const { name, languages } = deepObject.state.information;
+const { value } = deepObject;
 
-console.log(nickname); // 멍멍이
-
-위 코드에서는 animal.name 값을 nickname 값에 담고 있는데
-
-이름이 같다면 그냥 우리가 이전에 배웠던 대로 비구조화 할당을 쓰면 되는데 지금은 이름이 서로 다르다.
-
-이러한 상황에서는 : 문자를 사용해서 이름을 바꿔줄 수 있다.
-
-const animal = {
-  name: '멍멍이',
-  type: '개'
+const extracted = {
+  name,
+  languages,
+  value
 };
 
-const { name: nickname } = animal
-console.log(nickname);
+console.log(extracted); // {name: "velopert", languages: Array[3], value: 5}
 
-위 코드는 'animal 객체 안에 있는 name 을 nickname 이라고 선언하겠다.' 라는 의미
+그런데 잠깐! 
 
-배열 비구조화 할당
+지금 extracted 객체를 선언 할 때 이런식으로 했는데요
 
-비구조화 할당은 객체에만 할 수 있는 것이 아니라 배열에서 할 수 있다.
+const extracted = {
+  name,
+  languages,
+  value
+}
+이 코드는 다음 코드와 똑같습니다.
 
-예시 코드
+const extracted = {
+  name: name,
+  languages: languages,
+  value: value
+}
 
-const array = [1, 2];
-const [one, two] = array;
+만약에 key 이름으로 선언된 값이 존재하다면, 바로 매칭시켜주는 문법입니다. 
 
-console.log(one);
-console.log(two);
+이 문법은 ES6 의 object-shorthand 문법이라고 부릅니다. (이름은 굳이 알아둘 필요는 없습니다..!)
 
-이 문법은 배열 안에 있는 원소를 다른 이름으로 새로 선언해주고 싶을 때 사용하면 매우 유용.
+다시 본론으로 돌아와서, 
 
-객체 비구조화 할당과 마찬가지로, 기본값 지정이 가능.
+아까 deepObject 객체에서 names, languages, value 를 추출하는 과정에서 비구조화 할당을 두번 했었죠?
 
-const array = [1];
-const [one, two = 2] = array;
+이번엔 두번째 방법, 한번에 모두 추출하는 방법을 알아보겠습니다.
 
-console.log(one);
-console.log(two);
+const deepObject = {
+  state: {
+    information: {
+      name: 'velopert',
+      languages: ['korean', 'english', 'chinese']
+    }
+  },
+  value: 5
+};
+
+const {
+  state: {
+    information: { name, languages }
+  },
+  value
+} = deepObject;
+
+const extracted = {
+  name,
+  languages,
+  value
+};
+
+console.log(extracted);
+
+이렇게 하면 깊숙히 안에 들어있는 값도 객체에서 바로 추출 할 수 있다.
