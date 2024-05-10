@@ -1,95 +1,87 @@
-깊은 값 비구조화 할당
+07. spread 와 rest
 
-객체의 깊숙한 곳에 들어있는 값을 꺼내는 방법
+이번에는 ES6 에서 도입된 spread 와 rest 문법에 대해서 알아보겠습니다. 
 
-예를 들어 다음과 같은 객체가 있다고 가정
+서로 완전히 다른 문법인데, 은근히 좀 비슷하다
 
-const deepObject = {
-  state: {
-    information: {
-      name: 'velopert',
-      languages: ['korean', 'english', 'chinese']
-    }
-  },
-  value: 5
-};
-여기서, name, languages, value 값들을 밖으로 꺼내주고 싶다면 어떻게 해야 할까? 
+spread
 
-이럴땐 두가지 해결 방법이 있다. 
+spread 라는 단어가 가지고 있는 의미는 펼치다, 퍼뜨리다  
 
-첫번째: 비구조화 할당 문법을 두 번 사용하는 것
+이 문법을 사용하면, 객체 혹은 배열을 펼칠 수 있다.
 
-const deepObject = {
-  state: {
-    information: {
-      name: 'velopert',
-      languages: ['korean', 'english', 'chinese']
-    }
-  },
-  value: 5
+예를 들어서 다음과 같은 객체들이 있다고 가정
+
+const slime = {
+  name: '슬라임'
 };
 
-const { name, languages } = deepObject.state.information;
-const { value } = deepObject;
-
-const extracted = {
-  name,
-  languages,
-  value
+const cuteSlime = {
+  name: '슬라임',
+  attribute: 'cute'
 };
 
-console.log(extracted); // {name: "velopert", languages: Array[3], value: 5}
-
-그런데 잠깐! 
-
-지금 extracted 객체를 선언 할 때 이런식으로 했는데요
-
-const extracted = {
-  name,
-  languages,
-  value
-}
-이 코드는 다음 코드와 똑같습니다.
-
-const extracted = {
-  name: name,
-  languages: languages,
-  value: value
-}
-
-만약에 key 이름으로 선언된 값이 존재하다면, 바로 매칭시켜주는 문법입니다. 
-
-이 문법은 ES6 의 object-shorthand 문법이라고 부릅니다. (이름은 굳이 알아둘 필요는 없습니다..!)
-
-다시 본론으로 돌아와서, 
-
-아까 deepObject 객체에서 names, languages, value 를 추출하는 과정에서 비구조화 할당을 두번 했었죠?
-
-이번엔 두번째 방법, 한번에 모두 추출하는 방법을 알아보겠습니다.
-
-const deepObject = {
-  state: {
-    information: {
-      name: 'velopert',
-      languages: ['korean', 'english', 'chinese']
-    }
-  },
-  value: 5
+const purpleCuteSlime = {
+  name: '슬라임',
+  attribute: 'cute',
+  color: 'purple'
 };
 
-const {
-  state: {
-    information: { name, languages }
-  },
-  value
-} = deepObject;
+console.log(slime);
+console.log(cuteSlime);
+console.log(purpleCuteSlime);
 
-const extracted = {
-  name,
-  languages,
-  value
+
+이 코드에서는 먼저 slime 이라는 객체를 선언
+
+그리고 cuteSlime 이라는 객체를 만들었는데요, 
+
+기존에 선언한 slime 을 건들이지 않고 새로운 객체를 만들어서 slime 이 가지고 있는 값을 그대로 사용
+
+그 다음에는 purpleCuteSlime 이라는 객체를 만들었는데요, 
+
+이 객체는 cuteSlime 이 가지고 있는 속성을 그대로 사용하면서 추가적으로 color 가 추가
+
+위 코드에서의 핵심은, 기존의 것을 건들이지 않고, 새로운 객체를 만든다는 것 인데요, 
+
+이러한 상황에 사용 할 수 있는 유용한 문법이 spread 
+
+아까 코드는 spread 문법을 사용하면 다음과 같이 작성 할 수 있다.
+
+const slime = {
+  name: '슬라임'
 };
 
-console.log(extracted);
+const cuteSlime = {
+  ...slime,
+  attribute: 'cute'
+};
 
-이렇게 하면 깊숙히 안에 들어있는 값도 객체에서 바로 추출 할 수 있다.
+const purpleCuteSlime = {
+  ...cuteSlime,
+  color: 'purple'
+};
+
+console.log(slime);
+console.log(cuteSlime);
+console.log(purpleCuteSlime);
+
+여기서 사용한 ... 문자가 바로 spread 연산자
+
+spread 연산자는 배열에서도 사용 할 수 있습니다.
+
+const animals = ['개', '고양이', '참새'];
+const anotherAnimals = [...animals, '비둘기'];
+console.log(animals);
+console.log(anotherAnimals);
+
+
+기존의 animals 는 건드리지 않으면서, 새로운 anotherAnimals 배열에 animals 가 가지고 있는 내용을 모두 집어넣고, 
+'비둘기' 라는 항목을 추가
+
+배열에서 spread 연산자를 여러번 사용 할 수도 있다.
+
+const numbers = [1, 2, 3, 4, 5];
+
+const spreadNumbers = [...numbers, 1000, ...numbers];
+console.log(spreadNumbers); // [1, 2, 3, 4, 5, 1000, 1, 2, 3, 4, 5]
