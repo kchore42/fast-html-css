@@ -35,3 +35,4 @@ function sum(...rest) {
 const numbers = [1, 2, 3, 4, 5, 6];
 const result = sum(...numbers);
 console.log(result);
+sd
