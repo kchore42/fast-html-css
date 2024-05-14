@@ -1,87 +1,196 @@
-07. spread 와 rest
+02. async/await
+async/await 문법은 ES8에 해당하는 문법으로서, Promise 를 더욱 쉽게 사용 할 수 있게 해줍니다.
 
-이번에는 ES6 에서 도입된 spread 와 rest 문법에 대해서 알아보겠습니다. 
+기본적인 사용법을 알아봅시다.
 
-서로 완전히 다른 문법인데, 은근히 좀 비슷하다
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-spread
+async function process() {
+  console.log('안녕하세요!');
+  await sleep(1000); // 1초쉬고
+  console.log('반갑습니다!');
+}
 
-spread 라는 단어가 가지고 있는 의미는 펼치다, 퍼뜨리다  
+process();
 
-이 문법을 사용하면, 객체 혹은 배열을 펼칠 수 있다.
+async/await 문법을 사용할 때에는, 함수를 선언 할 때 함수의 앞부분에 async 키워드를 붙여주세요. 
+그리고 Promise 의 앞부분에 await 을 넣어주면 해당 프로미스가 끝날때까지 기다렸다가 다음 작업을 수행 할 수 있습니다.
 
-예를 들어서 다음과 같은 객체들이 있다고 가정
+위 코드에서는 sleep 이라는 함수를 만들어서 파라미터로 넣어준 시간 만큼 기다리는 Promise 를 만들고, 
+이를 process 함수에서 사용해주었습니다.
 
-const slime = {
-  name: '슬라임'
+함수에서 async 를 사용하면, 해당 함수는 결과값으로 Promise 를 반환하게 됩니다.
+따라서 다음과 같이 코드를 작성 할 수 있습니다.
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function process() {
+  console.log('안녕하세요!');
+  await sleep(1000); // 1초쉬고
+  console.log('반갑습니다!');
+}
+
+process().then(() => {
+  console.log('작업이 끝났어요!');
+});
+
+async 함수에서 에러를 발생 시킬때에는 throw 를 사용하고, 에러를 잡아낼 때에는 try/catch 문을 사용합니다.
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function makeError() {
+  await sleep(1000);
+  const error = new Error();
+  throw error;
+}
+
+async function process() {
+  try {
+    await makeError();
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+process();
+
+
+이번에는, 비동기 함수를 몇개 더 만들어보겠습니다.
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+const getDog = async () => {
+  await sleep(1000);
+  return '멍멍이';
 };
 
-const cuteSlime = {
-  name: '슬라임',
-  attribute: 'cute'
+const getRabbit = async () => {
+  await sleep(500);
+  return '토끼';
+};
+const getTurtle = async () => {
+  await sleep(3000);
+  return '거북이';
 };
 
-const purpleCuteSlime = {
-  name: '슬라임',
-  attribute: 'cute',
-  color: 'purple'
+async function process() {
+  const dog = await getDog();
+  console.log(dog);
+  const rabbit = await getRabbit();
+  console.log(rabbit);
+  const turtle = await getTurtle();
+  console.log(turtle);
+}
+
+process();
+현재 위 코드에서는 getDog 는 1초, getRabbit 은 0.5초, getTurtle 은 3초가 걸리고 있습니다.
+ 이 함수들을 process 함수에서 연달아서 사용하게 되면서, process 함수가 실행되는 총 시간은 4.5초가 됩니다.
+
+지금은 getDog -> getRabbit -> getTurtle 순서대로 실행이 되고 있는데요, 
+하나가 끝나야 다음 작업이 시작하고 있는데, 동시에 작업을 시작하고 싶다면, 
+
+다음과 같이 Promise.all 을 사용해야합니다.
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+const getDog = async () => {
+  await sleep(1000);
+  return '멍멍이';
 };
 
-console.log(slime);
-console.log(cuteSlime);
-console.log(purpleCuteSlime);
-
-
-이 코드에서는 먼저 slime 이라는 객체를 선언
-
-그리고 cuteSlime 이라는 객체를 만들었는데요, 
-
-기존에 선언한 slime 을 건들이지 않고 새로운 객체를 만들어서 slime 이 가지고 있는 값을 그대로 사용
-
-그 다음에는 purpleCuteSlime 이라는 객체를 만들었는데요, 
-
-이 객체는 cuteSlime 이 가지고 있는 속성을 그대로 사용하면서 추가적으로 color 가 추가
-
-위 코드에서의 핵심은, 기존의 것을 건들이지 않고, 새로운 객체를 만든다는 것 인데요, 
-
-이러한 상황에 사용 할 수 있는 유용한 문법이 spread 
-
-아까 코드는 spread 문법을 사용하면 다음과 같이 작성 할 수 있다.
-
-const slime = {
-  name: '슬라임'
+const getRabbit = async () => {
+  await sleep(500);
+  return '토끼';
+};
+const getTurtle = async () => {
+  await sleep(3000);
+  return '거북이';
 };
 
-const cuteSlime = {
-  ...slime,
-  attribute: 'cute'
+async function process() {
+  const results = await Promise.all([getDog(), getRabbit(), getTurtle()]);
+  console.log(results);
+}
+
+process();
+
+
+만약에 여기서 배열 비구조화 할당 문법을 사용한다면 각 결과값을 따로 따로 추출해서 조회 할 수 있습니다.
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+const getDog = async () => {
+  await sleep(1000);
+  return '멍멍이';
 };
 
-const purpleCuteSlime = {
-  ...cuteSlime,
-  color: 'purple'
+const getRabbit = async () => {
+  await sleep(500);
+  return '토끼';
+};
+const getTurtle = async () => {
+  await sleep(3000);
+  return '거북이';
 };
 
-console.log(slime);
-console.log(cuteSlime);
-console.log(purpleCuteSlime);
+async function process() {
+  const [dog, rabbit, turtle] = await Promise.all([
+    getDog(),
+    getRabbit(),
+    getTurtle()
+  ]);
+  console.log(dog);
+  console.log(rabbit);
+  console.log(turtle);
+}
 
-여기서 사용한 ... 문자가 바로 spread 연산자
+process();
+Promise.all 를 사용 할 때에는, 등록한 프로미스 중 하나라도 실패하면, 모든게 실패 한 것으로 간주합니다.
 
-spread 연산자는 배열에서도 사용 할 수 있습니다.
+이번에는 Promise.race 라는 것에 대해서 알아봅시다. 
 
-const animals = ['개', '고양이', '참새'];
-const anotherAnimals = [...animals, '비둘기'];
-console.log(animals);
-console.log(anotherAnimals);
+이 함수는 Promise.all 과 달리, 여러개의 프로미스를 등록해서 실행했을 때 가장 빨리 끝난것 하나만의 결과값을 가져옵니다.
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-기존의 animals 는 건드리지 않으면서, 새로운 anotherAnimals 배열에 animals 가 가지고 있는 내용을 모두 집어넣고, 
-'비둘기' 라는 항목을 추가
+const getDog = async () => {
+  await sleep(1000);
+  return '멍멍이';
+};
 
-배열에서 spread 연산자를 여러번 사용 할 수도 있다.
+const getRabbit = async () => {
+  await sleep(500);
+  return '토끼';
+};
+const getTurtle = async () => {
+  await sleep(3000);
+  return '거북이';
+};
 
-const numbers = [1, 2, 3, 4, 5];
+async function process() {
+  const first = await Promise.race([
+    getDog(),
+    getRabbit(),
+    getTurtle()
+  ]);
+  console.log(first);
+}
 
-const spreadNumbers = [...numbers, 1000, ...numbers];
-console.log(spreadNumbers); // [1, 2, 3, 4, 5, 1000, 1, 2, 3, 4, 5]
+process();
+Promise.race 의 경우엔 가장 다른 Promise 가 먼저 성공하기 전에 가장 먼저 끝난 Promise 가 실패하면 이를 실패로 간주합니다. 
+따라서, 현재 위의 코드에서 getRabbit 에서 에러를 발생시킨다면 에러를 잡아낼 수 있지만, 
+getTurtle 이나 getDog 에서 발생한 에러는 무시됩니다.
