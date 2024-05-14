@@ -1,87 +1,204 @@
-07. spread 와 rest
+01. Promise
+프로미스는 비동기 작업을 조금 더 편하게 처리 할 수 있도록 ES6 에 도입된 기능입니다. 
+이전에는 비동기 작업을 처리 할 때에는 콜백 함수로 처리를 해야 했었는데요, 
+콜백 함수로 처리를 하게 된다면 비동기 작업이 많아질 경우 코드가 쉽게 난잡해지게 되었습니다.
 
-이번에는 ES6 에서 도입된 spread 와 rest 문법에 대해서 알아보겠습니다. 
+한번 숫자 n 을 파라미터로 받아와서 다섯번에 걸쳐 1초마다 1씩 더해서 출력하는 작업을 
+setTimeout 으로 구현해봅시다.
 
-서로 완전히 다른 문법인데, 은근히 좀 비슷하다
+function increaseAndPrint(n, callback) {
+  setTimeout(() => {
+    const increased = n + 1;
+    console.log(increased);
+    if (callback) {
+      callback(increased);
+    }
+  }, 1000);
+}
 
-spread
+increaseAndPrint(0, n => {
+  increaseAndPrint(n, n => {
+    increaseAndPrint(n, n => {
+      increaseAndPrint(n, n => {
+        increaseAndPrint(n, n => {
+          console.log('끝!');
+        });
+      });
+    });
+  });
+});
+코드 읽기가 복잡하죠? 이런 식의 코드를 Callback Hell (콜백지옥) 이라고 부릅니다.
 
-spread 라는 단어가 가지고 있는 의미는 펼치다, 퍼뜨리다  
+비동기적으로 처리해야 하는 일이 많아질수록, 코드의 깊이가 계속 깊어지는 현상이 있는데요, 
+Promise 를 사용하면 이렇게 코드의 깊이가 깊어지는 현상을 방지 할 수 있습니다.
 
-이 문법을 사용하면, 객체 혹은 배열을 펼칠 수 있다.
+Promise 만들기
 
-예를 들어서 다음과 같은 객체들이 있다고 가정
+Promise 는 다음과 같이 만듭니다.
 
-const slime = {
-  name: '슬라임'
-};
+const myPromise = new Promise((resolve, reject) => {
+  // 구현..
+})
+Promise 는 성공 할 수도 있고, 실패 할 수도 있습니다. 
+성공 할 때에는 resolve 를 호출해주면 되고, 실패할 때에는 reject 를 호출해주면 됩니다. 
+지금 당장은 실패하는 상황은 고려하지 않고, 1초 뒤에 성공시키는 상황에 대해서만 구현을 해보겠습니다.
 
-const cuteSlime = {
-  name: '슬라임',
-  attribute: 'cute'
-};
+const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(1);
+  }, 1000);
+});
 
-const purpleCuteSlime = {
-  name: '슬라임',
-  attribute: 'cute',
-  color: 'purple'
-};
+myPromise.then(n => {
+  console.log(n);
+});
+resolve 를 호출 할 때 특정 값을 파라미터로 넣어주면, 이 값을 작업이 끝나고 나서 사용 할 수 있습니다. 
+작업이 끝나고 나서 또 다른 작업을 해야 할 때에는 Promise 뒤에 .then(...) 을 붙여서 사용하면 됩니다.
 
-console.log(slime);
-console.log(cuteSlime);
-console.log(purpleCuteSlime);
+이번에는, 1초뒤에 실패되게끔 해봅시다.
 
+const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    reject(new Error());
+  }, 1000);
+});
 
-이 코드에서는 먼저 slime 이라는 객체를 선언
+myPromise
+  .then(n => {
+    console.log(n);
+  })
+  .catch(error => {
+    console.log(error);
+  });
+실패하는 상황에서는 reject 를 사용하고, .catch 를 통하여 실패했을시 수행 할 작업을 설정 할 수 있습니다.
 
-그리고 cuteSlime 이라는 객체를 만들었는데요, 
+이제, Promise 를 만드는 함수를 작성해봅시다.
 
-기존에 선언한 slime 을 건들이지 않고 새로운 객체를 만들어서 slime 이 가지고 있는 값을 그대로 사용
+function increaseAndPrint(n) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const value = n + 1;
+      if (value === 5) {
+        const error = new Error();
+        error.name = 'ValueIsFiveError';
+        reject(error);
+        return;
+      }
+      console.log(value);
+      resolve(value);
+    }, 1000);
+  });
+}
 
-그 다음에는 purpleCuteSlime 이라는 객체를 만들었는데요, 
-
-이 객체는 cuteSlime 이 가지고 있는 속성을 그대로 사용하면서 추가적으로 color 가 추가
-
-위 코드에서의 핵심은, 기존의 것을 건들이지 않고, 새로운 객체를 만든다는 것 인데요, 
-
-이러한 상황에 사용 할 수 있는 유용한 문법이 spread 
-
-아까 코드는 spread 문법을 사용하면 다음과 같이 작성 할 수 있다.
-
-const slime = {
-  name: '슬라임'
-};
-
-const cuteSlime = {
-  ...slime,
-  attribute: 'cute'
-};
-
-const purpleCuteSlime = {
-  ...cuteSlime,
-  color: 'purple'
-};
-
-console.log(slime);
-console.log(cuteSlime);
-console.log(purpleCuteSlime);
-
-여기서 사용한 ... 문자가 바로 spread 연산자
-
-spread 연산자는 배열에서도 사용 할 수 있습니다.
-
-const animals = ['개', '고양이', '참새'];
-const anotherAnimals = [...animals, '비둘기'];
-console.log(animals);
-console.log(anotherAnimals);
+increaseAndPrint(0).then((n) => {
+  console.log('result: ', n);
+})
 
 
-기존의 animals 는 건드리지 않으면서, 새로운 anotherAnimals 배열에 animals 가 가지고 있는 내용을 모두 집어넣고, 
-'비둘기' 라는 항목을 추가
+여기까지만 보면, 결국 함수를 전달하는건데, 뭐가 다르지 싶을수도 있습니다. 
+하지만, Promise 의 속성 중에는, 만약 then 내부에 넣은 함수에서 또 Promise 를 리턴하게 된다면, 
+연달아서 사용 할 수 있습니다. 
 
-배열에서 spread 연산자를 여러번 사용 할 수도 있다.
+이제, Promise 를 만드는 함수를 작성해봅시다.
 
-const numbers = [1, 2, 3, 4, 5];
+function increaseAndPrint(n) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const value = n + 1;
+      if (value === 5) {
+        const error = new Error();
+        error.name = 'ValueIsFiveError';
+        reject(error);
+        return;
+      }
+      console.log(value);
+      resolve(value);
+    }, 1000);
+  });
+}
 
-const spreadNumbers = [...numbers, 1000, ...numbers];
-console.log(spreadNumbers); // [1, 2, 3, 4, 5, 1000, 1, 2, 3, 4, 5]
+increaseAndPrint(0).then((n) => {
+  console.log('result: ', n);
+})
+
+
+여기까지만 보면, 결국 함수를 전달하는건데, 뭐가 다르지 싶을수도 있습니다. 
+하지만, Promise 의 속성 중에는, 만약 then 내부에 넣은 함수에서 또 Promise 를 리턴하게 된다면, 
+연달아서 사용 할 수 있습니다. 
+
+
+다음과 같이 말이죠.
+
+function increaseAndPrint(n) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const value = n + 1;
+      if (value === 5) {
+        const error = new Error();
+        error.name = 'ValueIsFiveError';
+        reject(error);
+        return;
+      }
+      console.log(value);
+      resolve(value);
+    }, 1000);
+  });
+}
+
+increaseAndPrint(0)
+  .then(n => {
+    return increaseAndPrint(n);
+  })
+  .then(n => {
+    return increaseAndPrint(n);
+  })
+  .then(n => {
+    return increaseAndPrint(n);
+  })
+  .then(n => {
+    return increaseAndPrint(n);
+  })
+  .then(n => {
+    return increaseAndPrint(n);
+  })
+  .catch(e => {
+    console.error(e);
+  });
+
+
+위 코드는 이렇게 정리를 할 수 있습니다.
+
+function increaseAndPrint(n) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const value = n + 1;
+      if (value === 5) {
+        const error = new Error();
+        error.name = 'ValueIsFiveError';
+        reject(error);
+        return;
+      }
+      console.log(value);
+      resolve(value);
+    }, 1000);
+  });
+}
+
+increaseAndPrint(0)
+  .then(increaseAndPrint)
+  .then(increaseAndPrint)
+  .then(increaseAndPrint)
+  .then(increaseAndPrint)
+  .then(increaseAndPrint)
+  .catch(e => {
+    console.error(e);
+  });
+Promise 를 사용하면, 비동기 작업의 개수가 많아져도 코드의 깊이가 깊어지지 않게 됩니다.
+
+하지만, 이것도 불편한점이 있긴 합니다. 
+에러를 잡을 때 몇번째에서 발생했는지 알아내기도 어렵고
+ 특정 조건에 따라 분기를 나누는 작업도 어렵고, 
+특정 값을 공유해가면서 작업을 처리하기도 까다롭습니다. 
+
+
+다음 섹션에서 배울 async/await 을 사용하면, 이러한 문제점을 깔끔하게 해결 할 수 있습니다.
