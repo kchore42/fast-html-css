@@ -1,84 +1,58 @@
-자바스크립트에서 비동기 처리 다루기
+01. 카운터
+첫번째로 만들어볼것은, 버튼을 클릭하면 숫자가 올라가거나 내려가는 카운터
 
-만약 작업을 동기적으로 처리한다면 작업이 끝날 때까지 기다리는 동안 중지 상태가 되기 때문에 
-다른 작업을 할 수 없습니다. 그리고 작업이 끝나야 비로소 그 다음 예정된 작업을 할 수 있죠. 
-하지만 이를 비동기적으로 처리를 한다면 흐름이 멈추지 않기 때문에 동시에 여러 가지 작업을 처리할 수도 있고, 
-기다리는 과정에서 다른 함수도 호출할 수 있습니다.
+DOM 선택하기
+우선, DOM 을 선택해봅시다. index.js 를 다음과 같이 수정해보세요.
 
-function work() {
-  const start = Date.now();
-  for (let i = 0; i < 1000000000; i++) {}
-  const end = Date.now();
-  console.log(end - start + 'ms');
-}
+const number = document.getElementById("number");
+const increase = document.getElementById("increase");
+const decrease = document.getElementById("decrease");
 
-work();
-console.log('다음 작업');
+console.log(number);
+console.log(increase);
+console.log(decrease);
 
-여기서 Date.now 는 현재 시간을 숫자 형태로 가져오는 자바스크립트 내장 함수
+각 DOM 에 내장되어있는 기능들은 정말 다양하지만 그 중에서 중요한것 몇가지만 사용해보겠습니다.
 
-위 work 함수는, 1,000,000,000 번 루프를 돌고, 이 작업이 얼마나 걸렸는지 알려줍니다.
+const number = document.getElementById("number");
+const increase = document.getElementById("increase");
+const decrease = document.getElementById("decrease");
 
-//결과 517ms, 다음 작업
+console.log(number.innerText); // 내용
+console.log(increase.offsetTop); // top 위치
+console.log(decrease.id); // id
 
-만약 이 작업이 진행되는 동안 다른 작업도 하고 싶다면 함수를 비동기 형태로 전환을 해주어야하는데요, 
-그렇게 하기 위해서는 setTimeout 이라는 함수를 사용해주어야합니다.
+이벤트 설정하기
+이제 DOM 이벤트를 설정해봅시다. 버튼들이 클릭 됐을 때 콘솔에 텍스트를 출력하는 이벤트를 설정해보겠습니다.
 
-function work() {
-  setTimeout(() => {
-    const start = Date.now();
-    for (let i = 0; i < 1000000000; i++) {}
-    const end = Date.now();
-    console.log(end - start + 'ms');
-  }, 0);
-}
+const number = document.getElementById("number");
+const increase = document.getElementById("increase");
+const decrease = document.getElementById("decrease");
 
-console.log('작업 시작!');
-work();
-console.log('다음 작업');
+increase.onclick = () => {
+  console.log("increase 가 클릭됨");
+};
 
-setTimeout 함수는 첫번째 파라미터에 넣는 함수를 
-두번째 파라미터에 넣은 시간(ms 단위)이 흐른 후 호출해줍니다. 
-지금은 두번째 파라미터에 0을 넣었습니다. 따라서, 이 함수는 바로 실행이 됩니다. 
-0ms 이후에 실행한다는 의미이지만 실제로는 4ms 이후에 실행됩니다.
-이렇게 setTimeout 을 사용하면 우리가 정한 작업이 백그라운드에서 수행되기 때문에 
-기존의 코드 흐름을 막지 않고 동시에 다른 작업들을 진행 할 수 있습니다.
+decrease.onclick = () => {
+  console.log("decrease 가 클릭됨");
+};
+버튼들을 클릭했을 때 콘솔에 우리가 설정한 텍스트들이 출력되는지 확인해보세요.
 
+DOM 에 이벤트를 설정 할 때에는 on이벤트이름 값에 함수를 설정해주면 됩니다. DOM 이벤트의 종류는 정말 다양합니다.
 
-결과
+그럼 이제, 버튼들이 클릭될 때 숫자값을 올리거나 내려보겠습니다.
 
-//작업 시작!, 다음 작업, 508ms
+const number = document.getElementById("number");
+const increase = document.getElementById("increase");
+const decrease = document.getElementById("decrease");
 
-결과물을 보면, 작업이 시작 되고 나서, for 루프가 돌아가는 동안 다음 작업도 실행되고, 
-for 루프가 끝나고 나서 몇 ms 걸렸는지 나타나고 있습니다.
+increase.onclick = () => {
+  const current = parseInt(number.innerText, 10);
+  number.innerText = current + 1;
+};
 
-그렇다면, 만약에 work 함수가 끝난 다음에 어떤 작업을 처리하고 싶다면 어떻게 해야 할까요? 
-이럴 땐, 콜백 함수를 파라미터로 전달해주면 됩니다. 콜백 함수란, 함수 타입의 값을 파라미터로 넘겨줘서, 
-파라미터로 받은 함수를 특정 작업이 끝나고 호출을 해주는 것을 의미
-
-function work(callback) {
-  setTimeout(() => {
-    const start = Date.now();
-    for (let i = 0; i < 1000000000; i++) {}
-    const end = Date.now();
-    console.log(end - start + 'ms');
-    callback();
-  }, 0);
-}
-
-console.log('작업 시작!');
-work(() => {
-  console.log('작업이 끝났어요!')
-});
-console.log('다음 작업');
-
-결과
-//작업 시작!, 다음 작업, 498ms, 작업이 끝났어요!
-
-다음과 같은 작업들은 주로 비동기적으로 처리하게 됩니다.
-
-Ajax Web API 요청: 만약 서버쪽에서 데이터를 받와아야 할 때는, 요청을 하고 서버에서 응답을 할 때 까지 대기를 해야 되기 때문에 작업을 비동기적으로 처리합니다.
-파일 읽기: 주로 서버 쪽에서 파일을 읽어야 하는 상황에는 비동기적으로 처리합니다.
-암호화/복호화: 암호화/복호화를 할 때에도 바로 처리가 되지 않고, 시간이 어느 정도 걸리는 경우가 있기 때문에 비동기적으로 처리합니다.
-작업 예약: 단순히 어떤 작업을 몇초 후에 스케쥴링 해야 하는 상황에는, setTimeout 을 사용하여 비동기적으로 처리합니다.
-비동기 작업을 다룰 때에는 callback 함수 외에도 Promise, 그리고 async/await 라는 문법을 사용하여 처리 할 수 있습니다.
+decrease.onclick = () => {
+  const current = parseInt(number.innerText, 10);
+  number.innerText = current - 1;
+};
+parseInt 는 문자열을 숫자로 변환해주는 함수입니다. 두번째 10을 넣어준 것은, 10진수로 숫자를 받아오겠다는 의미입니다.
