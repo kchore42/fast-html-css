@@ -1,25 +1,35 @@
-SCRIPT (JS 불러오거나 작성하기)
-HTML 문서에서 CSS는, 작성된 CSS를 <link>로 불러오거나 <style></style>안에 작성할 수 있습니다.
+HTML 문서의 구조
+<body></body> 안에서 사용하는 태그들은 HTML 문서의 구조를 나타냅니다.
 
-JS는 <script></script>로 이 2가지 방식을 모두 사용할 수 있습니다.
 
-<!-- 불러오기 -->
-<script src="./js/main.js"></script>
+DIV(막 쓰는 태그)
+<div></div>의 ‘div’는 ‘division’으로 약자로 ‘분할’을 뜻하고 ‘문서의 부분이나 섹션을 정의’합니다.
+명확한 의미를 가지지 않기 때문에 정말 많은 경우 단순히 특정 범위를 묶는(wrap) 용도로 사용합니다.
+보통 이렇게 묶인 부분들에 CSS나 JS를 적용하게 됩니다.
 
-<!-- 작성하기 -->
-<script>
-  function windowOnClickHandler(event) {
-    console.log(event);
-  }
-  window.addEventListener('click', windowOnClickHandler);
-</script>
+<body>
+  <div>
+    <p></p>
+  </div>
+  <div>
+    <div>
+      <h1></h1>
+      <p></p>
+    </div>
+  </div>
+</body>
 
 <!-- 다음과 같이 이해할 수 있습니다. -->
+<body>
+  <묶음1>
+    <p></p>
+  </묶음1>
+  <묶음2>
+    <묶음2-1>
+      <h1></h1>
+      <p></p>
+    </묶음2-1>
+  </묶음2>
+</body>
+“DIV는 아무 의미가 없다. 왜냐하면 아무 의미가 없기 때문이다.”
 
-<!-- 불러오기 -->
-<자바스크립트 문서경로="./js/main.js"></자바스크립트>
-
-<!-- 작성하기 -->
-<자바스크립트>
-  <!-- JS 코드 -->
-</자바스크립트>
