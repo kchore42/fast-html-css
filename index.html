@@ -1,20 +1,18 @@
-LINK(CSS 불러오기) =빈(Empty) 태그
+STYLE (CSS 작성하기)
+CSS를 외부 문서에서 작성하여 연결하는 것이 아니고 HTML 문서 내부에 작성할 때 사용합니다.
 
-외부 문서를 연결할 때 사용합니다.
-특히 HTML 외부에서 작성된 CSS 문서(xxx.css 파일)를 불러와 연결할 때 사용합니다.
-
-
-<head>
-  <link rel="stylesheet" href="./css/main.css">
-  <link rel="icon" href="./favicon.png">
-</head>
+<style>
+  img {
+    width: 100px;
+    height: 200px;
+  }
+  p {
+    font-size: 20px;
+    font-weight: bold;
+  }
+</style>
 
 <!-- 다음과 같이 이해할 수 있습니다. -->
-<문서의정보범위>
-  <외부문서연결 관계="CSS" 문서경로="./css/main.css">
-  <외부문서연결 관계="사이트대표아이콘" 문서경로="./favicon.png">
-
-</문서의정보범위>
-속성	의미	값
-rel	(필수)현재 문서와 외부 문서와의 관계를 지정	stylesheet, icon 등..
-href	외부 문서의 위치를 지정	경로
+<스타일정의>
+  <!-- CSS 코드 -->
+</스타일정의>
