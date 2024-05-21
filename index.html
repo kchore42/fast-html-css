@@ -1,66 +1,11 @@
-멀티미디어
+<figure>, <figcaption>
 
-<img />
-이미지를 삽입.
-
-속성	의미	값
-src	(필수)이미지 URL	URL	
-alt	(필수)이미지의 대체텍스트	
-width	이미지의 가로 너비	
-height	이미지의 세로 너비	
-srcset	브라우저에게 제시할 이미지 URL과 원본 크기의 목록을 정의	w, x
-sizes	미디어 조건과 해당 조건일 때 이미지 최적화 크기의 목록을 정의	
-<!-- srcset, sizes -->
-<!-- 다양한 디스플레이 해상도에 맞는 최적의 이미지를 브라우저가 선택해서 사용 -->
-<img srcset="./small.jpg 320w,
-             ./medium.jpg 640w,
-             ./large.jpg 1024w"
-     sizes="(max-width: 480px) 300px,
-            (max-width: 800px) 600px,
-            900px"
-     src="./small.jpg"
-     alt="The image" />
-<img srcset="./image.jpg,
-             ./image-1.5x.jpg 1.5x,
-             ./image-2x.jpg 2x"
-     src="./image.jpg"
-     alt="The image" />
-img { display: inline; }
-
-HTML IMG의 srcset과 sizes 속성
-
-Responsive images for srcset and sizes
-
-<audio>
-소리 콘텐츠(MP3)를 삽입.
-
-autoplay가 지정된 경우, preload는 무시됨.
-
-속성	의미	값	기본값
-autoplay	준비되면 바로 재생	불린(Boolean)	
-controls	제어 메뉴를 표시	불린(Boolean)	
-loop	재생이 끝나면 다시 처음부터 재생	불린(Boolean)	
-preload	페이지가 로드될 때 파일을 로드할지의 지정(힌트 제공)	none: 로드하지 않음,
-metadata: 메타데이터만 로드,
-auto: 전체 파일 로드	metadata
-src	콘텐츠 URL	URL	
-muted	음소거 여부	불린(Boolean)	
-audio { display: inline; }
-
-<video>
-동영상 콘텐츠(MP4)를 삽입.
-
-autoplay가 지정된 경우, preload는 무시됨.
-속성	의미	값	기본값
-autoplay	준비되면 바로 재생	불린(Boolean)	
-controls	제어 메뉴를 표시	불린(Boolean)	
-loop	재생이 끝나면 다시 처음부터 재생	불린(Boolean)	
-muted	음소거 여부	불린(Boolean)	
-poster	동영상 썸네일 이미지 URL	URL	
-preload	페이지가 로드될 때 파일을 로드할지의 지정(힌트 제공)	none: 로드하지 않음,
-metadata: 메타데이터만 로드,
-auto: 전체 파일 로드	metadata
-src	콘텐츠 URL	URL	
-width	동영상 가로 너비		
-height	동영상 세로 너비		
-video { display: inline; }
+  <figure>는 이미지나 삽화, 도표 등의 영역을 설정.
+  <figcaption>는 <figure>에 포함되어 이미지나 삽화 등의 설명을 표시.(Figure Caption)
+  
+  <figure>
+    <img src="milk.jpg" alt="A milk">
+    <figcaption>Milk is a nutrient-rich, white liquid food produced by the mammary glands of mammals.</figcaption>
+  </figure>
+  figure { display: block; }
+  figcation { display: inline; }
