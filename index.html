@@ -1,52 +1,369 @@
-<select>
-  옵션을 선택하는 메뉴.
-  
-  속성	의미	값	기본값
-  autocomplete	사용자가 이전에 입력한 값으로 자동 완성 기능을 사용할 것인지 여부	on, off	on	
-  disabled	선택 메뉴를 비활성화	불린(Boolean)	
-  form	선택 메뉴가 속할 하나 이상의 <form>의 id 속성 값		
-  multiple	다중 선택 여부	불린(Boolean)	
-  name	선택 메뉴의 이름		
-  size	한 번에 볼 수 있는 행의 개수	숫자(Number)	0(1과 같음)
-  
-  <datalist>
-  <input>에 미리 정의된 옵션을 지정하여 자동완성(Autocomplete) 기능을 제공하는 데 사용.
-  
-  <input>의 list 속성 바인딩.
-  <option>을 포함하여 정의된 옵션을 지정.
-  <input type="text" list="fruits">
-  
-  <datalist id="fruits">
-    <option>Apple</option>
-    <option>Orange</option>
-    <option>Banana</option>
-    <option>Mango</option>
-    <option>Fineapple</option>
-  </datalist>
-  
-  <optgroup>
-  <option>을 그룹화.
-  
-  속성	의미	값
-  label	(필수)옵션 그룹의 이름	
-  disabled	옵션 그룹을 비활성화	불린(Boolean)
-  
-  <option>
-  선택 메뉴(<select>)나 자동완성(<datalist>)에서 사용될 옵션.
-  
-  선택적 빈(Empty) 태그로 사용 가능.
-  속성	의미	값	특성
-  disabled	옵션을 비활성화	불린(Boolean)	
-  label	표시될 옵션의 제목		생략되면 포함된 텍스트를 표시
-  selected	옵션이 선택되었음을 표시	불린(Boolean)	
-  value	양식으로 제출될 값		생략되면 포함된 텍스트를 값으로 사용
-  
-  <progress>
-  작업의 완료 진행률을 표시.
-  
-  속성	의미	값	특징
-  max	작업의 총량	숫자(Number)	
-  value	작업의 진행량	숫자(Number)	max 속성을 생략할 경우 0~1 사이의 숫자여야 함
-  
-  <progress value="70" max="100">70 %</progress>
-  progress { display: inline-block; }
+전역 속성(Global Attributes)
+
+모든 HTML 요소에서 공통적으로 사용 가능한 속성.
+
+class
+
+공백으로 구분된 요소의 별칭을 지정.
+CSS 혹은 JavaScript의 요소 선택기(CSS 선택자나 GetElementsByClassName, QuerySelectorAll 같은)를 통해서 요소를 선택하거나 접근.
+
+id
+문서에서 고유한 식별자(idenifier, ID)를 정의.
+CSS 혹은 JavaScript의 요소 선택기(CSS 선택자나 GetElementsByClassName, QuerySelectorAll 같은)를 통해서 요소를 선택하거나 접근.
+
+style
+요소에 적용할 CSS를 선언.
+
+title
+요소의 정보(설명)을 지정.
+
+lang
+요소의 언어(ISO 639-1)를 지정.
+
+<p lang="en">This paragraph is English</p>
+<p lang="ko">이 단락은 한글입니다.</p>
+<p lang="fr">Ce paragraphe est défini en français.</p>
+
+data-*
+사용자 정의 데이터 속성을 지정.
+HTML에 JavaScript에서 이용할 수 있는 데이터(정보)를 저장하는 용도로 사용.
+
+<!-- data-custom-data-attributes -->
+<div id="me" data-my-name="Heropy" data-my-age="851">Heropy</div>
+// dataset.customDataAttributes
+const $me = document.getElementById('me');
+console.log($me.dataset.myName); // "Heropy"
+console.log($me.dataset.myAge); // "851"
+
+draggable
+요소가 Drag and Drop API를 사용 가능한지 여부를 지정.
+
+<div draggable="true">The element to drag.</div>
+
+hidden
+요소를 숨김.
+
+<form id="hidden-form" action="/form-action" hidden>
+  <!-- 숨겨진 양식들.. -->
+</form>
+<button form="hidden-form" type="submit">전송</button>=
+
+tabindex
+Tab키를 이용해 요소를 순차적으로 포커스 탐색할 순서를 지정.
+
+대화형 콘텐츠(Interactive Content)는 기본적으로 코드 순서대로 탭 순서가 지정됨.
+비대화형 콘텐츠에 tabindex="0"을 지정하여 대화형 콘텐츠와 같이 탭 순서를 사용.
+tabindex="-1"을 통해 포커스는 가능하지만 탭 순서에서 제외 가능.
+tabindex="1" 이상의 양수 값은 논리적 흐름을 방해하기 때문에 사용을 추천하지 않음.
+
+<h1 tabindex="0">Sign In</h1>
+<label>Username: <input type="text"></label>
+<label>Password: <input type="password"></label>
+<label>PS: <input type="text" tabindex="-1"></label>
+<input type="submit" value="Sign In">
+
+Using the tabindex attribute
+
+생략한 요소
+
+<template>
+렌더링되지 않는 콘텐츠를 보유.
+
+JavaScript를 사용해 렌더링.
+반복적으로 사용하는 콘텐츠에 활용.
+IE 지원 불가
+
+<map>, <area>
+클라이언트 측 이미지 맵(<map>)과 클릭 가능한 영역(<area>)을 정의.
+(<img />와 연결해 사용)
+
+<picture>
+이미지를 삽입.
+(<img />의 srcset, sizes로 대체 가능)
+
+<source>
+브라우저가 선택 가능한 <audio>, <video>, <picture>등의 다중 미디어 리소스를 지정.
+
+<track>
+<audio>, <video> 같은 미디어가 재생 중일 때 표시될 자막, 캡션 파일 등을 지정.
+
+<embed>
+외부 응용 프로그램이나 대화형 플러그인을 삽입.
+
+<object>
+멀티미디어, 중첩된 브라우저 컨텍스트(프레임), 플러그인 등을 삽입.
+
+<param>
+<object>의 매개 변수를 정의.
+
+
+생략한 속성
+사용 태그	속성	의미	값	특징
+<link />,
+<a>	hreflang	현재 페이지의 대체 언어(ISO 639-1)	ko, en…	다른 언어 또는 지역별 여러 버전의 페이지가 있는 경우
+<ol>	reversed	항목을 역순으로 설정		IE 지원 불가
+<link>,
+<img />,
+<video>,
+<script>	crossorigin	가져 오기가 CORS를 사용하여 수행되어야하는지 여부	anonymous,
+use-credentials	
+<img />	ismap	서버 측 이미지 맵으로 지정해 클릭하여 좌표를 쿼리스트링으로 서버에 전송할지 여부	불린(Boolean)	<img />가 유효한 href 속성을 가진 <a>의 하위 요소인 경우에만 허용
+<img />	usemap	클라이언트 측 이미지 맵으로 지정	<map>의 # + name 속성 값	<a>, <button>의 하위 요소인 경우 사용 불가
+<form>	accept-charset	서버가 받을 문자인코딩 방식	UTF-8, EUC-KR…	UNKNOWN
+<form>	enctype	method속성이 POST일 경우, 서버로 전송하는 콘텐츠의 MIME 타입		
+<input />	accept	서버가 받을 파일 종류	파일 확장자(.jpg, .png..),
+
+MIME 타입,
+audio/*,
+video/*,
+image/*	type="file"
+<input />	width	이미지의 가로 너비	숫자(Number)	type="image"
+<input />	height	이미지의 가로 너비	숫자(Number)	type="image"
+<input />,
+<button>	formaction	양식을 제출할 때 양식 데이터를 보낼 위치	URL	type="submit",
+type="image",
+form의 속성보다 우선
+<input />,
+<button>	formenctype	양식 데이터를 서버로 보내기 전에 인코딩 할 방법을 지정	-	type="submit",
+type="image",
+form의 속성보다 우선
+<input />,
+<button>	formmethod	양식 데이터를 보내는 방법	GET, POST	type="submit",
+type="image",
+form의 속성보다 우선
+<input />,
+<button>	formnovalidate	양식 데이터의 유효성을 검사하지 않도록 지정	불린(Boolean)	type="submit",
+type="image",
+form의 속성보다 우선
+<input />,
+<button>	formtarget		_self, _blank	type="submit",
+type="image",
+form의 속성보다 우선
+<input />,
+<textarea>	minlength	입력 가능한 최소 문자 수	숫자(Number)	type="text",
+type="email",
+type="password",
+type="tel",
+type="url"
+<input />	pattern	양식의 값을 검사하는 정규표현식	정규표현식(RegExp)	type="text",
+type="search",
+type="tel",
+type="url",
+type="email"
+<input />,
+<textarea>,
+<select>	required	필수 여부	불린(Boolean)	
+<input />	size	양식의 가로 너비	숫자(Number, 20)	평균 문자 너비를 기준
+<input />,
+<textarea>	spellcheck	맞춤법 및 문법 검사의 필요 여부	true, false	
+<button>	value	폼 데이터와 함께 전송되는 버튼의 초기값		IE 지원 불가
+<textarea>	cols	양식의 가로 너비	숫자(Number, 20)	평균 문자 너비를 기준
+
+생략한 전역 속성
+
+accesskey
+요소의 키보드 단축키 힌트를 제공.
+
+다음의 이유 등으로 일반 목적의 웹사이트에서는 사용을 권장하지 않음.
+브라우저 키보드 단축키 혹은 보조기기의 기능과 충돌
+특정 키보드의 존재하지 않는 키 사용
+숫자 같은 논리적인 관계가 없는 키 지정
+accesskey의 존재를 모르는 사용자의 실수
+<a href="https://google.com" accesskey="G">Press 'Alt' + 'G' key on Chrome!</a>
+MDN / W3Schools
+
+contenteditable
+요소의 사용자 편집 여부를 지정.
+
+<style>
+  p::before { content: "["; }
+  p::after { content: "]"; }
+</style>
+
+<blockquote contenteditable="true">
+  <p>Edit this content to add your own bracket.</p>
+</blockquote>전역 속성(Global Attributes)
+
+모든 HTML 요소에서 공통적으로 사용 가능한 속성.
+
+class
+
+공백으로 구분된 요소의 별칭을 지정.
+CSS 혹은 JavaScript의 요소 선택기(CSS 선택자나 GetElementsByClassName, QuerySelectorAll 같은)를 통해서 요소를 선택하거나 접근.
+
+id
+문서에서 고유한 식별자(idenifier, ID)를 정의.
+CSS 혹은 JavaScript의 요소 선택기(CSS 선택자나 GetElementsByClassName, QuerySelectorAll 같은)를 통해서 요소를 선택하거나 접근.
+
+style
+요소에 적용할 CSS를 선언.
+
+title
+요소의 정보(설명)을 지정.
+
+lang
+요소의 언어(ISO 639-1)를 지정.
+
+<p lang="en">This paragraph is English</p>
+<p lang="ko">이 단락은 한글입니다.</p>
+<p lang="fr">Ce paragraphe est défini en français.</p>
+
+data-*
+사용자 정의 데이터 속성을 지정.
+HTML에 JavaScript에서 이용할 수 있는 데이터(정보)를 저장하는 용도로 사용.
+
+<!-- data-custom-data-attributes -->
+<div id="me" data-my-name="Heropy" data-my-age="851">Heropy</div>
+// dataset.customDataAttributes
+const $me = document.getElementById('me');
+console.log($me.dataset.myName); // "Heropy"
+console.log($me.dataset.myAge); // "851"
+
+draggable
+요소가 Drag and Drop API를 사용 가능한지 여부를 지정.
+
+<div draggable="true">The element to drag.</div>
+
+hidden
+요소를 숨김.
+
+<form id="hidden-form" action="/form-action" hidden>
+  <!-- 숨겨진 양식들.. -->
+</form>
+<button form="hidden-form" type="submit">전송</button>=
+
+tabindex
+Tab키를 이용해 요소를 순차적으로 포커스 탐색할 순서를 지정.
+
+대화형 콘텐츠(Interactive Content)는 기본적으로 코드 순서대로 탭 순서가 지정됨.
+비대화형 콘텐츠에 tabindex="0"을 지정하여 대화형 콘텐츠와 같이 탭 순서를 사용.
+tabindex="-1"을 통해 포커스는 가능하지만 탭 순서에서 제외 가능.
+tabindex="1" 이상의 양수 값은 논리적 흐름을 방해하기 때문에 사용을 추천하지 않음.
+
+<h1 tabindex="0">Sign In</h1>
+<label>Username: <input type="text"></label>
+<label>Password: <input type="password"></label>
+<label>PS: <input type="text" tabindex="-1"></label>
+<input type="submit" value="Sign In">
+
+Using the tabindex attribute
+
+생략한 요소
+
+<template>
+렌더링되지 않는 콘텐츠를 보유.
+
+JavaScript를 사용해 렌더링.
+반복적으로 사용하는 콘텐츠에 활용.
+IE 지원 불가
+
+<map>, <area>
+클라이언트 측 이미지 맵(<map>)과 클릭 가능한 영역(<area>)을 정의.
+(<img />와 연결해 사용)
+
+<picture>
+이미지를 삽입.
+(<img />의 srcset, sizes로 대체 가능)
+
+<source>
+브라우저가 선택 가능한 <audio>, <video>, <picture>등의 다중 미디어 리소스를 지정.
+
+<track>
+<audio>, <video> 같은 미디어가 재생 중일 때 표시될 자막, 캡션 파일 등을 지정.
+
+<embed>
+외부 응용 프로그램이나 대화형 플러그인을 삽입.
+
+<object>
+멀티미디어, 중첩된 브라우저 컨텍스트(프레임), 플러그인 등을 삽입.
+
+<param>
+<object>의 매개 변수를 정의.
+
+
+생략한 속성
+사용 태그	속성	의미	값	특징
+<link />,
+<a>	hreflang	현재 페이지의 대체 언어(ISO 639-1)	ko, en…	다른 언어 또는 지역별 여러 버전의 페이지가 있는 경우
+<ol>	reversed	항목을 역순으로 설정		IE 지원 불가
+<link>,
+<img />,
+<video>,
+<script>	crossorigin	가져 오기가 CORS를 사용하여 수행되어야하는지 여부	anonymous,
+use-credentials	
+<img />	ismap	서버 측 이미지 맵으로 지정해 클릭하여 좌표를 쿼리스트링으로 서버에 전송할지 여부	불린(Boolean)	<img />가 유효한 href 속성을 가진 <a>의 하위 요소인 경우에만 허용
+<img />	usemap	클라이언트 측 이미지 맵으로 지정	<map>의 # + name 속성 값	<a>, <button>의 하위 요소인 경우 사용 불가
+<form>	accept-charset	서버가 받을 문자인코딩 방식	UTF-8, EUC-KR…	UNKNOWN
+<form>	enctype	method속성이 POST일 경우, 서버로 전송하는 콘텐츠의 MIME 타입		
+<input />	accept	서버가 받을 파일 종류	파일 확장자(.jpg, .png..),
+
+MIME 타입,
+audio/*,
+video/*,
+image/*	type="file"
+<input />	width	이미지의 가로 너비	숫자(Number)	type="image"
+<input />	height	이미지의 가로 너비	숫자(Number)	type="image"
+<input />,
+<button>	formaction	양식을 제출할 때 양식 데이터를 보낼 위치	URL	type="submit",
+type="image",
+form의 속성보다 우선
+<input />,
+<button>	formenctype	양식 데이터를 서버로 보내기 전에 인코딩 할 방법을 지정	-	type="submit",
+type="image",
+form의 속성보다 우선
+<input />,
+<button>	formmethod	양식 데이터를 보내는 방법	GET, POST	type="submit",
+type="image",
+form의 속성보다 우선
+<input />,
+<button>	formnovalidate	양식 데이터의 유효성을 검사하지 않도록 지정	불린(Boolean)	type="submit",
+type="image",
+form의 속성보다 우선
+<input />,
+<button>	formtarget		_self, _blank	type="submit",
+type="image",
+form의 속성보다 우선
+<input />,
+<textarea>	minlength	입력 가능한 최소 문자 수	숫자(Number)	type="text",
+type="email",
+type="password",
+type="tel",
+type="url"
+<input />	pattern	양식의 값을 검사하는 정규표현식	정규표현식(RegExp)	type="text",
+type="search",
+type="tel",
+type="url",
+type="email"
+<input />,
+<textarea>,
+<select>	required	필수 여부	불린(Boolean)	
+<input />	size	양식의 가로 너비	숫자(Number, 20)	평균 문자 너비를 기준
+<input />,
+<textarea>	spellcheck	맞춤법 및 문법 검사의 필요 여부	true, false	
+<button>	value	폼 데이터와 함께 전송되는 버튼의 초기값		IE 지원 불가
+<textarea>	cols	양식의 가로 너비	숫자(Number, 20)	평균 문자 너비를 기준
+
+생략한 전역 속성
+
+accesskey
+요소의 키보드 단축키 힌트를 제공.
+
+다음의 이유 등으로 일반 목적의 웹사이트에서는 사용을 권장하지 않음.
+브라우저 키보드 단축키 혹은 보조기기의 기능과 충돌
+특정 키보드의 존재하지 않는 키 사용
+숫자 같은 논리적인 관계가 없는 키 지정
+accesskey의 존재를 모르는 사용자의 실수
+<a href="https://google.com" accesskey="G">Press 'Alt' + 'G' key on Chrome!</a>
+MDN / W3Schools
+
+contenteditable
+요소의 사용자 편집 여부를 지정.
+
+<style>
+  p::before { content: "["; }
+  p::after { content: "]"; }
+</style>
+
+<blockquote contenteditable="true">
+  <p>Edit this content to add your own bracket.</p>
+</blockquote>
