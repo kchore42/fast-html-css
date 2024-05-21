@@ -1,58 +1,67 @@
-표 콘텐츠
+양식
+<form>
+웹 서버에 정보를 제출하기 위한 양식 범위를 정의.
 
-<table>
-  <caption>Fruits</caption>
-  <colgroup>
-    <col span="2" style="background-color: yellowgreen;">
-    <col style="background-color: tomato;">
-  </colgroup>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>F123A</td>
-      <td>Apple</td>
-      <td>$22</td>
-    </tr>
-    <tr>
-      <td>F098B</td>
-      <td>Banana</td>
-      <td>$19</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>, <tr>, <th>, <td>
-데이터 표(<table>)의 행(줄 / <tr>)과 열(칸, 셀(Cell) / <th>, <td>)을 생성.
-(Table Row, Table Header, Table Data)
-
-table { display: table; }
-tr { display: table-row; }
-th, td { display: table-cell; }
-
-<th>
-‘머리글 칸’을 지정
+<form>이 다른 <form>을 자식 요소로 포함할 수 없음.
 
 속성	의미	값	기본값
-abbr	열에 대한 간단한 설명		
-headers	관련된 하나 이상의 다른 머리글 칸 id 속성 값		
-colspan	확장하려는(병합) 열의 수		1
-rowspan	확장하려는(병합) 행의 수		1
-scope	자신이 누구의 ‘머리글 칸’인지 명시	col: 자신의 열
-colgroup: 모든 열
-row: 자신의 행
-rowgroup: 모든 행
-auto	auto
+action	전송한 정보를 처리할 웹페이지의 URL	URL	
+autocomplete	사용자가 이전에 입력한 값으로 자동 완성 기능을 사용할 것인지 여부	on, off	on
+method	서버로 전송할 HTTP 방식	GET, POST	GET
+name	고유한 양식의 이름		
+novalidate	서버로 전송시 양식 데이터의 유효성을 검사하지 않도록 지정		
+target	서버로 전송 후 응답받을 방식을 지정	_self, _blank	_self
+form { display: block; }
 
-<td>
-‘일반 칸’을 지정
+<input />
+사용자에게 입력 받을 데이터 양식.
 
-속성	의미	값	기본값
-headers	관련된 하나 이상의 다른 머리글 칸 id 속성 값		
-colspan	확장하려는(병합) 열의 수		1
-rowspan	확장하려는(병합) 행의 수		1
+속성	의미	값	기본값	특징
+autocomplete	사용자가 이전에 입력한 값으로 자동 완성 기능을 사용할 것인지 여부	on, off	on	
+autofocus	페이지가 로드될 때 자동으로 포커스	불린(Boolean)		문서 내 고유해야 함
+checked	양식이 선택되었음을 표시	불린(Boolean)		type 속성 값이 radio, checkbox일 경우만
+disabled	양식을 비활성화	불린(Boolean)		
+form	<form>의 id 속성 값			해당 <form>의 후손이 아닐 경우만
+list	참조할 <datalist>의 id 속성 값			
+max	지정 가능한 최대 값	숫자(Number)		type 속성 값이 number일 경우만,
+min속성보다 큰 값만 허용
+min	지정 가능한 최소 값	숫자(Number)		type 속성 값이 number일 경우만,
+max속성보다 작은 값만 허용
+maxlength	입력 가능한 최대 문자 수	숫자(Number)	524288	type 속성 값이 text, email, password, tel, url일 경우만
+multiple	둘 이상의 값을 입력 할 수 있는지 여부	불린(Boolean)		type 속성 값이 email, file일 경우만,
+email일 경우 ,로 구분
+name	양식의 이름			
+placeholder	사용자가 입력할 값의 힌트			type 속성 값이 text, search, tel, url, email일 경우만
+readonly	수정 불가한 읽기 전용	불린(Boolean)		
+step	유효한 증감 숫자의 간격	숫자(Number)	1	type 속성 값이 number, range일 경우만
+src	이미지의 URL	URL		type 속성 값이 image일 경우만
+alt	이미지의 대체 텍스트			type 속성 값이 image일 경우만
+type	입력 받을 데이터의 종류	별도 정리	text
+value	양식의 초기 값			
+데이터 종류(Type)의 값(Values)
+type속성에 입력할 수 있는 값의 목록.
+
+<input type="button" />
+<input type="checkbox" />
+<input type="file" />
+<input type="text" />
+
+값	데이터 종류	특징
+button	일반 버튼	<button>처럼 사용
+checkbox	체크박스	
+color	색상	IE 지원 불가
+email	이메일	
+file	파일	
+hidden	보이지 않지만 전송할 양식	value 속성으로 값을 지정
+image	이미지 제출 버튼	<img />처럼 사용
+number	숫자	
+password	비밀	가려지는 양식
+radio	라디오 버튼	같은 name 속성 그룹 내 하나만 선택 가능
+range	범위 컨트롤	min, max, step, value(기본값) 속성 사용
+reset	초기화	해당 <form> 범위 내 모든 양식
+search	검색	
+submit	제출 버튼	해당 <form> 범위 내 고유한 양식
+tel	전화번호	
+text	일반 텍스트	
+url	절대 URL	
+input { display: inline-block; }
