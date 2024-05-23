@@ -1,13 +1,16 @@
-가상 클래스 선택자
-기호 :하나 있는거(가상 클래스 선태자), ::(가상 요소 선택자)
+가상 요소 선택자
+1.before
+e요소 내부의 앞에, 내용을 삽입
+기호 E::
 
-8. :nth-of-type()
-  E의 타입(태그이름)과 동일한 타입인 형제 요소 중 E가 n번째 요소라면 선택
-  (n 키워드 사용 시 0부터 해석)
-기호 - E:nth-of-type()
-주의점은 type는 태그를 찾는 목적으로 사용해야 함
-
-
-9.not (부정 선택자)
-S가 아닌 E 선택
-기호 - E:not(S)
+ul {
+  font-size: 40px;
+}
+ul li:before {
+  content: "숫자";
+  font-weight:bold;
+  color: red;
+  background: tomato;
+  margin-right: 20px;
+}
+/* 주의점: content 무조건 있어야 함, 내용을 적지 않더라도 (content: "";) 필수로 들어가야 한다 */
