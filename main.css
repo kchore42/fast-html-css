@@ -1,12 +1,16 @@
 가상 클래스 선택자
 기호 :하나 있는거(가상 클래스 선태자), ::(가상 요소 선택자)
 
-5. First Child 
-E가 형제 요소 중 첫번째 요소라면 선택(같은 부모)
-기호 E:first-child
+7.nth :nth-child()
+e가 형제 요소 중 n번째 요소라면 선택
+(n 키워드 사용 시 0부터 해석,zero-base)
+기호 - E:nth-child(n)
 
-.fruits li:first-child {
-  color:red;
+.fruits li:nth-child(2n) {
+  color; red;
 }
+/* 짝수만 선택 가능 */
 
-6.last-child
+.fruits li:nth-child(n+3) {
+  color; red;
+}
