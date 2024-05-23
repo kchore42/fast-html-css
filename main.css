@@ -1,34 +1,37 @@
-선택자
-/* 굉장히 중요한 부분: 완벽하게 학습 필요!! */
+복합 선택자 combinator
 
-기본 선택자 4가지
+1.일치 선택자
+기호:ef 
 
-1.전체 universal
-(요소 내부)의 모든 요소를 선택
-'*'(에스터리스크) 표시가 있음
-* {
-  color: red;
+span.orange {
+ color:red;
+}
+태그 선택자와 class 선택자가 붙어 있는 형태
+
+2.자식 선택자
+부모가 기준(앞에 있는 것이 조건, 뒤가 선택자) = 부모가 조건, 자식이 선택
+기호: >
+ul>.orange {
+color:red;
 }
 
-2.태그
-태그이름이 E(element)인 요소 선택
-ex) div, span
-li { /* 태그 앞 뒤 기호가 없으면 태그 선택자 */
+3.후손(하위)선택자=(자손)
+기호: E F (띄어쓰기)
+div .orange { 
   color: red;
 }
+div 태그의 모든 요소 중에 class orange를 찾아라
 
-3.클래스
-태그의 별명, html class 속성의 값이 E인 요소 선택
-기호: .E
-.orange {
-  color: red;
+부모 요소, 자식 요소, 형제 요소 / 후손(하위), 조상(상위)
 
+4.인접 형제 선택자 (부모 요소가 같아야 함), E의 다음 형제 요소 F 하나만 선택
+기호: E + F 
+.orange + li {
+  color: red; 
 }
-4.아이디
-class와 비슷하지만 다름
-차이점은 class 모든 선택자에 사용, id는 고유하게 적용
-기호: #E
-#orange {
+
+5.일반 형제 선택자, E의 다음 형제 요소 F 모두 선택
+기호: E ~ F
+.orange ~ lr {
   color:red;
 }
-
