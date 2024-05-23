@@ -1,16 +1,17 @@
 가상 요소 선택자
-1.before
-e요소 내부의 앞에, 내용을 삽입
-기호 E::
+2. ::after
+e요소 내부의 뒤에, 내용을 삽입
 
 ul {
-  font-size: 40px;
+    font-size:500px;
 }
-ul li:before {
-  content: "숫자";
-  font-weight:bold;
-  color: red;
-  background: tomato;
-  margin-right: 20px;
-}
+
+  ul li::after {
+    content: url("https://heropy.blog/css/images/logo.png");
+  }
+
+  /* 이미지 넣을 때 url, ():함수 */
+
+
+
 /* 주의점: content 무조건 있어야 함, 내용을 적지 않더라도 (content: "";) 필수로 들어가야 한다 */
