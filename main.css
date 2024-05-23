@@ -1,37 +1,34 @@
-우선순위 결정
-같은 요소가 여러 선언의 대상이 될 경우,
-어떤 선언의 css속성을 우선 적용할지 결정하는 방법
+가상 클래스 선택자
+기호 :하나 있는거(가상 클래스 선태자), ::(가상 요소 선택자)
 
-1. 명시도 점수가 높은 선언이 우선(명시도)
-2. 점수가 같은 경우, 가장 마지막에 해석되는 선언이 우선(선언 순서)
-3. 명시도는 '상속'규칙보다 우선(중요도)
-4.!important가 적용된 선언 방식이 다른 모든 방식보다 우선(중요도)
+1.hover
+E에 마우스(포인터)가 올라가 있는 동안에만 E선택 (작동)
+E:hover
 
-1.가장 중요(!important)
-모든 선언을 무시하고 가장 우선
-
-2.인라인 선언 방식(style)
-점수:1000점
-div style=color
-
-3.아이디
-점수:100점
-#color yellow {
-
+a:hover {
+  font-weight: bold;
+  font-size: 20px;
 }
 
-4.클래스
-점수:10점
+2.active
+E를 마우스로 클릭하는 동안에만 E선택(작동)
+E:active
 
-5.태그 선택자
-점수:1점
+.box {
+  width: 100px;
+}
 
-6.전체
-점수:0점
+3.focus
+  E가 포커스 된 동안에만 E 선택
+  E:foucs
+대화형 콘텐츠에서만 사용가능(input, img, tabindex)
 
-7.상속
-점수:없음
-
-
-
-
+input {
+  width: 100px;
+  outline:none;
+  border: 1px solid lightgray;
+  padding: 5px 10px
+}
+input:foucs {
+  border-color: redx;
+}
