@@ -10,8 +10,20 @@
   <div>Hello</div>
 </body>
 </html>
-인라인방(in-line)방식
+인라인(in-line)방식
 HTML에 직접 작성하기 때문에 선택자가 필요없다
 html 요소(태그)의 'style'속성에 직접 작성하는 방식
 <div style="color: red; font-size:20px font-weight: bold">Hello</div>
 이 방식은 '선택자'가 필요하지 않습니다<div class=""></div>
+
+내장(embedded) 방식
+html <style></style> 안에 작성하는 방식, body 안에 장식
+
+link 방식
+html <link rel="stylesheet" href="">를 이용하여 외부 문서를 css를 불러와 적용하는 방식
+head 안에 장식, 주변에서 찾는 방식, 상대경로 './' 생략 되어 있음
+
+@import 방식
+css내부에서 @import를 이용하여 외부문서를 css로 가져 오는 방식은
+css가 css를 가져오는 방식
+주의: 직렬방식
