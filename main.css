@@ -1,34 +1,12 @@
 가상 클래스 선택자
 기호 :하나 있는거(가상 클래스 선태자), ::(가상 요소 선택자)
 
-1.hover
-E에 마우스(포인터)가 올라가 있는 동안에만 E선택 (작동)
-E:hover
+5. First Child 
+E가 형제 요소 중 첫번째 요소라면 선택(같은 부모)
+기호 E:first-child
 
-a:hover {
-  font-weight: bold;
-  font-size: 20px;
+.fruits li:first-child {
+  color:red;
 }
 
-2.active
-E를 마우스로 클릭하는 동안에만 E선택(작동)
-E:active
-
-.box {
-  width: 100px;
-}
-
-3.focus
-  E가 포커스 된 동안에만 E 선택
-  E:foucs
-대화형 콘텐츠에서만 사용가능(input, img, tabindex)
-
-input {
-  width: 100px;
-  outline:none;
-  border: 1px solid lightgray;
-  padding: 5px 10px
-}
-input:foucs {
-  border-color: redx;
-}
+6.last-child
