@@ -1,15 +1,16 @@
 css 단위
-vw, vh  100이 최고 사이즈, 50이면 절반
+vmin, vmax
 
-vh = viewport height
- 
-vw = viewport width
- 
-즉, 현재 실행중인 스크린 크기에 맞춰 상대적 크기를 반환하겠다는 뜻입니다.
-출처: https://programming119.tistory.com/93 [개발자 아저씨들 힘을모아:티스토리]
+vmin = viewport height
+
+vmax = viewport width
+
+vmin은 짧은 쪽에 기준에 맞춰 백분률
+vmax는 긴 쪽에 기준을 맞춰 백분률
+
 
 .container {
-  width: 50vw; /* 기본적으로 백분율 */
-  height: 50vh;
+  width: 50vmax; /* 기본적으로 백분률 */
+  height: ;
   background: red;
 }
