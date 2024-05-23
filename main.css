@@ -1,28 +1,8 @@
-
-body * {
-  border: 2px bold;
-  font-size: 100px;
-}
+css 단위
+vw, vh  100이 최고 사이즈, 50이면 절반
 
 .container {
-  width: 100em;
-  font-size: 10px;
+  width: 50vw; /* 기본적으로 백분율 */
+  height: 50vh;
+  background: red;
 }
-.parent{
-  width: 60em;
-  font-size: 4em;
-}
-.child{
-  width: 50%;
-}
-/* px, %
-
-%는 부모 요소에 영향을 받는다
-*/
-
-단위:em
-/*주의점:자기 자신의 폰트 사이즈에 영향을 받는다
-
-자식은 부모의 속성을 상속 받는다. */
-
-rem 최상위 부모 요소에 영향을 받는다
