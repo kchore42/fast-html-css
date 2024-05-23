@@ -1,5 +1,18 @@
-.box {
-  
+
+body * {
+  border: 2px bold;
 }
 
+.container {
+  width: 600px;
+}
+.parent{
+  width: 50%;
+}
+.child{
+  width: 50%;
+}
+/* px, %
 
+%는 부모 요소에 영향을 받는다
+*/
