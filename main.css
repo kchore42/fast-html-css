@@ -1,25 +1,9 @@
 css 단위
-width, height
-0을 넣을 때 단위 값을 넣지 않는 것이 일반적
-
-인라인 요소는 가로값, 세로값이 나오지 않음
-span
-
-div { /*블럭 요소*/ 레이 아웃에 특화
-  width: auto; /* 100% */
-  height: auto; /* 0 */
-}
-span { /* 인라인 요소 */ 텍스트 특화
-  width: auto; /* 0 */
-  height: auto; /* 0 */
-
-}
+max-width, min-sidth
+max-height, min-height
 
 1.블럭 요소
--DIV, h1, p
--사용 가능한 최대 가로 너비를 사용
--크기를 지정할 수 있다
--(width 100%’ height: 0’로 시작)
+-DIV, h1, p-(width 100%’ height: 0’로 시작)
 -수직으로 쌓임
 -margin, padding 위, 아래, 좌, 우 사용 가능
 -레이아웃
