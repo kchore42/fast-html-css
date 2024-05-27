@@ -1,10 +1,10 @@
-text-decoration
-문자의 장식(line)을 설정
+letter-spacing
+글자 자간(글자 사이의 간격)을 지정
+0부터 시작
 
-*속성 값
-none(기본 값)
-underline
-overline
-line-through
+div {
+  font-size: 30px
+  letter-spacing: -1px;
+}
 
 
