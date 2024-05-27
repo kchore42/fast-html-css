@@ -1,67 +1,17 @@
 position
 요소의 위치 지정 방법의 유형(기준)을 설정
 
-*속성 값
-static 유형(기준)없음 / 배치 불가능 (기본값)
-relative 요소 자신을 기준으로 배치
-absolute 위치 상 부모 요소를 기준으로 배치
-fixed 브라우저(뷰포트)를 기준으로 배치
-sticky 스크롤 영역 기준으로 배치
+*요소 쌓임 순서(stack order)
+요소가 쌓여 있는 순서를 통해 
+어떤 요소가 사용자와 가깝게 있는지(더 위에 쌓이는지)를 결정(Z축)
 
-*속성 4개 /* position이 지정되어 있을 때만 사용 가능 */
-top 
-요소의 position 기준에 맞는 '위쪽'에서의 거리(위치)를 설정
-auto
-단위
-% 부모 요소의 세로 너비의 비율로 지정(음수값 허용)
+1.static을 제외한 position 속성의 값이 있을 경우 가장 위에 쌓임(값은 무관)
+2.position이 모두 존재한다면 z-index 속성의 숫자 값이 높을 수록 위헤 쌓임
+3.position 속성의 값이 있고, z-index 속성의 숫자 값이 같다면,
+'HTML'의 마지막 코드일 수록 위에 쌓임(나중에  작성한 코드(요소))
 
-bottom
-요소의 position 기준에 맞는 '아래쪽'에서의 거리(위치)를 설정
-auto
-단위
-% (음수값 허용)
+position > z-index(기본값 0) > HTML마지막 코드
 
-left
-요소의 position 기준에 맞는 '왼쪽'에서의 거리(위치)를 설정
-auto
-단위
-% 부모 요소의 가로 너비의 비율로 지정(음수값 허용)(음수값 허용)
-
-right
-요소의 position 기준에 맞는 '오른쪽'에서의 거리(위치)를 설정
-auto
-단위
-% 부모 요소의 가로 너비의 비율로 지정(음수값 허용)(음수값 허용)
-
-
-position 속성값 
-*relative (주위의 영향을 끼치기 때문에 보통 absolute 사용하는 것을 추천)
-
-*absolute
-/* 부모요소에 position이 없다면 position:relative를 넣어 줘라 */
-(위치상의 부모 요소이기 때문에)
-
-*fixed (위치 고정)
-ex) 쇼핑몰의 배너
-
-*sticky (입력할 때 값이 하나 이상 있어야 한다)
-스크롤 영역 기준으로 배치, 스크롤 되는 영역 전체 어딘가에 요소를 붙여서 사용하겠다
-
-.box {
-  position: sticky;
-  top: 0;
-}
-
-.section {
-  height: 200px;
-  border: 4px dashed lightgray;
-}
-
-.section h1 {
-  text-align: center;
-  line-height: 2;
-  font-size: 24px;
-  font-weight: bold;
-  position: sticky;
-  top: 0;
+.box1 {
+  position: relative;
 }
