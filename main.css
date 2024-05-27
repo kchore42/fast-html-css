@@ -1,24 +1,24 @@
-opacity
-요소의 투명도를 지정
+font(단축)
+글자 관련 속성들을 지정
 
-*속성 값
-0~1 사이의 숫자(소수점으로 지정)
+font-style(기울기, normal)
+font-weight 
+font-size(기본값 medium 16px)
+line-height
+font-family
 
 *사용법
-opacity: 투명도;
+font: 기울기 두께 크기 / 줄높이 글꼴;(특이점 /가 들어가는 경우 있음)
+/* 기본적으로 크기와 글꼴이 들어가야 함 */
 
-반 투명
-.half {
-  opacity: 0.5;
-}
-.tranparent{
-  opacity: 0;
-}
-
-.parent {
-opacity: .75; /* 0 생략 가능 */
-}
-
-.parent .child {
+div{
+  font: size 20px; 
+  font-style: italic;
 
 }
+
+
+
+
+
+
