@@ -1,19 +1,15 @@
-font-weight
-글자의 두께(가중치)를 지정(개별)
+font-size(개별)
+글자의 크기를 지정
 
-*속성 값
-normal
-bold
-bolder[부모요소 보다 더 두껍게(bold 보다 두껍다는 개념이 아님)]
-lighter
-숫자
-
-100: thin 
-~
-700: bold
+*속성 값 (대개 16px)
+px, em, cm등 단위로 지정
 
 *사용법
 
+div {
+font-size: 14px;
+
+}
 
 
 
