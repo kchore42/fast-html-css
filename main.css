@@ -1,11 +1,10 @@
-text-indent
- (첫번째 줄의) 들여쓰기를 지정
- 음수 값 사용 가능
+text-decoration
+문자의 장식(line)을 설정
 
- div {
-  text-indent: 50px;
-}
-
-
+*속성 값
+none(기본 값)
+underline
+overline
+line-through
 
 
