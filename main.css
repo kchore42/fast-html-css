@@ -15,3 +15,9 @@ position > z-index(기본값 0) > HTML마지막 코드
 .box1 {
   position: relative;
 }
+
+*dispaly 수정
+absolute, fixed 속성 값이 적용된 요소는 display 속성의 값이 대부분
+block으로 수정됨
+
+제외: static, relative, sticky
