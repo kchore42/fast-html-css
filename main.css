@@ -41,3 +41,5 @@ position 속성값
 /* 부모요소에 position이 없다면 position:relative를 넣어 줘라 */
 (위치상의 부모 요소이기 때문에)
 
+*fixed (위치 고정)
+ex) 쇼핑몰의 배너
