@@ -1,25 +1,16 @@
-display
-요소의 박스 타입(유형)을 설정
+overflow(단축)
+요소의 크기 이상으로 내용(자식요소)이 넘쳤을 때, 내용의 보여짐을 제어
 
 *속성 값
-block
-inline : 가로 세로 x, 수평, 위 아래 값 x
-inline-block
-기타 table, table-cell,felx 
-none: 요소의 박스 타입이 없음(요소가 사라짐) 
+visible
+hidden
+scroll (넘친 부분 잘라내고, 스크롤발 :강제)
+auto(넘친 부분이 있는 경우만 잘라내고 스크롤바 생성)
 
-span {
-  display: block; (span이 인라인 요소이지만, block요소로 사용할 때 쓰임)
-  width: 100px;
-}
-input {
-  display: inline-block;
-  width: 10px;
-  height: 20px;
+.parent {
+
 }
 
-div { /* 가운데 정렬 할 때 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.parent .child {
+  
 }
