@@ -1,13 +1,17 @@
-font-size(개별)
+line-height
 글자의 크기를 지정
 
-*속성 값 (대개 16px)
-px, em, cm등 단위로 지정
+*속성 값 (대개 16px)(단위 보다는 숫자로 배수 입력이 편함)
+normal(1~1.4)
+숫자
+단위
+%
 
 *사용법
 
 div {
 font-size: 14px;
+line-height: 1.4;
 
 }
 
