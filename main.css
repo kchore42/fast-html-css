@@ -1,16 +1,24 @@
-overflow(단축)
-요소의 크기 이상으로 내용(자식요소)이 넘쳤을 때, 내용의 보여짐을 제어
+opacity
+요소의 투명도를 지정
 
 *속성 값
-visible
-hidden
-scroll (넘친 부분 잘라내고, 스크롤발 :강제)
-auto(넘친 부분이 있는 경우만 잘라내고 스크롤바 생성)
+0~1 사이의 숫자(소수점으로 지정)
+
+*사용법
+opacity: 투명도;
+
+반 투명
+.half {
+  opacity: 0.5;
+}
+.tranparent{
+  opacity: 0;
+}
 
 .parent {
-
+opacity: .75; /* 0 생략 가능 */
 }
 
 .parent .child {
-  
+
 }
