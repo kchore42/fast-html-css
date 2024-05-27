@@ -1,3 +1,25 @@
-box-sizing
-content-box: 너비(width, height)만으로 요소의 크기 계산 (기본값)
-border-box: 너비에 안쪽 여백 + padding +border
+display
+요소의 박스 타입(유형)을 설정
+
+*속성 값
+block
+inline : 가로 세로 x, 수평, 위 아래 값 x
+inline-block
+기타 table, table-cell,felx 
+none: 요소의 박스 타입이 없음(요소가 사라짐) 
+
+span {
+  display: block; (span이 인라인 요소이지만, block요소로 사용할 때 쓰임)
+  width: 100px;
+}
+input {
+  display: inline-block;
+  width: 10px;
+  height: 20px;
+}
+
+div { /* 가운데 정렬 할 때 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
