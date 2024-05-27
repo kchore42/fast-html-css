@@ -1,11 +1,10 @@
-text-align 
-문자 정렬 방식을 지정
+text-indent
+ (첫번째 줄의) 들여쓰기를 지정
+ 음수 값 사용 가능
 
-*속성값
-left
-light
-center
-justify(2줄 이상일 때 사용 가능) 
+ div {
+  text-indent: 50px;
+}
 
 
 
