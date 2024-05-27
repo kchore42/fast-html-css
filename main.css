@@ -43,3 +43,25 @@ position 속성값
 
 *fixed (위치 고정)
 ex) 쇼핑몰의 배너
+
+*sticky (입력할 때 값이 하나 이상 있어야 한다)
+스크롤 영역 기준으로 배치, 스크롤 되는 영역 전체 어딘가에 요소를 붙여서 사용하겠다
+
+.box {
+  position: sticky;
+  top: 0;
+}
+
+.section {
+  height: 200px;
+  border: 4px dashed lightgray;
+}
+
+.section h1 {
+  text-align: center;
+  line-height: 2;
+  font-size: 24px;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+}
