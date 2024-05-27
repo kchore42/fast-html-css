@@ -35,5 +35,9 @@ auto
 
 
 position 속성값 
-*relative (주위의 영향을 끼치기 때문에 보통 absolute 사용하는 것을 추천 )
+*relative (주위의 영향을 끼치기 때문에 보통 absolute 사용하는 것을 추천)
+
+*absolute
+/* 부모요소에 position이 없다면 position:relative를 넣어 줘라 */
+(위치상의 부모 요소이기 때문에)
 
