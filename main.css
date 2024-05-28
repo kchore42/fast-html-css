@@ -12,4 +12,26 @@ background: red url(../img/image.jpg) no-repeat left top scroll
 }
 
 background-color
+개별 속성 보다는 단축 속성으로 많이 사용하게 됨
+
+background-image
+속성 값
+기본값 none
+url 
+
+/* 개별 속성 */
+.box1{background-image: url(../img/i1.jpg), url(../img/i2.jpg)
+  개별 속성 일 때는 쉼표를 통해}
+
+  .box2{
+    /*단축 속성 */
+    background: url(../img/i1.jpg) no-repeat,
+    url(../img/i2.jpg) no-repeat 100px 50px;
+    width: 100px;
+    height: 300px;
+    border: 2px dashed lightgray
+    
+  }
+/* 이미지가 범위 안에서 반복 되므로 no-repeat 설정 필요 */
+
 
