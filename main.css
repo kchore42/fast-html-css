@@ -1,15 +1,14 @@
-CSS3 Flex Box
-Flex는 요소의 크기가 불분명하거나 동적인 경우에도, 각 요소를 정렬할 수 있는 효율적인 방법을 제공합니다.
+Flex Container
 
-우선 Flex는 2개의 개념으로 나뉩니다.
+Flex Container를 위한 속성들은 다음과 같습니다.
+주 축(main-axis)과 교차 축(cross-axis)의 개념은 뒤에서 살펴봅시다.
 
-첫 번째는 Container 
-두 번째는 Items 입니다.
-
-위에서 살펴본 바와 같이 Container는 Items를 감싸는 부모 요소이며, 
-각 Item을 정렬하기 위해선 Container가 필수입니다.
-
-주의할 부분은 Container와 Items에 적용하는 속성이 구분되어 있다는 것입니다.
-
-Container에는 display, flex-flow, justify-content 등의 속성을 사용할 수 있으며,
-Items에는 order, flex, align-self 등의 속성을 사용할 수 있습니다.
+속성	의미
+display	Flex Container를 정의
+flex-flow	flex-direction와 flex-wrap의 단축 속성
+flex-direction	Flex Items의 주 축(Main Axis)을 설정
+flex-wrap	 Flex Items의 여러 줄 묶음(줄 바꿈) 설정
+justify-content	주 축(Main Axis)의 정렬 방법을 설정
+align-content	교차 축(Cross Axis)의 정렬 방법을 설정(2줄 이상)
+align-items	교차 축(Cross Axis)에서 Items의 정렬 방법을 설정(1줄)
+gap	각 아이템 사이의 간격을 설정
