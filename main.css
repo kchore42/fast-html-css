@@ -1,46 +1,44 @@
-CSS Grid
-grid-template
+row-gap
 
-grid-template-rows, grid-template-columns 그리고 grid-template-areas의 단축 속성입니다.
+각 행과 행 사이의 간격(Line width | Gutter)을 지정합니다.
+
+더 명확하게는 그리드 선(Grid Line)의 크기를 지정한다고 표현할 수 있습니다.
 
 CSS
 .container {
-  grid-template: <grid-template-rows> / <grid-template-columns>;
-  grid-template: <grid-template-areas>;
+  row-gap: 크기;
 }
-다음과 같이 작성할 수도 있습니다.
+
+column-gap
+각 열과 열 사이의 간격(Line width | Gutter)을 지정합니다.
 
 CSS
 .container {
-  grid-template:
-    [1행시작선이름] "AREAS" 행너비 [1행끝선이름]
-    [2행시작선이름] "AREAS" 행너비 [2행끝선이름]
-    / <grid-template-columns>;
+  column-gap: 크기;
+}
+
+gap
+각 행과 행, 열과 열 사이의 간격(Line width | Gutter)을 지정합니다.
+
+CSS
+.container {
+  gap: <row-gap> <column-gap>;
 }
 
 CSS
 .container {
   display: grid;
-  grid-template:
-    "header header header" 80px
-    "main main aside" 350px
-    "footer footer footer" 130px
-    / 2fr 100px 1fr;
+  grid-template-rows: repeat(2, 150px);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px 10px;
 }
-header { grid-area: header; }
-main   { grid-area: main; }
-aside  { grid-area: aside; }
-footer { grid-area: footer; }
 
-위 예제의 컨테이너는 다음과 같이 해석할 수 있습니다.
-
-CSS
+/* 하나의 값으로 통일할 수 있습니다. */
 .container {
-  display: grid;
-  grid-template-rows: 80px 350px 130px;
-  grid-template-columns: 2fr 100px 1fr;
-  grid-template-areas:
-    "header header header"
-    "main main aside"
-    "footer footer footer";
+  gap: 10px;  /* row-gap: 10px; + column-gap: 10px; */
+}
+/* 하나의 값만 적용하고자 한다면 다음과 같이 사용할 수 있습니다. */
+.container {
+  gap: 10px 0; /* row-gap */
+  gap: 0 10px; /* column-gap */
 }
