@@ -1,44 +1,52 @@
-row-gap
+CSS Grid
 
-각 행과 행 사이의 간격(Line width | Gutter)을 지정합니다.
+grid-auto-rows
 
-더 명확하게는 그리드 선(Grid Line)의 크기를 지정한다고 표현할 수 있습니다.
+암시적 행(Track)의 크기를 정의합니다.
+아이템(Item)이 grid-template-rows로 정의한 명시적 행 외부에 배치되는 경우 암시적 행의 크기가 적용됩니다.
 
-CSS
-.container {
-  row-gap: 크기;
-}
-
-column-gap
-각 열과 열 사이의 간격(Line width | Gutter)을 지정합니다.
-
-CSS
-.container {
-  column-gap: 크기;
-}
-
-gap
-각 행과 행, 열과 열 사이의 간격(Line width | Gutter)을 지정합니다.
+HTML
+<div class="container">
+  <div class="item">1</div>
+  <div class="item">2</div>
+  <div class="item">3</div>
+</div>
 
 CSS
 .container {
-  gap: <row-gap> <column-gap>;
-}
-
-CSS
-.container {
+  width: 300px;
+  height: 200px;
   display: grid;
-  grid-template-rows: repeat(2, 150px);
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px 10px;
+  grid-template-rows: 100px 100px; /* 명시적 2개 행 정의 */
+  grid-template-columns: 150px 150px; /* 명시적 2개 열 정의 */
+  grid-auto-rows: 100px; /* 그 외(암시적) 행의 크기 정의 */
 }
 
-/* 하나의 값으로 통일할 수 있습니다. */
-.container {
-  gap: 10px;  /* row-gap: 10px; + column-gap: 10px; */
+.item:nth-child(3) {
+  grid-row: 3 / 4;
 }
-/* 하나의 값만 적용하고자 한다면 다음과 같이 사용할 수 있습니다. */
+
+CSS Grid
+grid-auto-columns
+암시적 열(Track)의 크기를 정의합니다.
+아이템(Item)이 grid-template-columns로 정의한 명시적 열 외부에 배치되는 경우 암시적 열의 크기가 적용됩니다.
+
+CSS
 .container {
-  gap: 10px 0; /* row-gap */
-  gap: 0 10px; /* column-gap */
+  width: 300px;
+  height: 200px;
+  display: grid;
+  grid-template-rows: 100px 100px;
+  grid-template-columns: 150px 150px;
+  grid-auto-rows: 100px;
+  grid-auto-columns: 100px;
 }
+
+.item:nth-child(3) {
+  grid-row: 3 / 4;
+  grid-column: 3 / 4;
+}
+CSS Grid
+다음과 같이 아이템이 배치되는 위치에 맞게 암시적 행과 열의 개수가 생성됩니다.
+
+암시적 크기가 적용된 행과 열은 양수 라인 번호만 사용할 수 있습니다.(음수 사용 불가)
