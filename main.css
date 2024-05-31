@@ -1,62 +1,53 @@
-align-content
+align-items
 
-그리드 콘텐츠(Contents)를 수직(열 축) 정렬합니다.
+그리드 아이템(Items)들을 수직(열 축) 정렬합니다.
 
-그리드 콘텐츠의 세로 너비가 그리드 컨테이너(Container)보다 작아야 합니다.
+그리드 아이템의 세로 너비가 자신이 속한 그리드 행(Track)의 크기보다 작아야 합니다.
 
 값	의미	기본값
 normal	stretch와 같습니다.	normal
 start	시작점(위쪽) 정렬	
 center	수직 가운데 정렬	
 end	끝점(아래쪽) 정렬	
-space-around	각 행 위아래에 여백을 고르게 정렬	
-space-between	첫 행은 시작점에, 끝 행은 끝점에 정렬되고 나머지 여백으로 고르게 정렬	
-space-evenly	모든 여백을 고르게 정렬	
-stretch	열 축을 채우기 위해 그리드 콘텐츠를 늘림	
+stretch	열 축을 채우기 위해 그리드 아이템을 늘림	
 
 CSS
 .container {
   width: 450px;
   height: 450px;
   display: grid;
-  grid-template-rows: repeat(3, 100px);
-  grid-template-columns: repeat(3, 100px);
-  align-content: <align-content>;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  align-items: <align-items>;
 }
-====================================================================
+
 CSS Grid
 
-justify-content
+justify-items
 
-그리드 콘텐츠(Contents)를 수평(행 축) 정렬합니다.
+그리드 아이템(Items)들을 수평(행 축) 정렬합니다.
 
-그리드 콘텐츠의 가로 너비가 그리드 컨테이너(Container)보다 작아야 합니다.
+그리드 아이템의 가로 너비가 자신이 속한 그리드 열(Track)의 크기보다 작아야 합니다.
 
 값	의미	기본값
 normal	stretch와 같습니다.	normal
 start	시작점(왼쪽) 정렬	
 center	수평 가운데 정렬	
 end	끝점(오른쪽) 정렬	
-space-around	각 열 좌우에 여백을 고르게 정렬	
-space-between	첫 열은 시작점에, 끝 열은 끝점에 정렬되고 나머지 여백으로 고르게 정렬	
-space-evenly	모든 여백을 고르게 정렬	
-stretch	행 축을 채우기 위해 그리드 콘텐츠를 늘림	
+stretch	행 축을 채우기 위해 그리드 아이템을 늘림	
 
-CSS
 .container {
   width: 450px;
   height: 450px;
   display: grid;
-  grid-template-rows: repeat(3, 100px);
-  grid-template-columns: repeat(3, 100px);
-  justify-content: <justify-content>;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: <justify-items>;
 }
-=========================================================================
+
 CSS Grid
-
-place-content
-
-align-content와 justify-content의 단축 속성입니다.
+place-items
+align-items와 justify-items의 단축 속성입니다.
 
 하나의 값만 입력하면 두 속성에 모두 적용됩니다.
 
@@ -64,23 +55,23 @@ Edge(IE) 브라우저에서 지원하지 않는 속성입니다.
 
 CSS
 .container {
-  place-content: <align-content> <justify-content>;
+  place-items: <align-items> <justify-items>;
 }
 각 코드 블록 내 컨테이너(.container)들은 모두 같은 의미입니다.
 
 CSS
 .container {
-  place-content: center space-evenly;
+  place-items: start stretch;
 }
 .container {
-  align-content: center;
-  justify-content: space-evenly;
+  align-items: start;
+  justify-items: stretch;
 }
 CSS
 .container {
-  place-content: end;
+  place-items: center;
 }
 .container {
-  align-content: end;
-  justify-content: end;
+  align-items: center;
+  justify-items: center;
 }
