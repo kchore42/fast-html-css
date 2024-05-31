@@ -1,39 +1,46 @@
-grid-template-areas
-지정된 그리드 영역 이름(grid-area)을 참조해 그리드 템플릿을 생성합니다.
+CSS Grid
+grid-template
 
-grid-area는 Grid Container가 아닌 Grid Item에 적용하는 속성입니다.
+grid-template-rows, grid-template-columns 그리고 grid-template-areas의 단축 속성입니다.
+
+CSS
+.container {
+  grid-template: <grid-template-rows> / <grid-template-columns>;
+  grid-template: <grid-template-areas>;
+}
+다음과 같이 작성할 수도 있습니다.
+
+CSS
+.container {
+  grid-template:
+    [1행시작선이름] "AREAS" 행너비 [1행끝선이름]
+    [2행시작선이름] "AREAS" 행너비 [2행끝선이름]
+    / <grid-template-columns>;
+}
 
 CSS
 .container {
   display: grid;
-  grid-template-rows: repeat(3, 100px);
-  grid-template-columns: repeat(3, 1fr);
+  grid-template:
+    "header header header" 80px
+    "main main aside" 350px
+    "footer footer footer" 130px
+    / 2fr 100px 1fr;
+}
+header { grid-area: header; }
+main   { grid-area: main; }
+aside  { grid-area: aside; }
+footer { grid-area: footer; }
+
+위 예제의 컨테이너는 다음과 같이 해석할 수 있습니다.
+
+CSS
+.container {
+  display: grid;
+  grid-template-rows: 80px 350px 130px;
+  grid-template-columns: 2fr 100px 1fr;
   grid-template-areas:
     "header header header"
     "main main aside"
     "footer footer footer";
 }
-header { grid-area: header; }
-main   { grid-area: main;   }
-aside  { grid-area: aside;  }
-footer { grid-area: footer; }
-
-CSS Grid
-
-.(마침표)를 사용하거나 명시적으로 none을 입력해 빈 영역을 정의할 수 있습니다.
-
-CSS
-.container {
-  display: grid;
-  grid-template-rows: repeat(4, 100px);
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-areas:
-    "header header header"
-    "main . ."
-    "main . aside"
-    "footer footer footer";
-}
-header { grid-area: header; }
-main   { grid-area: main;   }
-aside  { grid-area: aside;  }
-footer { grid-area: footer; }
