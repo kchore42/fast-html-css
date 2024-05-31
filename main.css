@@ -1,33 +1,47 @@
-order
+Grid Functions
+그리드에서 사용하는 주요 함수들에 대해서 알아봅시다.
 
-그리드 아이템이 자동 배치되는 순서를 변경할 수 있습니다.
+repeat
 
-숫자가 작을수록 앞서 배치됩니다.
+repeat() 함수는 행/열(Track)의 크기 정의를 반복합니다.
+
+'반복되는 횟수'와 '행/열의 크기 정의'를 인수로 사용합니다.
+
+grid-template-rows와 grid-template-columns에서 사용합니다.
+
+각 코드 블록 내 컨테이너(.container)들은 모두 같은 의미입니다.
 
 CSS
+/* 9컬럼 그리드 */
 .container {
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px 100px;
 }
 
-.item:nth-child(1) { order: 1; }
-.item:nth-child(3) { order: 5; }
-.item:nth-child(5) { order: -1; }
+.container {
+  grid-template-columns: repeat(9, 100px);
+}
 
-CSS Grid
-======================================================
-z-index
-z-index 속성을 이용해 아이템이 쌓이는 순서를 변경할 수 있습니다.
 
+.container {
+  grid-template-rows: [row-start] 200px [row-end row-start] 200px [row-end];
+  grid-template-columns: [col-start] 100px [col-end col-start] 100px [col-end col-start] 100px [col-end];
+}
+
+.container {
+  grid-template-rows: repeat(2, [row-start] 200px [row-end]);
+  grid-template-columns: repeat(3, [col-start] 100px [col-end]);
+}
+
+.container {
+  grid-template: repeat(2, [row-start] 200px [row-end]) / repeat(3, [col-start] 100px [col-end]);
+}
+=================================================
 CSS
-.item:nth-child(1) {
-  grid-area: 1 / 1 / 2 / 3;
+
+.container {
+  /* 12컬럼 그리드 */
+  grid-template-columns: 1fr 2fr 1fr 2fr 1fr 2fr 1fr 2fr 1fr 2fr 1fr 2fr;
 }
-.item:nth-child(2) {
-  grid-area: 1 / 2 / 3 / 3;
-  z-index: 1;
-}
-.item:nth-child(3) {
-  grid-area: 2 / 2 / 3 / 4;
+.container {
+  grid-template-columns: repeat(6, 1fr 2fr);
 }
