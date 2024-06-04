@@ -1,74 +1,28 @@
-문자
+논리
 
-문자 연산에는 +가 사용됩니다.
+Sass의 @if 조건문에서 사용되는 논리(Boolean) 연산에는 '그리고',' 또는', '부정'이 있습니다.
 
-문자 연산의 결과는 첫 번째 피연산자를 기준으로 합니다.
+자바스크립트 문법에 익숙하다면 &&, ||, !와 같은 기능으로 생각하면 됩니다.
 
-첫 번째 피연산자에 따옴표가 붙어있다면 연산 결과를 따옴표로 묶습니다.
+종류	설명
+and	그리고
+or	또는
+not	부정(반대)
 
-반대로 첫 번째 피연산자에 따옴표가 붙어있지 않다면 연산 결과도 따옴표를 처리하지 않습니다.
-
-SCSS:
-
-SCSS
-div::after {
-  content: "Hello " + World;
-  flex-flow: row + "-reverse" + " " + wrap
-}
-Compiled to:
-
-CSS
-div::after {
-  content: "Hello World";
-  flex-flow: row-reverse wrap;
-}
-
-색상
-
-색상도 연산할 수 있습니다.
+간단한 예제를 확인하고, 더 자세한 내용은 조건문에서 살펴보겠습니다.
 
 SCSS:
 
 SCSS
+$width: 90px;
 div {
-  color: #123456 + #345678;
-  // R: 12 + 34 = 46
-  // G: 34 + 56 = 8a
-  // B: 56 + 78 = ce 
-  background: rgba(50, 100, 150, .5) + rgba(10, 20, 30, .5);
-  // R: 50 + 10 = 60
-  // G: 100 + 20 = 120
-  // B: 150 + 30 = 180
-  // A: Alpha channels must be equal
+  @if not ($width > 100px) {
+    height: 300px;
+  }
 }
-
 Compiled to:
 
 CSS
 div {
-  color: #468ace;
-  background: rgba(60, 120, 180, 0.5);
-}
-
-RGBA에서 Alpha 값은 연산되지 않으며 서로 동일해야 다른 값의 연산이 가능합니다.
-
-Alpha 값을 연산하기 위한 다음과 같은 색상 함수(Color Functions)를 사용할 수 있습니다.
-
-opacify(), transparentize()
-
-SCSS:
-
-SCSS
-$color: rgba(10, 20, 30, .5);
-div {
-  color: opacify($color, .3);  // 30% 더 불투명하게 / 0.5 + 0.3
-  background-color: transparentize($color, .2);  // 20% 더 투명하게 / 0.5 - 0.2
-}
-
-Compiled to:
-
-CSS
-div {
-  color: rgba(10, 20, 30, 0.8);
-  background-color: rgba(10, 20, 30, 0.3);
+  height: 300px;
 }
