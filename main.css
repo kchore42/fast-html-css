@@ -1,57 +1,60 @@
-!default
+Sass와 SCSS는 차이점은 뭔가요?
 
-!default 플래그는 할당되지 않은 변수의 초깃값을 설정합니다.
 
-즉, 할당 되어 있는 변수가 있다면 변수가 기존 할당 값을 사용합니다.
+더 쉽고 간단한 차이는 {}(중괄호)와 ;(세미콜론)의 유무입니다
 
+Sass:
+
+SASS
+.list
+  width: 100px
+  float: left
+  li
+    color: red
+    background: url("./image.jpg")
+    &:last-child
+      margin-right: -10px
 SCSS:
 
 SCSS
-$color-primary: red;
+.list {
+  width: 100px;
+  float: left;
+  li {
+    color: red;
+    background: url("./image.jpg");
+    &:last-child {
+      margin-right: -10px;
+    }
+  }
+}.
 
-.box {
-  $color-primary: blue !default;
-  background: $color-primary;
-}
+Sass는 선택자의 유효범위를 '들여쓰기'로 구분하고, SCSS는 {}로 범위를 구분합니다.
 
-Compiled to:
+아래는 Mixins('믹스인'은 재사용 가능한 기능을 만드는 방식의 의미합니다) 예제입니다.
+Sass는 단축 구문으로 사용합니다.
 
-CSS
-.box {
-  background: red;
-}
+:Sass
 
-좀 더 유용하게, '변수와 값을 설정하겠지만, 혹시 기존 변수가 있을 경우는 현재 설정하는 변수의 값은 사용하지 않겠다'는 의미로 쓸 수 있습니다.
+SASS
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
 
-예를 들어, Bootstrap 같은 외부 Sass(SCSS) 라이브러리를 연결했더니 변수 이름이 같아 내가 작성한 코드의 변수들이 Overwrite(덮어쓰기) 된다면 문제가 있겠죠.
-
-반대로 내가 만든 Sass(SCSS) 라이브러리가 다른 사용자 코드의 변수들을 Overwrite 한다면, 사용자들은 그 라이브러리를 더 이상 사용하지 않을 것입니다.
-
-이럴 때 Sass(SCSS) 라이브러리(혹은 새롭게 만든 모듈)에서 사용하는 변수에 !default 플래그가 있다면 기존 코드(원본)를 Overwrite 하지 않고도 사용할 수 있습니다.
-
-SCSS
-// _config.scss
-$color-active: red;
-SCSS
-// main.scss
-@import 'config';
-
-$color-active: blue !default;
-
-.box {
-  background: $color-active;  // red
-}
-
-#{}
-
-#{}를 이용해서 코드의 어디든지 변수 값을 넣을 수 있습니다.
-
-이를 문자 보간(Interpolation)이라고 합니다.
+.box
+  +border-radius(10px)
+:SCSS
 
 SCSS
-$family: unquote("Droid+Sans");
-@import url("http://fonts.googleapis.com/css?family=#{$family}");
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
 
-CSS
-@import url("http://fonts.googleapis.com/css?family=Droid+Sans");
-Sass의 내장 함수 unquote()는 문자에서 따옴표를 제거합니다.
+.box { @include border-radius(10px); }
+Sass는 =와 + 기호로 Mixins 기능을 사용했고,
+SCSS는 @mixin과 @include로 기능을 사용했습니다.
