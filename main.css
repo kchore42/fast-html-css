@@ -1,99 +1,33 @@
-여러 파일 가져오기
+연산
 
-하나의 @import로 여러 파일을 가져올 수도 있습니다.
+Sass는 기본적인 연산(Operations) 기능을 지원합니다.
 
-파일 이름은 ,로 구분합니다.
+레이아웃 작업시 상황에 맞게 크기를 계산을 하거나 정해진 값을 나눠서 작성할 경우 유용합니다.
 
-SCSS
-@import "header", "footer";
+다음은 Sass에서 사용 가능한 연산자 종류 입니다.
 
-파일 분할
+산술 연산자:
 
-프로젝트 규모가 커지면 파일들을 header나 side-menu 같이 각 기능과 부분으로 나눠 유지보수가 쉽도록 관리하게 됩니다.
+종류	설명	주의사항
++	더하기	
+-	빼기	
+*	곱하기	하나 이상의 값이 반드시 숫자(Number)
+/	나누기	오른쪽 값이 반드시 숫자(Number)
+%	나머지	
 
-이 경우 파일이 점점 많아지는데, 모든 파일이 컴파일 시 각각의 ~.css 파일로 나눠서 저장된다면 관리나 성능 차원에서 문제가 될 수 있겠죠.
+비교 연산자:
 
-그래서 Sass는 파일 분할(Partials) 기능을 지원합니다.
+종류	설명
+==	동등
+!=	부등
+<	대소 / 보다 작은
+>	대소 / 보다 큰
+<=	대소 및 동등 / 보다 작거나 같은
+>=	대소 및 동등 / 보다 크거나 같은
 
-파일 이름 앞에 _를 붙여(_header.scss와 같이) 
+논리(불린, Boolean) 연산자:
 
-@import로 가져오면 컴파일 시 ~.css 파일로 컴파일하지 않습니다.
-
-예를 들어보겠습니다.
-
-다음과 같이 scss/ 안에 3개의 Sass 파일이 있습니다.
-
-BASH
-Sass-App
-  # ...
-  ├─scss
-  │  ├─header.scss
-  │  ├─side-menu.scss
-  │  └─main.scss
-  # ...
-main.scss로 나머지 ~.scss 파일을 가져옵니다.
-
-SCSS
-
-// main.scss
-@import "header", "side-menu";
-그리고 이 파일들을 css/디렉토리로 컴파일합니다.
-(컴파일은 위에서 설명한 node-sass로 진행합니다.)
-
-
-BASH
-
-# `scss`디렉토리에 있는 파일들을 `css`디렉토리로 컴파일
-
-node-sass scss --output css
-
-컴파일 후 확인하면 아래와 같이 scss/에 있던 파일들이 css/ 안에 각 하나씩의 파일로 컴파일됩니다.
-
-BASH
-Sass-App
-  # ...
-  ├─css
-  │  ├─header.css
-  │  ├─side-menu.css
-  │  └─main.css
-  ├─scss
-  │  ├─header.scss
-  │  ├─side-menu.scss
-  │  └─main.scss
-  # ...
-자, 이번에는 가져올 파일 이름에 _를 붙이겠습니다.
-
-메인 파일인 main.scss에서는 _를 사용하지 않습니다.
-
-BASH
-Sass-App
-  # ...
-  ├─scss
-  │  ├─_header.scss
-  │  ├─_side-menu.scss
-  │  └─main.scss
-  # ...
-SCSS
-// main.scss
-@import "header", "side-menu";
-
-같은 방법으로 컴파일하면...
-
-BASH
-node-sass scss --output css
-
-아래처럼 별도의 파일로 컴파일되지 않고 사용됩니다.
-
-BASH
-Sass-App
-  # ...
-  ├─css
-  │  └─main.css  # main + header + side-menu
-  ├─scss
-  │  ├─header.scss
-  │  ├─side-menu.scss
-  │  └─main.scss
-  # ...
-
-Webpack이나 Parcel, Gulp 같은 일반적인 빌드툴에서는 Partials 기능을 사용할 필요 없이, 
-설정된 값에 따라 빌드됩니다. 하지만 되도록 _를 사용할 것을 권장합니다.
+종류	설명
+and	그리고
+or	또는
+not	부정
