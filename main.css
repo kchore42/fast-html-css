@@ -1,61 +1,74 @@
-숫자
+문자
 
-상대적 단위 연산
+문자 연산에는 +가 사용됩니다.
 
-일반적으론 절댓값을 나타내는 px 단위로 연산을 합니다만, 상대적 단위(%, em, vw 등)의 연산의 경우 CSS calc()로 연산해야 합니다.
+문자 연산의 결과는 첫 번째 피연산자를 기준으로 합니다.
+
+첫 번째 피연산자에 따옴표가 붙어있다면 연산 결과를 따옴표로 묶습니다.
+
+반대로 첫 번째 피연산자에 따옴표가 붙어있지 않다면 연산 결과도 따옴표를 처리하지 않습니다.
+
+SCSS:
 
 SCSS
-width: 50% - 20px;  // 단위 모순 에러(Incompatible units error)
-width: calc(50% - 20px);  // 연산 가능
+div::after {
+  content: "Hello " + World;
+  flex-flow: row + "-reverse" + " " + wrap
+}
+Compiled to:
 
-나누기 연산의 주의사항
+CSS
+div::after {
+  content: "Hello World";
+  flex-flow: row-reverse wrap;
+}
 
-CSS는 속성 값의 숫자를 분리하는 방법으로 /를 허용하기 때문에 /가 나누기 연산으로 사용되지 않을 수 있습니다.
+색상
 
-예를 들어, font: 16px / 22px serif; 같은 경우 font-size: 16px와 line-height: 22px의 속성값 분리를 위해서 /를 사용합니다.
-
-아래 예제를 보면 나누기 연산자만 연산 되지 않고 그대로 컴파일됩니다.
+색상도 연산할 수 있습니다.
 
 SCSS:
 
 SCSS
 div {
-  width: 20px + 20px;  // 더하기
-  height: 40px - 10px;  // 빼기
-  font-size: 10px * 2;  // 곱하기
-  margin: 30px / 2;  // 나누기
+  color: #123456 + #345678;
+  // R: 12 + 34 = 46
+  // G: 34 + 56 = 8a
+  // B: 56 + 78 = ce 
+  background: rgba(50, 100, 150, .5) + rgba(10, 20, 30, .5);
+  // R: 50 + 10 = 60
+  // G: 100 + 20 = 120
+  // B: 150 + 30 = 180
+  // A: Alpha channels must be equal
 }
+
 Compiled to:
 
 CSS
 div {
-  width: 40px;  /* OK */
-  height: 30px;  /* OK */
-  font-size: 20px;  /* OK */
-  margin: 30px / 2;  /* ?? */
+  color: #468ace;
+  background: rgba(60, 120, 180, 0.5);
 }
-따라서 /를 나누기 연산 기능으로 사용하려면 다음과 같은 조건을 충족해야 합니다.
 
-값 또는 그 일부가 변수에 저장되거나 함수에 의해 반환되는 경우
+RGBA에서 Alpha 값은 연산되지 않으며 서로 동일해야 다른 값의 연산이 가능합니다.
 
-값이 ()로 묶여있는 경우
+Alpha 값을 연산하기 위한 다음과 같은 색상 함수(Color Functions)를 사용할 수 있습니다.
 
-값이 다른 산술 표현식의 일부로 사용되는 경우
+opacify(), transparentize()
 
 SCSS:
 
 SCSS
+$color: rgba(10, 20, 30, .5);
 div {
-  $x: 100px;
-  width: $x / 2;  // 변수에 저장된 값을 나누기
-  height: (100px / 2);  // 괄호로 묶어서 나누기
-  font-size: 10px + 12px / 3;  // 더하기 연산과 같이 사용
+  color: opacify($color, .3);  // 30% 더 불투명하게 / 0.5 + 0.3
+  background-color: transparentize($color, .2);  // 20% 더 투명하게 / 0.5 - 0.2
 }
+
 Compiled to:
 
 CSS
 div {
-  width: 50px;
-  height: 50px;
-  font-size: 14px;
+  color: rgba(10, 20, 30, 0.8);
+  background-color: rgba(10, 20, 30, 0.3);
 }
