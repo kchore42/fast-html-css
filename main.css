@@ -1,99 +1,81 @@
-가변 인수
+@content
 
-때때로 입력할 인수의 개수가 불확실한 경우가 있습니다.
+선언된 Mixin에 @content이 포함되어 있다면 해당 부분에 원하는 스타일 블록을 전달할 수 있습니다.
 
-그럴 경우 가변 인수(Variable Arguments)를 사용할 수 있습니다.
+이 방식을 사용하여 기존 Mixin이 가지고 있는 기능에 선택자나 속성 등을 추가할 수 있습니다.
 
-가변 인수는 매개변수 뒤에 ...을 붙여줍니다.
+@mixin 믹스인이름() {
+  스타일;
+  @content;
+}
 
-SCSS
-@mixin 믹스인이름($매개변수...) {
+@include 믹스인이름() {
+  // 스타일 블록
   스타일;
 }
 
-@include 믹스인이름(인수A, 인수B, 인수C);
+SCSS:
 
 SCSS
-// 인수를 순서대로 하나씩 전달 받다가, 3번째 매개변수($bg-values)는 인수의 개수에 상관없이 받음
-@mixin bg($width, $height, $bg-values...) {
-  width: $width;
-  height: $height;
-  background: $bg-values;
-}
-
-div {
-  // 위의 Mixin(bg) 설정에 맞게 인수를 순서대로 전달하다가 3번째 이후부터는 개수에 상관없이 전달
-  @include bg(
-    100px,
-    200px,
-    url("/images/a.png") no-repeat 10px 20px,
-    url("/images/b.png") no-repeat,
-    url("/images/c.png")
-  );
-}
-
-CSS
-div {
-  width: 100px;
-  height: 200px;
-  background: url("/images/a.png") no-repeat 10px 20px,
-              url("/images/b.png") no-repeat,
-              url("/images/c.png");
-}
-
-위에선 인수를 받는 매개변수에 ...을 사용하여 가변 인수를 활용했습니다.
-===================================================================
-
-이번엔 반대로 가변 인수를 전달할 값으로 사용해 보겠습니다.
-
-SCSS
-@mixin font(
-  $style: normal,
-  $weight: normal,
-  $size: 16px,
-  $family: sans-serif
-) {
-  font: {
-    style: $style;
-    weight: $weight;
-    size: $size;
-    family: $family;
+@mixin icon($url) {
+  &::after {
+    content: $url;
+    @content;
   }
 }
 
-div {
-  // 매개변수 순서와 개수에 맞게 전달
-  $font-values: italic, bold, 16px, sans-serif;
-  @include font($font-values...);
+.icon1 {
+  // icon Mixin의 기존 기능만 사용
+  @include icon("/images/icon.png");
+}
+.icon2 {
+  // icon Mixin에 스타일 블록을 추가하여 사용
+  @include icon("/images/icon.png") {
+    position: absolute;
+  };
 }
 
-span {
-  // 필요한 값만 키워드 인수로 변수에 담아 전달
-  $font-values: (style: italic, size: 22px);
-  @include font($font-values...);
-}
-a {
-  // 필요한 값만 키워드 인수로 전달
-  @include font((weight: 900, family: monospace)...);
-}
+Compiled to:
 
 CSS
+.icon1::after {
+  content: "/images/icon.png";
+}
+
+.icon2::after {
+  content: "/images/icon.png";
+  position: absolute;
+}
+
+Mixin에게 전달된 스타일 블록은 Mixin의 범위가 아니라 스타일 블록이 정의된 범위에서 평가됩니다.
+
+즉, Mixin의 매개변수는 전달된 스타일 블록 안에서 사용되지 않고 전역 값으로 해석됩니다.
+
+전역 변수(Global variables)와 지역 변수(Local variables)를 생각하면 좀 더 쉽습니다.
+
+SCSS:
+
+SCSS
+$color: red;
+
+@mixin colors($color: blue) {
+  // Mixin의 범위
+  @content;
+  background-color: $color;
+  border-color: $color;
+}
 
 div {
-  font-style: italic;
-  font-weight: bold;
-  font-size: 16px;
-  font-family: sans-serif;
+  @include colors() {
+    // 스타일 블록이 정의된 범위
+    color: $color;
+  }
 }
-span {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 22px;
-  font-family: sans-serif;
-}
-a {
-  font-style: normal;
-  font-weight: 900;
-  font-size: 16px;
-  font-family: monospace;
+Compiled to:
+
+CSS
+div {
+  color: red;
+  background-color: blue;
+  border-color: blue;
 }
