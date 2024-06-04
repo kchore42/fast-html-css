@@ -1,35 +1,28 @@
-중첩된 속성
+변수
 
-font-, margin- 등과 같이 동일한 네임 스페이스를 가지는 속성들을 다음과 같이 사용할 수 있습니다.
+반복적으로 사용되는 값을 변수로 지정할 수 있습니다.
 
+변수 이름 앞에는 항상 $를 붙입니다.
+
+SCSS
+$변수이름: 속성값;
 SCSS:
 
 SCSS
-.box {
-  font: {
-    weight: bold;
-    size: 10px;
-    family: sans-serif;
-  };
-  margin: {
-    top: 10px;
-    left: 20px;
-  };
-  padding: {
-    bottom: 40px;
-    right: 30px;
-  };
-}
+$color-primary: #e96900;
+$url-images: "/assets/images/";
+$w: 200px;
 
+.box {
+  width: $w;
+  margin-left: $w;
+  background: $color-primary url($url-images + "bg.jpg");
+}
 Compiled to:
 
 CSS
 .box {
-  font-weight: bold;
-  font-size: 10px;
-  font-family: sans-serif;
-  margin-top: 10px;
-  margin-left: 20px;
-  padding-bottom: 40px;
-  padding-right: 30px;
+  width: 200px;
+  margin-left: 200px;
+  background: #e96900 url("/assets/images/bg.jpg");
 }
