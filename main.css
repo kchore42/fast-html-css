@@ -1,100 +1,174 @@
-함수
+조건과 반복
 
-자신의 함수(Functions)를 정의하여 사용할 수 있습니다.
+if 함수
 
-함수와 Mixins은 거의 유사하지만 반환되는 내용이 다릅니다.
+조건의 값(true, false)에 따라 두 개의 표현식 중 하나만 반환합니다.
 
-Mixin은 위에서 살펴본 대로 지정한 스타일(Style)을 반환하는 반면,
-함수는 보통 연산된(Computed) 특정 값을 @return 지시어를 통해 반환합니다.
+조건부 삼항 연산자(conditional ternary operator)와 비슷합니다.
 
-SCSS
-// Mixins
-@mixin 믹스인이름($매개변수) {
-  스타일;
-}
+조건의 값이 true이면 표현식1을,
 
-// Functions
-@function 함수이름($매개변수) {
-  @return 값
-}
-
-사용하는 방법에도 차이가 있습니다.
-
-Mixin은 @include 지시어를 사용하는 반면,
-
-함수는 함수 이름으로 바로 사용합니다.
+조건의 값이 false이면 표현식2를 실행합니다.
 
 SCSS
-// Mixin
-@include 믹스인이름(인수);
-
-// Functions
-함수이름(인수)
+if(조건, 표현식1, 표현식2)
 SCSS:
 
 SCSS
-$max-width: 980px;
-
-@function columns($number: 1, $columns: 12) {
-  @return $max-width * ($number / $columns)
-}
-
-.box_group {
-  width: $max-width;
-
-  .box1 {
-    width: columns();  // 1
-  }
-  .box2 {
-    width: columns(8);
-  }
-  .box3 {
-    width: columns(3);
-  }
-
+$width: 555px;
+div {
+  width: if($width > 300px, $width, null);
 }
 Compiled to:
 
 CSS
-.box_group {
-  /* 총 너비 */
-  width: 980px;
-}
-.box_group .box1 {
-  /* 총 너비의 약 8.3% */
-  width: 81.66667px;
-}
-.box_group .box2 {
-  /* 총 너비의 약 66.7% */
-  width: 653.33333px;
-}
-.box_group .box3 {
-  /* 총 너비의 25% */
-  width: 245px;
+div {
+  width: 555px;
 }
 
-위와 같이 함수는 @include 같은 별도의 지시어 없이 사용하기 때문에 내가 지정한 함수와 내장 함수(Built-in Functions)의 이름이 충돌할 수 있습니다.
+@if
 
-따라서 내가 지정한 함수에는 별도의 접두어를 붙여주는 것이 좋습니다.
+@if 지시어는 조건에 따른 분기 처리가 가능하며, if 문(if statements)과 유사합니다.
 
-내장 함수란, 응용 프로그램에 내장되어 있으며 최종 사용자가 액세스 할 수 있는 기능입니다.
+같이 사용할 수 있는 지시어는 @else, if가 있습니다.
 
-예를 들어, 대부분의 스프레드 시트 응용 프로그램은 행이나 열의 모든 셀을 추가하는 내장 SUM 함수를 지원합니다.
-
-예를 들어, 색의 빨강 성분을 가져오는 내장 함수로 이미 red()가 있습니다.
-
-같은 이름을 사용하여 함수를 정의하면 이름이 충돌하기 때문에 별도의 접두어를 붙여 extract-red() 같은 이름을 만들 수 있습니다.
-
+추가 지시어를 사용하면 좀 더 복잡한 조건문을 작성할 수 있습니다.
 
 SCSS
-// 내가 정의한 함수
-@function extract-red($color) {
-  // 내장 함수
-  @return rgb(red($color), 0, 0);
+// @if
+@if (조건) {
+  /* 조건이 참일 때 구문 */
+}
+
+// @if @else
+@if (조건) {
+  /* 조건이 참일 때 구문 */
+} @else {
+  /* 조건이 거짓일 때 구문 */
+}
+
+// @if @else if
+@if (조건1) {
+  /* 조건1이 참일 때 구문 */
+} @else if (조건2) {
+  /* 조건2가 참일 때 구문 */
+} @else {
+  /* 모두 거짓일 때 구문 */
+}
+
+조건에 ()는 생략이 가능하기 때문에, () 없이 작성하는 방법이 좀 더 편리할 수 있습니다.
+
+SCSS
+$bg: true;
+div {
+  @if $bg {
+    background: url("/images/a.jpg");
+  }
+}
+SCSS:
+
+SCSS
+$color: orange;
+div {
+  @if $color == strawberry {
+    color: #FE2E2E;
+  } @else if $color == orange {
+    color: #FE9A2E;
+  } @else if $color == banana {
+    color: #FFFF00;
+  } @else {
+    color: #2A1B0A;
+  }
+}
+
+Compiled to:
+
+CSS
+div {
+  color: #FE9A2E;
+}
+
+조건에는 논리 연산자 and, or, not을 사용할 수 있습니다.
+
+SCSS:
+
+SCSS
+@function limitSize($size) {
+  @if $size >= 0 and $size <= 200px {
+    @return 200px;
+  } @else {
+    @return 800px;
+  }
 }
 
 div {
-  color: extract-red(#D55A93);
+  width: limitSize(180px);
+  height: limitSize(340px);
 }
-혹은 모든 내장 함수의 이름을 다 알고 있을 수 없기 때문에 특별한 이름을 접두어로 사용할 수도 있습니다.
-my-custom-func-red()
+Compiled to:
+
+CSS
+div {
+  width: 200px;
+  height: 800px;
+}
+
+다른 예제도 살펴봅시다!
+
+Sass의 내장 함수 unitless()는 숫자에 단위가 있는지 여부를 반환합니다.
+
+SCSS:
+
+SCSS
+@mixin pCenter($w, $h, $p: absolute) {
+  @if
+    $p == absolute
+    or $p == fixed
+    // or not $p == relative
+    // or not $p == static
+  {
+    width: if(unitless($w), #{$w}px, $w);
+    height: if(unitless($h), #{$h}px, $h);
+    position: $p;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+}
+
+.box1 {
+  @include pCenter(10px, 20px);
+}
+.box2 {
+  @include pCenter(50, 50, fixed);
+}
+.box3 {
+  @include pCenter(100, 200, relative);
+}
+
+Compiled to:
+
+CSS
+.box1 {
+  width: 10px;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.box2 {
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
