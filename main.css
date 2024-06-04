@@ -1,53 +1,57 @@
-!global
+!default
 
-!global 플래그를 사용하면 변수의 유효범위를 전역(Global)로 설정할 수 있습니다.
+!default 플래그는 할당되지 않은 변수의 초깃값을 설정합니다.
 
-SCSS:
-
-SCSS
-.box1 {
-  $color: #111 !global;
-  background: $color;
-}
-.box2 {
-  background: $color;
-}
-Compiled to:
-
-CSS
-.box1 {
-  background: #111;
-}
-.box2 {
-  background: #111;
-}
-
-대신 기존에 사용하던 같은 이름의 변수가 있을 경우 값이 덮어져 사용될 수 있습니다.
+즉, 할당 되어 있는 변수가 있다면 변수가 기존 할당 값을 사용합니다.
 
 SCSS:
 
 SCSS
-$color: #000;
-.box1 {
-  $color: #111 !global;
-  background: $color;
+$color-primary: red;
+
+.box {
+  $color-primary: blue !default;
+  background: $color-primary;
 }
-.box2 {
-  background: $color;
-}
-.box3 {
-  $color: #222;
-  background: $color;
-}
+
 Compiled to:
 
 CSS
-.box1 {
-  background: #111;
+.box {
+  background: red;
 }
-.box2 {
-  background: #111;
+
+좀 더 유용하게, '변수와 값을 설정하겠지만, 혹시 기존 변수가 있을 경우는 현재 설정하는 변수의 값은 사용하지 않겠다'는 의미로 쓸 수 있습니다.
+
+예를 들어, Bootstrap 같은 외부 Sass(SCSS) 라이브러리를 연결했더니 변수 이름이 같아 내가 작성한 코드의 변수들이 Overwrite(덮어쓰기) 된다면 문제가 있겠죠.
+
+반대로 내가 만든 Sass(SCSS) 라이브러리가 다른 사용자 코드의 변수들을 Overwrite 한다면, 사용자들은 그 라이브러리를 더 이상 사용하지 않을 것입니다.
+
+이럴 때 Sass(SCSS) 라이브러리(혹은 새롭게 만든 모듈)에서 사용하는 변수에 !default 플래그가 있다면 기존 코드(원본)를 Overwrite 하지 않고도 사용할 수 있습니다.
+
+SCSS
+// _config.scss
+$color-active: red;
+SCSS
+// main.scss
+@import 'config';
+
+$color-active: blue !default;
+
+.box {
+  background: $color-active;  // red
 }
-.box3 {
-  background: #222;
-}
+
+#{}
+
+#{}를 이용해서 코드의 어디든지 변수 값을 넣을 수 있습니다.
+
+이를 문자 보간(Interpolation)이라고 합니다.
+
+SCSS
+$family: unquote("Droid+Sans");
+@import url("http://fonts.googleapis.com/css?family=#{$family}");
+
+CSS
+@import url("http://fonts.googleapis.com/css?family=Droid+Sans");
+Sass의 내장 함수 unquote()는 문자에서 따옴표를 제거합니다.
