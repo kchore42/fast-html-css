@@ -1,51 +1,35 @@
-@at-root
+중첩된 속성
 
-중첩에서 벗어나고 싶을 때 @at-root 키워드를 사용합니다.
-
-중첩 안에서 생성하되 중첩 밖에서 사용해야 경우에 유용합니다.
+font-, margin- 등과 같이 동일한 네임 스페이스를 가지는 속성들을 다음과 같이 사용할 수 있습니다.
 
 SCSS:
 
 SCSS
-.list {
-  $w: 100px;
-  $h: 50px;
-  li {
-    width: $w;
-    height: $h;
-  }
-
-  @at-root .box {
-    width: $w;
-    height: $h;
-  }
+.box {
+  font: {
+    weight: bold;
+    size: 10px;
+    family: sans-serif;
+  };
+  margin: {
+    top: 10px;
+    left: 20px;
+  };
+  padding: {
+    bottom: 40px;
+    right: 30px;
+  };
 }
+
 Compiled to:
 
 CSS
-.list li {
-  width: 100px;
-  height: 50px;
-}
 .box {
-  width: 100px;
-  height: 50px;
-}
-아래 예제 처럼 .list 안에 있는 특정 변수를 범위 밖에서 사용할 수 없기 때문에, 
-위 예제 처럼 @at-root 키워드를 사용해야 합니다.(변수는 아래에서 설명합니다)
-
-SCSS
-.list {
-  $w: 100px;
-  $h: 50px;
-  li {
-    width: $w;
-    height: $h;
-  }
-}
-
-// Error
-.box {
-  width: $w;
-  height: $h;
+  font-weight: bold;
+  font-size: 10px;
+  font-family: sans-serif;
+  margin-top: 10px;
+  margin-left: 20px;
+  padding-bottom: 40px;
+  padding-right: 30px;
 }
