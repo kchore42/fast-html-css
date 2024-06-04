@@ -1,56 +1,99 @@
-키워드 인수
+가변 인수
+
+때때로 입력할 인수의 개수가 불확실한 경우가 있습니다.
+
+그럴 경우 가변 인수(Variable Arguments)를 사용할 수 있습니다.
+
+가변 인수는 매개변수 뒤에 ...을 붙여줍니다.
 
 SCSS
-@mixin 믹스인이름($매개변수A: 기본값, $매개변수B: 기본값) {
+@mixin 믹스인이름($매개변수...) {
   스타일;
 }
 
-@include 믹스인이름($매개변수B: 인수);
-
-Mixin에 전달할 인수를 입력할 때 명시적으로 키워드(변수)를 입력하여 작성할 수 있고, 이를 키워드 인수(Keyword Arguments)라고 합니다.
-
-별도의 인수 입력 순서를 필요로 하지 않아 편리하게 작성할 수 있습니다.
-
-단, 작성하지 않은 인수가 적용될 수 있도록 기본값을 설정해 주는 것이 좋습니다.
+@include 믹스인이름(인수A, 인수B, 인수C);
 
 SCSS
-@mixin position(
-  $p: absolute,
-  $t: null,
-  $b: null,
-  $l: null,
-  $r: null
-) {
-  position: $p;
-  top: $t;
-  bottom: $b;
-  left: $l;
-  right: $r;
+// 인수를 순서대로 하나씩 전달 받다가, 3번째 매개변수($bg-values)는 인수의 개수에 상관없이 받음
+@mixin bg($width, $height, $bg-values...) {
+  width: $width;
+  height: $height;
+  background: $bg-values;
 }
 
-.absolute {
-  // 키워드 인수로 설정할 값만 전달
-  @include position($b: 10px, $r: 20px);
-}
-
-.fixed {
-  // 인수가 많아짐에 따라 가독성을 확보하기 위해 줄바꿈
-
-  @include position(
-    fixed,
-    $t: 30px,
-    $r: 40px
+div {
+  // 위의 Mixin(bg) 설정에 맞게 인수를 순서대로 전달하다가 3번째 이후부터는 개수에 상관없이 전달
+  @include bg(
+    100px,
+    200px,
+    url("/images/a.png") no-repeat 10px 20px,
+    url("/images/b.png") no-repeat,
+    url("/images/c.png")
   );
 }
 
 CSS
-.absolute {
-  position: absolute;
-  bottom: 10px;
-  right: 20px;
+div {
+  width: 100px;
+  height: 200px;
+  background: url("/images/a.png") no-repeat 10px 20px,
+              url("/images/b.png") no-repeat,
+              url("/images/c.png");
 }
-.fixed {
-  position: fixed;
-  top: 30px;
-  right: 40px;
+
+위에선 인수를 받는 매개변수에 ...을 사용하여 가변 인수를 활용했습니다.
+===================================================================
+
+이번엔 반대로 가변 인수를 전달할 값으로 사용해 보겠습니다.
+
+SCSS
+@mixin font(
+  $style: normal,
+  $weight: normal,
+  $size: 16px,
+  $family: sans-serif
+) {
+  font: {
+    style: $style;
+    weight: $weight;
+    size: $size;
+    family: $family;
+  }
+}
+
+div {
+  // 매개변수 순서와 개수에 맞게 전달
+  $font-values: italic, bold, 16px, sans-serif;
+  @include font($font-values...);
+}
+
+span {
+  // 필요한 값만 키워드 인수로 변수에 담아 전달
+  $font-values: (style: italic, size: 22px);
+  @include font($font-values...);
+}
+a {
+  // 필요한 값만 키워드 인수로 전달
+  @include font((weight: 900, family: monospace)...);
+}
+
+CSS
+
+div {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+span {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 22px;
+  font-family: sans-serif;
+}
+a {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 16px;
+  font-family: monospace;
 }
