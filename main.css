@@ -59,3 +59,62 @@ SCSS
     background: url("/images/icon.png");
   }
 }
+
+====================================================================
+
+@include
+선언된 Mixin을 사용(포함)하기 위해서는 @include가 필요합니다.
+
+위에서 선언한 Mixin을 사용해 보겠습니다.
+
+SCSS
+// SCSS
+@include 믹스인이름;
+
+// Sass
++믹스인이름
+SCSS:
+
+SCSS
+// SCSS
+h1 {
+  @include large-text;
+}
+div {
+  @include large-text;
+}
+
+// Sass
+h1
+  +large-text
+div
+  +large-text
+
+Compiled to:
+
+CSS
+h1 {
+  font-size: 22px;
+  font-weight: bold;
+  font-family: sans-serif;
+  color: orange;
+}
+h1::after {
+  content: "!!";
+}
+h1 span.icon {
+  background: url("/images/icon.png");
+}
+
+div {
+  font-size: 22px;
+  font-weight: bold;
+  font-family: sans-serif;
+  color: orange;
+}
+div::after {
+  content: "!!";
+}
+div span.icon {
+  background: url("/images/icon.png");
+}
