@@ -1,28 +1,44 @@
-변수
+변수 유효범위
 
-반복적으로 사용되는 값을 변수로 지정할 수 있습니다.
+변수는 사용 가능한 유효범위(Scope)가 있습니다.
 
-변수 이름 앞에는 항상 $를 붙입니다.
+선언된 블록({}) 내에서만 유효범위를 가집니다.
+
+변수 $color는 .box1의 블록 안에서 설정되었기 때문에, 블록 밖의 .box2에서는 사용할 수 없습니다.
 
 SCSS
-$변수이름: 속성값;
+.box1 {
+  $color: #111;
+  background: $color;
+}
+// Error
+.box2 {
+  background: $color;
+}
+
+
+변수 재 할당
+
+다음과 같이 변수에 변수를 다시 할당(Reassignment)할 수 있습니다.
+
 SCSS:
 
 SCSS
-$color-primary: #e96900;
-$url-images: "/assets/images/";
-$w: 200px;
+$red: #FF0000;
+$blue: #0000FF;
+
+$color-primary: $blue;
+$color-danger: $red;
 
 .box {
-  width: $w;
-  margin-left: $w;
-  background: $color-primary url($url-images + "bg.jpg");
+  color: $color-primary;
+  background: $color-danger;
 }
+
 Compiled to:
 
 CSS
 .box {
-  width: 200px;
-  margin-left: 200px;
-  background: #e96900 url("/assets/images/bg.jpg");
+  color: #0000FF;
+  background: #FF0000;
 }
