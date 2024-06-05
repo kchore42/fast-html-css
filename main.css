@@ -1,15 +1,8 @@
-List 함수
-모든 List 내장 함수는 기존 List 데이터를 갱신하지 않고 새 List 데이터를 반환합니다.
-모든 List 내장 함수는 Map 데이터에서도 사용할 수 있습니다.
+관리(Introspection) 함수
+variable-exists(name) : 변수가 현재 범위에 존재하는지 여부를 반환합니다.(인수는 $없이 변수의 이름만 사용합니다.)
 
-length($list) : List의 개수를 반환합니다.
+unit($number) : 숫자의 단위를 반환합니다.
 
-nth($list, $n) : List에서 n번째 값을 반환합니다.
+unitless($number) : 숫자에 단위가 있는지 여부를 반환합니다.
 
-set-nth($list, $n, $value) : List에서 n번째 값을 다른 값으로 변경합니다.
-
-join($list1, $list2, [$separator]) : 두 개의 List를 하나로 결합합니다.
-
-zip($lists...) : 여러 List들을 하나의 다차원 List로 결합합니다.
-
-index($list, $value) : List에서 특정 값의 index를 반환합니다.
+comparable($number1, $number2) : 두 개의 숫자가 연산 가능한지 여부를 반환합니다.
