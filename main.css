@@ -1,16 +1,15 @@
-숫자 함수
-percentage($number) : 숫자(단위 무시)를 백분율로 변환합니다.
+List 함수
+모든 List 내장 함수는 기존 List 데이터를 갱신하지 않고 새 List 데이터를 반환합니다.
+모든 List 내장 함수는 Map 데이터에서도 사용할 수 있습니다.
 
-round($number) : 정수로 반올림합니다.
+length($list) : List의 개수를 반환합니다.
 
-ceil($number) : 정수로 올림합니다.
+nth($list, $n) : List에서 n번째 값을 반환합니다.
 
-floor($number) : 정수로 내림(버림)합니다.
+set-nth($list, $n, $value) : List에서 n번째 값을 다른 값으로 변경합니다.
 
-abs($number) : 숫자의 절대 값을 반환합니다.
+join($list1, $list2, [$separator]) : 두 개의 List를 하나로 결합합니다.
 
-min($numbers...) : 숫자 중 최소 값을 찾습니다.
+zip($lists...) : 여러 List들을 하나의 다차원 List로 결합합니다.
 
-max($numbers...) : 숫자 중 최대 값을 찾습니다.
-
-random() : 0 부터 1 사이의 난수를 반환합니다.
+index($list, $value) : List에서 특정 값의 index를 반환합니다.
