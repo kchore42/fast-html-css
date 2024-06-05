@@ -1,93 +1,21 @@
-@each
-
-@each는 List와 Map 데이터를 반복할 때 사용합니다.
-
-for in 문과 유사합니다.
+Map 데이터를 반복할 경우 하나의 데이터에 두 개의 변수가 필요합니다.
 
 SCSS
-@each $변수 in 데이터 {
+@each $key변수, $value변수 in 데이터 {
   // 반복 내용
 }
-List 데이터를 반복해 보겠습니다.
-
-SCSS:
-
 SCSS
-// List Data
-$fruits: (apple, orange, banana, mango);
+$fruits-data: (
+  apple: korea,
+  orange: china,
+  banana: japan
+);
 
-.fruits {
-  @each $fruit in $fruits {
-    li.#{$fruit} {
-      background: url("/images/#{$fruit}.png");
-    }
-  }
-}
-Compiled to:
-
-CSS
-.fruits li.apple {
-  background: url("/images/apple.png");
-}
-.fruits li.orange {
-  background: url("/images/orange.png");
-}
-.fruits li.banana {
-  background: url("/images/banana.png");
-}
-.fruits li.mango {
-  background: url("/images/mango.png");
-}
-
-혹시 매번 반복마다 Index 값이 필요하다면 다음과 같이 index() 내장 함수를 사용할 수 있습니다.
-
-SCSS:
-
-SCSS
-$fruits: (apple, orange, banana, mango);
-
-.fruits {
-  @each $fruit in $fruits {
-    $i: index($fruits, $fruit);
-    li:nth-child(#{$i}) {
-      left: 50px * $i;
-    }
-  }
-}
-Compiled to:
-
-CSS
-.fruits li:nth-child(1) {
-  left: 50px;
-}
-.fruits li:nth-child(2) {
-  left: 100px;
-}
-.fruits li:nth-child(3) {
-  left: 150px;
-}
-.fruits li:nth-child(4) {
-  left: 200px;
-}
-
-동시에 여러 개의 List 데이터를 반복 처리할 수도 있습니다.
-
-단, 각 데이터의 Length가 같아야 합니다.
-
-SCSS:
-
-SCSS
-$apple: (apple, korea);
-$orange: (orange, china);
-$banana: (banana, japan);
-
-@each $fruit, $country in $apple, $orange, $banana {
+@each $fruit, $country in $fruits-data {
   .box-#{$fruit} {
     background: url("/images/#{$country}.png");
   }
 }
-Compiled to:
-
 CSS
 .box-apple {
   background: url("/images/korea.png");
