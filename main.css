@@ -1,14 +1,16 @@
-문자 함수
-unquote($string) : 문자에서 따옴표를 제거합니다.
+숫자 함수
+percentage($number) : 숫자(단위 무시)를 백분율로 변환합니다.
 
-quote($string) : 문자에 따옴표를 추가합니다.
+round($number) : 정수로 반올림합니다.
 
-str-insert($string, $insert, $index) : 문자의 index번째에 특정 문자를 삽입합니다.
+ceil($number) : 정수로 올림합니다.
 
-str-index($string, $substring) : 문자에서 특정 문자의 첫 index를 반환합니다.
+floor($number) : 정수로 내림(버림)합니다.
 
-str-slice($string, $start-at, [$end-at]) : 문자에서 특정 문자(몇 번째 글자부터 몇 번째 글자까지)를 추출합니다.
+abs($number) : 숫자의 절대 값을 반환합니다.
 
-to-upper-case($string) : 문자를 대문자를 변환합니다.
+min($numbers...) : 숫자 중 최소 값을 찾습니다.
 
-to-lower-case($string) : 문자를 소문자로 변환합니다.
+max($numbers...) : 숫자 중 최대 값을 찾습니다.
+
+random() : 0 부터 1 사이의 난수를 반환합니다.
