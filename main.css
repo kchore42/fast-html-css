@@ -1,174 +1,61 @@
-조건과 반복
+@for
 
-if 함수
+@for는 스타일을 반복적으로 출력합니다.
 
-조건의 값(true, false)에 따라 두 개의 표현식 중 하나만 반환합니다.
+for 문과 유사합니다.
 
-조건부 삼항 연산자(conditional ternary operator)와 비슷합니다.
+@for는 
 
-조건의 값이 true이면 표현식1을,
+through를 사용하는 형식과 
 
-조건의 값이 false이면 표현식2를 실행합니다.
+to를 사용하는 형식으로 나뉩니다.
 
-SCSS
-if(조건, 표현식1, 표현식2)
-SCSS:
+두 형식은 종료 조건이 해석되는 방식이 다릅니다.
 
 SCSS
-$width: 555px;
-div {
-  width: if($width > 300px, $width, null);
-}
-Compiled to:
 
-CSS
-div {
-  width: 555px;
+// through
+// 종료 만큼 반복
+@for $변수 from 시작 through 종료 {
+  // 반복 내용
 }
 
-@if
-
-@if 지시어는 조건에 따른 분기 처리가 가능하며, if 문(if statements)과 유사합니다.
-
-같이 사용할 수 있는 지시어는 @else, if가 있습니다.
-
-추가 지시어를 사용하면 좀 더 복잡한 조건문을 작성할 수 있습니다.
-
-SCSS
-// @if
-@if (조건) {
-  /* 조건이 참일 때 구문 */
+// to
+// 종료 직전까지 반복
+@for $변수 from 시작 to 종료 {
+  // 반복 내용
 }
 
-// @if @else
-@if (조건) {
-  /* 조건이 참일 때 구문 */
-} @else {
-  /* 조건이 거짓일 때 구문 */
-}
+차이점을 이해하기 위해 다음 예제를 살펴봅시다.
 
-// @if @else if
-@if (조건1) {
-  /* 조건1이 참일 때 구문 */
-} @else if (조건2) {
-  /* 조건2가 참일 때 구문 */
-} @else {
-  /* 모두 거짓일 때 구문 */
-}
-
-조건에 ()는 생략이 가능하기 때문에, () 없이 작성하는 방법이 좀 더 편리할 수 있습니다.
-
-SCSS
-$bg: true;
-div {
-  @if $bg {
-    background: url("/images/a.jpg");
-  }
-}
-SCSS:
-
-SCSS
-$color: orange;
-div {
-  @if $color == strawberry {
-    color: #FE2E2E;
-  } @else if $color == orange {
-    color: #FE9A2E;
-  } @else if $color == banana {
-    color: #FFFF00;
-  } @else {
-    color: #2A1B0A;
-  }
-}
-
-Compiled to:
-
-CSS
-div {
-  color: #FE9A2E;
-}
-
-조건에는 논리 연산자 and, or, not을 사용할 수 있습니다.
+변수는 관례상 $i를 사용합니다.
 
 SCSS:
 
 SCSS
-@function limitSize($size) {
-  @if $size >= 0 and $size <= 200px {
-    @return 200px;
-  } @else {
-    @return 800px;
+// 1부터 3번 반복
+@for $i from 1 through 3 {
+  .through:nth-child(#{$i}) {
+    width : 20px * $i
   }
 }
 
-div {
-  width: limitSize(180px);
-  height: limitSize(340px);
+// 1부터 3 직전까지만 반복(2번 반복)
+@for $i from 1 to 3 {
+  .to:nth-child(#{$i}) {
+    width : 20px * $i
+  }
 }
 Compiled to:
 
 CSS
-div {
-  width: 200px;
-  height: 800px;
-}
+.through:nth-child(1) { width: 20px; }
+.through:nth-child(2) { width: 40px; }
+.through:nth-child(3) { width: 60px; }
 
-다른 예제도 살펴봅시다!
+.to:nth-child(1) { width: 20px; }
+.to:nth-child(2) { width: 40px; }
 
-Sass의 내장 함수 unitless()는 숫자에 단위가 있는지 여부를 반환합니다.
+to는 주어진 값 직전까지만 반복해야할 경우 유용할 수 있습니다.
 
-SCSS:
-
-SCSS
-@mixin pCenter($w, $h, $p: absolute) {
-  @if
-    $p == absolute
-    or $p == fixed
-    // or not $p == relative
-    // or not $p == static
-  {
-    width: if(unitless($w), #{$w}px, $w);
-    height: if(unitless($h), #{$h}px, $h);
-    position: $p;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-}
-
-.box1 {
-  @include pCenter(10px, 20px);
-}
-.box2 {
-  @include pCenter(50, 50, fixed);
-}
-.box3 {
-  @include pCenter(100, 200, relative);
-}
-
-Compiled to:
-
-CSS
-.box1 {
-  width: 10px;
-  height: 20px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-
-.box2 {
-  width: 50px;
-  height: 50px;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
+그러나 :nth-child()에서 특히 유용하게 사용되는 @for는 일반적으로 through를 사용하길 권장합니다.
