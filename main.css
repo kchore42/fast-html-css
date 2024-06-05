@@ -1,26 +1,20 @@
-@while
+색상 함수
+mix($color1, $color2) : 두 개의 색을 섞습니다.
 
-@while은 조건이 false로 평가될 때까지 내용을 반복합니다.
+lighten($color, $amount) : 더 밝은색을 만듭니다.
 
-while 문과 유사하게 잘못된 조건으로 인해 컴파일 중 무한 루프에 빠질 수 있습니다.
+darken($color, $amount) : 더 어두운색을 만듭니다.
 
-사용을 권장하지 않습니다.
+saturate($color, $amount) : 색상의 채도를 올립니다.
 
-SCSS
-@while 조건 {
-  // 반복 내용
-}
-SCSS
-$i: 6;
+desaturate($color, $amount) : 색상의 채도를 낮춥니다.
 
-@while $i > 0 {
-  .item-#{$i} {
-    width: 2px * $i;
-  }
-  $i: $i - 2;
-}
+grayscale($color) : 색상을 회색으로 변환합니다.
 
-CSS
-.item-6 { width: 12px; }
-.item-4 { width: 8px; }
-.item-2 { width: 4px; }
+invert($color) : 색상을 반전시킵니다.
+
+rgba($color, $alpha) : 색상의 투명도를 변경합니다.
+
+opacify($color, $amount) / fade-in($color, $amount) : 색상을 더 불투명하게 만듭니다.
+
+transparentize($color, $amount) / fade-out($color, $amount) : 색상을 더 투명하게 만듭니다.
