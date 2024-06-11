@@ -1,80 +1,111 @@
-Getter 함수와 Setter 함수
+07. 배열
 
-객체 안에 Getter 함수와 Setter 함수를 설정하는 방법을 알아봅시다. 
+이번에는 배열을 배워봅시다. 
 
-객체를 만들고 나면, 다음과 같이 객체안의 값을 수정 할 수도 있는데요,
+이전에 배운 객체는 한 변수 혹은 상수에 여러가지 정보를 담기 위함이였다면, 
 
-const numbers = {
-  a: 1,
-  b: 2
-};
+배열은 여러개의 항목들이 들어있는 리스트와 같습니다.
 
-numbers.a = 5;
-console.log(numbers);
+예를 들어서 숫자 배열을 선언해봅시다.
 
+const array = [1, 2, 3, 4, 5];
+배열을 선언 할 때에는 이렇게 [ ] 안에 감싸주시면 됩니다.
 
-Getter 함수와 Setter 함수를 사용하게 되면 특정 값을 바꾸려고 하거나, 특정 값을 조회하려고 할 때 우리가 원하는 코드를 실행 시킬 수 있습니다.
+배열 안에는 어떤 값이던지 넣을 수 있습니다.
 
-다음 코드를 따라 적어보세요.
+예를 들어서, 객체 배열을 만들어볼까요?
 
-const numbers = {
-  a: 1,
-  b: 2,
-  get sum() {
-    console.log('sum 함수가 실행됩니다!');
-    return this.a + this.b;
-  }
-};
+const objects = [{ name: '멍멍이' }, { name: '야옹이' }];
+배열을 선언하고 나서, n 번째 항목을 조회하고 싶을 땐 다음과 같이 할 수 있습니다.
 
-console.log(numbers.sum);
-numbers.b = 5;
+objects[n];
+한번 다음 코드를 입력해보세요.
 
-console.log(numbers.sum);
+const objects = [{ name: '멍멍이' }, { name: '야옹이' }];
+
+console.log(objects);
+console.log(objects[0]);
+console.log(objects[1]);
 
 
-우리는 numbers.sum() 을 한 것이 아니라 number.sum 을 조회했을 뿐인데, 함수가 실행되고 그 결과값이 출력되었습니다.
+여기서 주의하실 점은, 첫번째 항목이 objects[1] 이 아니라 objects[0] 이라는 것 입니다.
 
-이런식으로 Getter 함수는 특정 값을 조회 할 때 우리가 설정한 함수로 연산된 값을 반환합니다.
+여기서 objects[1] 이 두번째 항목입니다.
+==================================================
+배열에 새 항목 추가하기
 
-이번에는 Setter 함수를 사용해봅시다.
+배열에 새로운 항목을 추가 할 때에는 배열이 지니고있는 내장 함수인 push 함수를 사용합니다.
 
-const numbers = {
-  _a: 1,
-  _b: 2,
-  sum: 3,
-  calculate() {
-    console.log('calculate');
-    this.sum = this._a + this._b;
-  },
-  get a() {
-    return this._a;
-  },
-  get b() {
-    return this._b;
-  },
-  set a(value) {
-    console.log('a가 바뀝니다.');
-    this._a = value;
-    this.calculate();
-  },
-  set b(value) {
-    console.log('b가 바뀝니다.');
-    this._b = value;
-    this.calculate();
-  }
-};
+다음 코드를 실행해보세요.
 
-console.log(numbers.sum);
-numbers.a = 5;
-numbers.b = 7;
-numbers.a = 9;
-console.log(numbers.sum);
-console.log(numbers.sum);
-console.log(numbers.sum);
+const objects = [{ name: '멍멍이' }, { name: '야옹이' }];
+
+objects.push({
+  name: '멍뭉이'
+});
+
+console.log(objects);
 
 
-Setter 함수를 설정 할 때에는 함수의 앞부분에 set 키워드를 붙입니다.
+잘 추가 됐나요?
+===================
+배열의 크기 알아내기
 
-Setter 함수를 설정하고 나면, numbers.a = 5 이렇게 값을 설정했을 때 5 를 함수의 파라미터로 받아오게 됩니다. 위 코드에서는 객체 안에 _a, _b 라는 숫자를 선언해주고, 이 값들을 위한 Getter 와 Setter 함수를 설정해주었습니다.
+배열의 크기를 알아낼 때에는 배열의 length 값을 확인합니다.
 
-아까 전에는 만든 객체에서는 numbers.sum 이 조회 될 때마다 덧셈이 이루어졌었지만, 이제는 a 혹은 b 값이 바뀔 때마다 sum 값을 연산합니다.
+const objects = [{ name: '멍멍이' }, { name: '야옹이' }];
+
+console.log(objects.length);
+
+objects.push({
+  name: '멍뭉이'
+});
+
+console.log(objects.length);
+
+
+length 가 2에서 3으로 올라갔나요?
+
+배열이 push 와 length 말고도 다양한 기능을 가지고 있습니다. 이에 대해선 나중에 다시 알아보겠습니다.
+
+const array = [1, 2, 3, 4, 5];
+배열을 선언할 때 이렇게 [ ] 안에 감싸주면 된다.
+
+const objects = [{name: '멍멍이' }. { name: '야옹이' }];
+
+배열을 선언하고 나서, n번ㅇ째 항복을 조회하고 싶을땐?
+
+odbjects[n];
+
+const objects = [{name: '멍멍이' }. { name: '야옹이' }];
+
+console.log(objects);
+console.log(objects[0]);
+console.log(objects[1]);
+
+====================
+배열에 새 항목 추가하기
+
+배열이 지니고 있는 내장 함수 push 함수 사용
+
+const objects = [{name: '멍멍이' }. { name: '야옹이' }];
+
+objects.push({
+ name: '멍뭉이'
+});
+
+console.log(objects);
+
+==================
+
+배열의 크기 알아내기
+
+크기를 알아낼 때는 배열의 length 값을 확인
+
+const objects = [{name: '멍멍이' }. { name: '야옹이' }];
+
+console.log(objects. length);
+
+objects.push({
+ name: '멍뭉이'
+})
