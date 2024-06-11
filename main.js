@@ -1,111 +1,74 @@
-07. 배열
+08. 반복문
 
-이번에는 배열을 배워봅시다. 
+반복문은 특정 작업을 반복적으로 할 때 사용할 수 있는 구문입니다.
 
-이전에 배운 객체는 한 변수 혹은 상수에 여러가지 정보를 담기 위함이였다면, 
+for
+for 문은 가장 기본적인 반복문입니다. 특정 값에 변화를 주어가면서 우리가 정한 조건이 만족된다면 계속 반복합니다.
 
-배열은 여러개의 항목들이 들어있는 리스트와 같습니다.
+한번 다음 코드를 따라 적어보세요.
 
-예를 들어서 숫자 배열을 선언해봅시다.
-
-const array = [1, 2, 3, 4, 5];
-배열을 선언 할 때에는 이렇게 [ ] 안에 감싸주시면 됩니다.
-
-배열 안에는 어떤 값이던지 넣을 수 있습니다.
-
-예를 들어서, 객체 배열을 만들어볼까요?
-
-const objects = [{ name: '멍멍이' }, { name: '야옹이' }];
-배열을 선언하고 나서, n 번째 항목을 조회하고 싶을 땐 다음과 같이 할 수 있습니다.
-
-objects[n];
-한번 다음 코드를 입력해보세요.
-
-const objects = [{ name: '멍멍이' }, { name: '야옹이' }];
-
-console.log(objects);
-console.log(objects[0]);
-console.log(objects[1]);
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
 
 
-여기서 주의하실 점은, 첫번째 항목이 objects[1] 이 아니라 objects[0] 이라는 것 입니다.
+결과가 0부터 9까지 잘 나타났나요?
 
-여기서 objects[1] 이 두번째 항목입니다.
+for 문을 다음과 같이 사용합니다.
+
+for (초기 구문; 조건 구문; 변화 구문;) {
+  코드
+}
+for 문을 사용 할 때 보통 i++ 를 해서 1씩 증감하는 형태로 사용합니다. 그런데, 1씩 빼는 형태도 가능합니다. 
+다음 코드를 한번 실행해보세요.
+
+for (let i = 10; i > 0; i--) {
+  console.log(i);
+}
+
+
+10부터 1까지 결과가 잘 나타났나요?
+
+for 문은 이렇게 숫자에 변화를 주어가면서 반복적으로 작업을 실행합니다.
 ==================================================
-배열에 새 항목 추가하기
+배열과 for
 
-배열에 새로운 항목을 추가 할 때에는 배열이 지니고있는 내장 함수인 push 함수를 사용합니다.
+이번에는 우리가 이전에 배운 배열과 for 문을 함꼐 활용해보겠습니다. 다음 코드를 작성해보세요.
 
-다음 코드를 실행해보세요.
+const names = ['멍멍이', '야옹이', '멍뭉이'];
 
-const objects = [{ name: '멍멍이' }, { name: '야옹이' }];
+for (let i = 0; i < names.length; i++) {
+  console.log(names[i]);
+}
+이렇게 하면 names 배열 안에있는 원소들을 하나하나 나열 할 수 있습니다.
 
-objects.push({
-  name: '멍뭉이'
-});
+반복문
 
-console.log(objects);
+반복문은 특정 작업을 반복적으로 할 때 사용할 수 있는 구문
 
+for
 
-잘 추가 됐나요?
-===================
-배열의 크기 알아내기
+for문은 가장 기본적인 반복분
 
-배열의 크기를 알아낼 때에는 배열의 length 값을 확인합니다.
+for (let i = 0; i < 10; i++) {
+ console.log(i);
+}
 
-const objects = [{ name: '멍멍이' }, { name: '야옹이' }];
+for(초기 구문; 조건 구문; 변화 구문;) {
+ 코드
+}
 
-console.log(objects.length);
+for 문을 사용할 때 보통 i++를 해서 1씩 증감하는 형태로 사용
 
-objects.push({
-  name: '멍뭉이'
-});
+for(let i = 10; i > 0; i--) {
+ console.log(i);
+}
 
-console.log(objects.length);
+===========
+배열과 for
 
+const names = ['멍멍이', '야옹이', '멍뭉이'];
 
-length 가 2에서 3으로 올라갔나요?
-
-배열이 push 와 length 말고도 다양한 기능을 가지고 있습니다. 이에 대해선 나중에 다시 알아보겠습니다.
-
-const array = [1, 2, 3, 4, 5];
-배열을 선언할 때 이렇게 [ ] 안에 감싸주면 된다.
-
-const objects = [{name: '멍멍이' }. { name: '야옹이' }];
-
-배열을 선언하고 나서, n번ㅇ째 항복을 조회하고 싶을땐?
-
-odbjects[n];
-
-const objects = [{name: '멍멍이' }. { name: '야옹이' }];
-
-console.log(objects);
-console.log(objects[0]);
-console.log(objects[1]);
-
-====================
-배열에 새 항목 추가하기
-
-배열이 지니고 있는 내장 함수 push 함수 사용
-
-const objects = [{name: '멍멍이' }. { name: '야옹이' }];
-
-objects.push({
- name: '멍뭉이'
-});
-
-console.log(objects);
-
-==================
-
-배열의 크기 알아내기
-
-크기를 알아낼 때는 배열의 length 값을 확인
-
-const objects = [{name: '멍멍이' }. { name: '야옹이' }];
-
-console.log(objects. length);
-
-objects.push({
- name: '멍뭉이'
-})
+for (let i = 0; i < names.length; i++) {
+ console.log(names[i]);
+}
