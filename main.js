@@ -1,62 +1,52 @@
-break 와 continue
+09. 배열 내장함수
 
-반복문 안에선 break와 continue를 통하여 반복분에서 벗어나거나, 그 다음 루프를 돌게끔 할 수 있다.
+이번에는 배열을 다룰 때 알고있으면 너무나 유용한 다양한 내장 함수들에 대하여 알아보겠습니다.
 
-for (let i = 0; i < 10; I++) {
- if(i===2) continue; // 다음 루프를 실행
- console.log(i);
- if (i===5) break; // 반복문을 끝내기
+forEach
+
+forEach 는 가장 쉬운 배열 내장함수입니다. 
+
+기존에 우리가 배웠던 for 문을 대체 시킬 수 있습니다. 
+
+예를 들어서 다음과 같은 텍스트 배열이 있다고 가정해봅시다.
+
+const superheroes = ['아이언맨', '캡틴 아메리카', '토르', '닥터 스트레인지'];
+만약, 배열 안에 있는 모든 원소들을 모두 출력해야 한다면 for 문을 사용하여 다음과 같이 구현 할 수 있는데요,
+
+const superheroes = ['아이언맨', '캡틴 아메리카', '토르', '닥터 스트레인지'];
+
+for (let i = 0; i < superheroes.length; i++) {
+  console.log(superheroes[i]);
 }
-i가 2일 땐 continue를 하여 언래 console를 해야 하지만 그 코드를 수행하지 않고 바로 3으로 넘어갑니다.
+배열의 forEach 함수를 사용하면 다음과 같이 구현 할 수 있습니다.
 
-i가 5일 땐 break를 하여 반복문을 종료시킵니다.
+const superheroes = ['아이언맨', '캡틴 아메리카', '토르', '닥터 스트레인지'];
 
-function sum Of(numbers) {
- let sum = 0;
- for (let i = 0; i < numbers.length; i++) { 
-  sum +=numbers[i];
-  }
- return sum;
-}
+superheroes.forEach(hero => {
+  console.log(hero);
+});
 
-const result = sumOf([1, 2, 3, 4, 5]);
-==================================
-퀴즈
-숫자로 이루어진 배열이 주어졌을 때, 해당 숫자 배열안에 들어있는 숫자 중 3보다 큰 숫자로만 이루어진 배열을 새로 만들어서 반환해보세요.
+forEach 함수의 파라미터로는, 각 원소에 대하여 처리하고 싶은 코드를 함수로 넣어줍니다. 
 
-function biggerThanThree(numbers) {
-  /* 구현해보세요 */
-}
-======================================
-①
-function biggerThanThree(numbers) {
-const a =[];
-for (let = i 0; i , numbers.length; i++) {
-if( i < 3 ) continue;
-a.push(number[i]);
-}
-return a;
+이 함수의 파라미터 hero는 각 원소를 가르키게 됩니다.
 
-② 
-function biggerThanThree(numbers) {
-numbers = numbers.filter((number) => number >3);
-return number;
-}
+이렇게 함수형태의 파라미터를 전달하는 것을 콜백함수 라고 부릅니다. '
 
-const numbers2 = [1, 2, 3, 4, 5, 6, 7];
-console.log(biggerThanThree(numbers2)); // [4, 5, 6, 7]
+함수를 등록해주면, forEach 가 실행을 해주는 거죠.
 
-③
-function biggerThanThree(numbers) {
-k = []
-for (let number of number) {
-if(number >3) {
-k.push(number)
-}
+forEach 는 가장 쉬운 배열 내장함수
+
+const superheroes = ['아이언맨', '캡틴 아메리카', '토르', '닥터 스트레인지'];
+
+for (let = 0; i < superheroes.length; I++) {
+ console.log(superheroes[i]);
 }
 
-return k
-}
+const superheroes = ['아이언맨', '캡틴 아메리카', '토르', '닥터 스트레인지'];
+superheroes.foreach(hero =>{
+ console.log(hero);
+});
 
-const numbers = [1, 2, 3, 4, 5, 6, 7];
-console.log(biggerThanThree(numbers2)); // [4, 5, 6, 7]
+함수 형태의 파라미터를 전달하는 것을 콜백함수라고 부른다
+
+함수를 등록해주면, forEach가 실행을 해주는 것
