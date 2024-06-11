@@ -1,40 +1,45 @@
-while
+for...of
 
-while문은 특정 조건이 참이라면 계속해서 반복하는 반복문입니다. 
+for...of문은 배열에 관한 반복문을 돌리기 위해서 만들어진 반복문입니다.
 
-for 문은 특정 숫자를 가지고 숫자의 값을 비교하고, 증감해주면서 반복을 한다면, 
+사실 이 구문은 배워놔도 사용 할 일이 별로 없습니다. 보통 배열을 반복할때에는 배열의 내장함수를 많이 사용합니다. 
 
-while문은 조건을 확인만 하면서 반복을 합니다. 
+그래도 알아는 둡시다.
 
-때문에, 조건문 내부에서 변화를 직접 주어야 합니다.
-
-우리가 가장 처음 작성했던 0 부터 9 까지 콘솔에 출력을하는 반복문을 while 문으로 구현해보겠습니다.
-
-let i = 0;
-while (i < 10) {
-  console.log(i);
-  i++;
-}
-while 문을 사용 할 때에는 조건문이 언젠간 false 가 되도록 신경쓰셔야 합니다. 
-
-만약에 언젠간 false 로 전환이 되지 않는다면 반복문이 끝나지 않고 영원히 반복됩니다.
-
-while
-
-while 특정 조건이 참이라면 계속 반복하는 반복문
-
-for문은 특정 숫자를 가지고 숫자의 값 비교, 증감해주면서 반복
-
-while문은 조건을 확인만 하면서 반복
-
-때문에 조건문 내부에서 변화를 직접 줘야 한다.
-
-let i = 0;
-while (i <10) {
- console.log(i);
- i++;
+let numbers = [10, 20, 30, 40, 50];
+for (let number of numbers) {
+  console.log(number);
 }
 
-while 문을 사용할 때에는 조건문이 언젠가 falserk 가 되도록 신경 써야한다.
 
-만약에 false 전환이 되지 않으면 반복문이 끝나지 않고 영원히 반복됨
+객체를 위한 반복문 for...in
+
+객체를 위한 반복문을 알아보기 전에, 객체의 정보를 배열 형태로 받아올 수 있는 함수 몇가지를 알아보겠습니다.
+
+const doggy = {
+  name: '멍멍이',
+  sound: '멍멍',
+  age: 2
+};
+
+console.log(Object.entries(doggy));
+console.log(Object.keys(doggy));
+console.log(Object.values(doggy));
+
+
+각 함수의 역할은 다음과 같습니다.
+
+Object.entries: [[키, 값], [키, 값]] 형태의 배열로 변환
+Object.keys: [키, 키, 키] 형태의 배열로 변환
+Object.values: [값, 값, 값] 형태의 배열로 변환
+객체가 지니고 있는 값에 대하여 반복을 하고 싶다면 위 함수들을 사용하셔도 되고, for...in 구문을 사용하셔도 됩니다.
+
+const doggy = {
+  name: '멍멍이',
+  sound: '멍멍',
+  age: 2
+};
+
+for (let key in doggy) {
+  console.log(`${key}: ${doggy[key]}`);
+}
