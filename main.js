@@ -1,56 +1,115 @@
+숫자 배열이 주어졌을 때 10보다 큰 숫자의 갯수를 반환하는 함수를 만드세요.
 
-객체 비구조화 할당
-
-print 함수를 보시면 파라미터로 받아온 hero 내부의 값을 조회 할 때 마다 hero. 를 입력하고 있는데, 
-
-객체 비구조화 할당이라는 문법을 사용하면 코드를 더욱 짧고 보기 좋게 작성 할 수 있습니다.
-
-이 문법은 "객체 구조 분해" 라고 불리기도 합니다.
-
-const ironMan = {
-  name: '토니 스타크',
-  actor: '로버트 다우니 주니어',
-  alias: '아이언맨'
-};
-
-const captainAmerica = {
-  name: '스티븐 로저스',
-  actor: '크리스 에반스',
-  alias: '캡틴 아메리카'
-};
-
-function print(hero) {
-  const { alias, name, actor } = hero;
-  const text = `${alias}(${name}) 역할을 맡은 배우는 ${actor} 입니다.`;
-  console.log(text);
+=======================================
+// forEach
+function countBiggerThenTen(numbers){
+let cnt = 0
+numbers.forEach(n => {
+cnt += n>10 ? 1 : 0
+})
+return cnt
 }
 
-print(ironMan);
-print(captainAmerica);
-똑같은 결과가 나타났나요?
+const count = countBiggerThenTen([1, 2, 3, 5, 10, 20, 30, 40, 50, 60])
+console.log(count)
 
-const { alias, name, actor } = hero;
-이 코드가 객체에서 값들을 추출해서 새로운 상수로 선언해 주는 것 입니다.
-
-여기서 더 나아가면, 파라미터 단계에서 객체 비구조화 할당을 할 수도 있습니다.
-
-const ironMan = {
-  name: '토니 스타크',
-  actor: '로버트 다우니 주니어',
-  alias: '아이언맨'
-};
-
-const captainAmerica = {
-  name: '스티븐 로저스',
-  actor: '크리스 에반스',
-  alias: '캡틴 아메리카'
-};
-
-function print({ alias, name, actor }) {
-  const text = `${alias}(${name}) 역할을 맡은 배우는 ${actor} 입니다.`;
-  console.log(text);
+// 출력 :
+5
+============================
+// for
+function countBiggerThenTen(numbers){
+let cnt = 0
+for(let i=0;i<numbers.length;i++) {
+cnt += numbers[i]>10 ? 1 : 0
+}
+return cnt
 }
 
+<<<<<<< HEAD
 print(ironMan);
 print(captainAmerica);
 test
+=======
+const count = countBiggerThenTen([1, 2, 3, 5, 10, 20, 30, 40, 50, 60])
+console.log(count)
+// 출력 :
+5
+==================================
+// map
+function countBiggerThenTen(numbers){
+let cnt = 0;
+numbers.map((n) => {
+cnt += n > 10 ? 1 : 0
+})
+return cnt
+}
+
+const count = countBiggerThenTen([1, 2, 3, 5, 10, 20, 30, 40, 50, 60])
+console.log(count)
+// 출력 :
+5
+================================
+// filter
+function countBiggerThenTen(numbers){
+let cnt = 0;
+numbers.filter((n) => {
+cnt += n > 10 ? 1 : 0
+})
+return cnt
+}
+
+const count = countBiggerThenTen([1, 2, 3, 5, 10, 20, 30, 40, 50, 60])
+console.log(count)
+// 출력 :
+5
+================================
+// reduce
+function countBiggerThenTen(numbers){
+let cnt = numbers.reduce((res, cval, idx, arr) => {
+return res += cval > 10 ? 1 : 0
+}, 0)
+return cnt
+}
+
+const count = countBiggerThenTen([1, 2, 3, 5, 10, 20, 30, 40, 50, 60])
+console.log(count)
+// 출력 :
+5
+===============================
+// sol 1
+const countBiggerThanTen = (numbers) => {
+  const largerThen10 = numbers.filter((nums) => nums > 10);
+  return largerThen10.length;
+};
+
+const count = countBiggerThanTen([1, 2, 3, 5, 10, 20, 30, 40, 50, 60]);
+console.log(count); // 5
+=================================================
+// sol 2
+
+const countBiggerThanTen = (numbers) => {
+  const index = numbers.indexOf(10);
+  const largerThen10 = numbers.splice(index, numbers.length - index);
+  largerThen10.shift();
+  return largerThen10.length;
+};
+
+const count = countBiggerThanTen([1, 2, 3, 5, 10, 20, 30, 40, 50, 60]);
+console.log(count); // 5
+=========================================
+function countBiggerThanTen(numbers) {
+let num = numbers.reduce((accumulate, current) => {
+if(current > 10)
+return ++accumulate;
+else
+return accumulate;
+}, 0);
+
+return num;
+}
+
+const count = countBiggerThanTen([1, 2, 3, 5, 10, 20, 30, 40, 50, 60]);
+console.log(count); // 5
+
+export default countBiggerThanTen;
+>>>>>>> 3e7a74a85efe5b7df3d2bd2e4dc2b2d0934fa2a7
