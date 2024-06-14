@@ -1,28 +1,45 @@
-연습
+알고 있으면 유용한 JS 문법
 
-class Food {
- construcrion(name) {
- this.name = name;
- this.brands =[];
+01. 삼항 연산자
+
+const array = [];
+let text ='';
+if array.length === 0) {
+ text = '배열이 비어있습니다.';
+} else {
+ text = '배열이 비어있지 않습니다.';
 }
- addBrand(brand) {
- this.brands.push(brand)
- }
- print() {
-  console.log('${this.name}을/를 파는 음식점들:')
-  console.log(this.brands.join(','));
- }
-}
+console.log(text);
 
-const pizaa = new Food('피자');
-pizza.addBrand('피자헛');
-pizza.addBrand('도미노 피자) ;
+const array = [];
+let text = array.length === 0 ? '배열이 비어있습니다' : '배열이 비어있지 않습니다.';
 
-const chicken = new Food('치킨');
-chicken.addBrand('굽네치킨');
-chicken.addBrand('BBQ');
+console.log(text);
+삼항 연산자의 사용법은 다음과 같다.
 
-pizza.print()
-chicken.print();
+조건 ? true일 때 : false일 때
+라인의 길이가 너무 길어진다면 다음 과 같이 작성
 
-이런식으로, 클래스를 만들어서 사용하면 같은 형태를 지닌 객체들을 만들 때 객체들이 지닌 값과 함수를 보기 좋은 형태로 쉽게 관리할 수 있다.
+const array = [];
+let text = array.length === 0
+ ? '배열이 비어있습니다.';
+ : '배열이 비어있지 않습니다.';
+
+console.log(text);
+
+삼함 연산자를 주첩해서 쓸 수 있다.
+
+const condition1 = false;
+const condition2 = false;
+
+const value = condition1
+ ?'와우!'
+ :condition2
+ ?'blabla'
+ :'foo';
+
+console.log(value);
+
+가독성이 그렇게 좋지 않으니 이러한 코드는 피하시는 것이 좋습니다. 이런 상황에는 차라리 if문으로 처리하는게 오히려 코드를 읽기가 쉬워질 수도 있습니다.
+
+
