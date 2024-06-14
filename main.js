@@ -1,45 +1,110 @@
 알고 있으면 유용한 JS 문법
 
-01. 삼항 연산자
+02. Truthy and Falsy
 
-const array = [];
-let text ='';
-if array.length === 0) {
- text = '배열이 비어있습니다.';
-} else {
- text = '배열이 비어있지 않습니다.';
+이것은 자바스크립트 문법까지는 아니지만, 알아둬야 하는 개념입니다.
+
+Truthy: true 같은 거
+Falst: false 같은 거
+
+라고 이해하면 된다.
+
+function print(person) {
+ console.log(person.name);
 }
-console.log(text);
 
-const array = [];
-let text = array.length === 0 ? '배열이 비어있습니다' : '배열이 비어있지 않습니다.';
+const person = {
+ name: 'john'
+};
 
-console.log(text);
-삼항 연산자의 사용법은 다음과 같다.
+print(person)
 
-조건 ? true일 때 : false일 때
-라인의 길이가 너무 길어진다면 다음 과 같이 작성
+만약에 이러한 상황에서, 만약 print 함수가 다음과 같이 파라미터가 비어진 채로 실행되었다고 가정
 
-const array = [];
-let text = array.length === 0
- ? '배열이 비어있습니다.';
- : '배열이 비어있지 않습니다.';
+function print(person) {
+ console.log(person.name);
+}
 
-console.log(text);
+const person = {
+ name. 'john'
+};
 
-삼함 연산자를 주첩해서 쓸 수 있다.
+print();
+이 코드는 다음과 같은 에러를 생성
 
-const condition1 = false;
-const condition2 = false;
+TypeError: Cannot read property 'name' of undefined
 
-const value = condition1
- ?'와우!'
- :condition2
- ?'blabla'
- :'foo';
+이러한 상황에서, 만약에 print 함수에서 object가 주어지지 않았다면, 문제가 있다 콘솔 출력?
 
-console.log(value);
+function print(person) {
+ if (person === undefined) {
+  return; 
+}
+ console.log(person.name);
+}
 
-가독성이 그렇게 좋지 않으니 이러한 코드는 피하시는 것이 좋습니다. 이런 상황에는 차라리 if문으로 처리하는게 오히려 코드를 읽기가 쉬워질 수도 있습니다.
+const person = {
+ name: 'John'
+};
+
+print();
+
+그런데 만약에 print 에 null 값이 파라미터로 전달되면 어떨까?
+
+function print(person) {
+ if (person === undefined) {
+  console.log('person이 없네요');
+  return;
+}
+ console.log(person.name);
+
+const person = null;
+print(person); 
+
+또 오류 발생하게 된다.
+
+TypeError: Cannot read property 'name' of null
+
+그러면 또 print 함수에 조건을 추가해줘야 한다.
+
+function print(person) {
+ if (person === undefined || person === unll) {
+  console.log('person'이 없네요');
+  return:
+}
+ console.log(person.name);
+}
+ 
+conse person = unll;
+print(person);
+
+이것을 더 축약해서 작성 가능
+
+function print(person) {
+ if (!person) {
+ console.log('person'이 없네요');
+ return;
+ }
+ console.log(person.name);
+}
+
+const person = null;
+print(person);
+
+이게 작동하는 이유는 , undefined 와 null 은 Falsey 한 값입니다.
+
+Falsy한 값 앞에 느낍표를 붙여주면 true로 전환된다.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
