@@ -1,181 +1,77 @@
-02. async/await
-async/await 문법은 ES8에 해당하는 문법으로서, Promise 를 더욱 쉽게 사용 할 수 있게 해줍니다.
+01. 카운터
+첫번째로 만들어볼것은, 버튼을 클릭하면 숫자가 올라가거나 내려가는 카운터입니다. CodeSandbox 에서 새로운 Vanilla 샌드박스를 만들고, index.js 파일 내용은 비우고, index.html 을 다음과 같이 수정해보세요.
 
-기본적인 사용법을 알아봅시다.
+UI 만들기
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+  </head>
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+  <body>
+    <h2 id="number">0</h2>
+    <div>
+      <button id="increase">+1</button>
+      <button id="decrease">-1</button>
+    </div>
 
-async function process() {
-  console.log('안녕하세요!');
-  await sleep(1000); // 1초쉬고
-  console.log('반갑습니다!');
-}
+    <script src="src/index.js"></script>
+  </body>
+</html>
 
-process();
-async/await 문법을 사용할 때에는, 함수를 선언 할 때 함수의 앞부분에 async 키워드를 붙여주세요. 그리고 Promise 의 앞부분에 await 을 넣어주면 해당 프로미스가 끝날때까지 기다렸다가 다음 작업을 수행 할 수 있습니다.
+DOM 선택하기
+우선, DOM 을 선택해봅시다. index.js 를 다음과 같이 수정해보세요.
 
-위 코드에서는 sleep 이라는 함수를 만들어서 파라미터로 넣어준 시간 만큼 기다리는 Promise 를 만들고, 이를 process 함수에서 사용해주었습니다.
+const number = document.getElementById("number");
+const increase = document.getElementById("increase");
+const decrease = document.getElementById("decrease");
 
-함수에서 async 를 사용하면, 해당 함수는 결과값으로 Promise 를 반환하게 됩니다. 따라서 다음과 같이 코드를 작성 할 수 있습니다.
+console.log(number);
+console.log(increase);
+console.log(decrease);
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
 
-async function process() {
-  console.log('안녕하세요!');
-  await sleep(1000); // 1초쉬고
-  console.log('반갑습니다!');
-}
+각 DOM 에 내장되어있는 기능들은 정말 다양하지만 그 중에서 중요한것 몇가지만 사용해보겠습니다.
 
-process().then(() => {
-  console.log('작업이 끝났어요!');
-});
-async 함수에서 에러를 발생 시킬때에는 throw 를 사용하고, 에러를 잡아낼 때에는 try/catch 문을 사용합니다.
+const number = document.getElementById("number");
+const increase = document.getElementById("increase");
+const decrease = document.getElementById("decrease");
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+console.log(number.innerText); // 내용
+console.log(increase.offsetTop); // top 위치
+console.log(decrease.id); // id
 
-async function makeError() {
-  await sleep(1000);
-  const error = new Error();
-  throw error;
-}
+이제 DOM 이벤트를 설정해봅시다. 버튼들이 클릭 됐을 때 콘솔에 텍스트를 출력하는 이벤트를 설정해보겠습니다.
 
-async function process() {
-  try {
-    await makeError();
-  } catch (e) {
-    console.error(e);
-  }
-}
+const number = document.getElementById("number");
+const increase = document.getElementById("increase");
+const decrease = document.getElementById("decrease");
 
-process();
-
-이번에는, 비동기 함수를 몇개 더 만들어보겠습니다.
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-const getDog = async () => {
-  await sleep(1000);
-  return '멍멍이';
+increase.onclick = () => {
+  console.log("increase 가 클릭됨");
 };
 
-const getRabbit = async () => {
-  await sleep(500);
-  return '토끼';
+decrease.onclick = () => {
+  console.log("decrease 가 클릭됨");
 };
-const getTurtle = async () => {
-  await sleep(3000);
-  return '거북이';
-};
+버튼들을 클릭했을 때 콘솔에 우리가 설정한 텍스트들이 출력되는지 확인해보세요.
 
-async function process() {
-  const dog = await getDog();
-  console.log(dog);
-  const rabbit = await getRabbit();
-  console.log(rabbit);
-  const turtle = await getTurtle();
-  console.log(turtle);
-}
+DOM 에 이벤트를 설정 할 때에는 on이벤트이름 값에 함수를 설정해주면 됩니다. DOM 이벤트의 종류는 정말 다양합니다.
 
-process();
-현재 위 코드에서는 getDog 는 1초, getRabbit 은 0.5초, getTurtle 은 3초가 걸리고 있습니다. 이 함수들을 process 함수에서 연달아서 사용하게 되면서, process 함수가 실행되는 총 시간은 4.5초가 됩니다.
+그럼 이제, 버튼들이 클릭될 때 숫자값을 올리거나 내려보겠습니다.
 
-지금은 getDog -> getRabbit -> getTurtle 순서대로 실행이 되고 있는데요, 하나가 끝나야 다음 작업이 시작하고 있는데, 동시에 작업을 시작하고 싶다면, 다음과 같이 Promise.all 을 사용해야합니다.
+const number = document.getElementById("number");
+const increase = document.getElementById("increase");
+const decrease = document.getElementById("decrease");
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-const getDog = async () => {
-  await sleep(1000);
-  return '멍멍이';
+increase.onclick = () => {
+  const current = parseInt(number.innerText, 10);
+  number.innerText = current + 1;
 };
 
-const getRabbit = async () => {
-  await sleep(500);
-  return '토끼';
+decrease.onclick = () => {
+  const current = parseInt(number.innerText, 10);
+  number.innerText = current - 1;
 };
-const getTurtle = async () => {
-  await sleep(3000);
-  return '거북이';
-};
-
-async function process() {
-  const results = await Promise.all([getDog(), getRabbit(), getTurtle()]);
-  console.log(results);
-}
-
-process();
-
-만약에 여기서 배열 비구조화 할당 문법을 사용한다면 각 결과값을 따로 따로 추출해서 조회 할 수 있습니다.
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-const getDog = async () => {
-  await sleep(1000);
-  return '멍멍이';
-};
-
-const getRabbit = async () => {
-  await sleep(500);
-  return '토끼';
-};
-const getTurtle = async () => {
-  await sleep(3000);
-  return '거북이';
-};
-
-async function process() {
-  const [dog, rabbit, turtle] = await Promise.all([
-    getDog(),
-    getRabbit(),
-    getTurtle()
-  ]);
-  console.log(dog);
-  console.log(rabbit);
-  console.log(turtle);
-}
-
-process();
-Promise.all 를 사용 할 때에는, 등록한 프로미스 중 하나라도 실패하면, 모든게 실패 한 것으로 간주합니다.
-
-이번에는 Promise.race 라는 것에 대해서 알아봅시다. 이 함수는 Promise.all 과 달리, 여러개의 프로미스를 등록해서 실행했을 때 가장 빨리 끝난것 하나만의 결과값을 가져옵니다.
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-const getDog = async () => {
-  await sleep(1000);
-  return '멍멍이';
-};
-
-const getRabbit = async () => {
-  await sleep(500);
-  return '토끼';
-};
-const getTurtle = async () => {
-  await sleep(3000);
-  return '거북이';
-};
-
-async function process() {
-  const first = await Promise.race([
-    getDog(),
-    getRabbit(),
-    getTurtle()
-  ]);
-  console.log(first);
-}
-
-process();
-Promise.race 의 경우엔 가장 다른 Promise 가 먼저 성공하기 전에 가장 먼저 끝난 Promise 가 실패하면 이를 실패로 간주합니다. 따라서, 현재 위의 코드에서 getRabbit 에서 에러를 발생시킨다면 에러를 잡아낼 수 있지만, getTurtle 이나 getDog 에서 발생한 에러는 무시됩니다.
+parseInt 는 문자열을 숫자로 변환해주는 함수입니다. 두번째 10을 넣어준 것은, 10진수로 숫자를 받아오겠다는 의미입니다.
