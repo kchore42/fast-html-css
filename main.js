@@ -1,75 +1,48 @@
--------------------------------------------------------------------------------------------------
+04. 함수의 기본 파라미터
 
-02. Truthy and Falsy(2)
+이번에는 함수의 기본 파라미터를 설정하는 방법에 대해서 알아보겠습니다.
 
-undefined 와 null 은 Falsy 한 값이다. Fasly 한 값 앞에 느낌표 를 붙여주면 true로 전환된다.
 
-console.log(!undefined);
-consolelog(!null);
+한번, 우리가 원의 넓이를 구하는 함수를 만들어보겠습니다.
 
-Falsy 한 값은 이 외에도 몇개 더 있다.
+function calculateCircleArea(r) {
+  return Math.PI * r * r;
 
-console.log(!undefined);
-console.log(!null);
-consolel.log(!0);
-console.log(!'');
-consolel.(!NaN);
+const area = calculateCircleArea(4);
+console.log(area); // 50.26548245743669
+여기서 Math.PI 는 원주율 파이(π) 값을 가르킵니다.
 
-이 값은 모두 true가 됩니다.
+만약 우리가 이 함수에 r 값을 넣어주지 않으면 어떤 결과가 나타날까요?
 
-NAN(= Not A Number)의 의미를 가지고 있다.
-
-보통 NaN 은 문자열을 숫자로 변환하는 자바스크립트 기본 함수 parselnt 라는 함수를 사용하게 될 때 볼 수 있다.
-
-//parseInt() 는 문자열 타입의 매개변수를 정수로 리턴해주는 함수
-
-const num = parselnt('15', 10); // 10진수 15를 숫자로 변환겠다는 의미 
-console.log(num); // 10
-const notnum = parselnt)('야호~', 10);
-console.log(notnum); // NaN
-
-다시 본론으로 돌아와서, Falsy 한 값은 아까 나열한 다섯 가지입니다.
-
-console.log(!undefined);
-console.log(!null);
-console.log(!0);
-console.log(!'');
-console.log(!NaN);
-
-그리고, 그 외의 값은 모두! Truthy한 값입니다.
-
-console.log(!3);
-console.log(!'hello');
-consolel.log(!['array?']
-console.log(![])
-console.log(!{value: 1 });
-
-이번에는 아까와는 반대로 모든 값이 false가 된다.
-
-Truthty한 값과 Falsy 한 값은 if문에서도 사용할 수 있다.
-
-const value = { a: 1 };
-if (value) { 
- console.log('value 가 Truthy 하네요.');
+function calculateCircleArea(r) {
+  return Math.PI * r * r;
 }
 
-value가 Truthy 한 값이기 때문에, 콘솔에 메시지가 출력될 것입니다. 
-반면,  value가 null, undefined, 0, '', NaN 중 하나라면, 나타나지 않을 것이다.
+const area = calculateCircleArea();
+console.log(area); // NaN
 
-그래서 이렇게. Truthy 한 값과 Falsy 한 값을 잘 알아놓으면 조건문을 작성할 때 편하다.
--------------------------------------------------------------------------------------------------
 
-알아두면 유용한 팁 하나!!
+결과는 NaN 이 나옵니다. Not a Number 라는 의미로, 
 
-만약에, 특정 값이 Truthy 한 값이라면, 그렇지 않다면 false로 값을 표현하는 것을 구현해보겠습니다
+우리가 undefined * undefined 이렇게 숫자가 아닌 값에 곱셈을 하니까 이상한 결과물이 나와버렸습니다.
 
-const.= value ={ :1};
+이 함수에서 만약에 r 값이 주어지지 않았다면 기본 값을 1을 사용하도록 설정해봅시다.
 
-const truthy = value ? true: falself;
+우리가 지금까지 배운 것들을 활용하면 이렇게 작성 할 수 있습니다.
 
-우리가 이전에 배운 삼항연산자를 사용하면 쉽게 value 값의 존재 유무에 따라 쉽게 true 및 false
-로 전환이 가능하다.
+function calculateCircleArea(r) {
+  const radius = r || 1;
+  return Math.PI * radius * radius;
+}
 
-const value = { a:1 };
-const truthy = !!value;
-!value 는 false가 되고, 여기에 !false 는 true가 되어서, 결과는 true가 된다.
+const area = calculateCircleArea();
+console.log(area); // 3.141592653589793
+
+ES5 시절엔 위와 같이 하는게 최선이였는데, ES6 에선 다음과 같이 할 수 있게 되었습니다.
+
+function calculateCircleArea(r = 1) {
+  return Math.PI * r * r;
+}
+
+const area = calculateCircleArea();
+console.log(area); // 3.141592653589793
