@@ -1,162 +1,157 @@
-08. 자바스크립트의 Scope 에 대한 이해
-이번에는 자바스크립트의 Scope 에 대해서 알아봅시다. Scope 란, 우리가 변수 혹은 함수를 선언하게 될 때 해당 변수 또는 함수가 유효한 범위를 의미합니다. Scope 는 총 3가지 종류가있습니다.
+01. Promise
+프로미스는 비동기 작업을 조금 더 편하게 처리 할 수 있도록 ES6 에 도입된 기능입니다. 이전에는 비동기 작업을 처리 할 때에는 콜백 함수로 처리를 해야 했었는데요, 콜백 함수로 처리를 하게 된다면 비동기 작업이 많아질 경우 코드가 쉽게 난잡해지게 되었습니다.
 
-Global (전역) Scope: 코드의 모든 범위에서 사용이 가능합니다.
-Function (함수) Scope: 함수 안에서만 사용이 가능합니다.
-Block (블록) Scope: if, for, switch 등 특정 블록 내부에서만 사용이 가능합니다.
-예시를 통한 Scope 이해
-한번, 예시 코드를 보고 Scope 를 이해해봅시다.
+한번 숫자 n 을 파라미터로 받아와서 다섯번에 걸쳐 1초마다 1씩 더해서 출력하는 작업을 setTimeout 으로 구현해봅시다.
 
-const value = 'hello!';
-
-function myFunction() {
-  console.log('myFunction: ');
-  console.log(value);
+function increaseAndPrint(n, callback) {
+  setTimeout(() => {
+    const increased = n + 1;
+    console.log(increased);
+    if (callback) {
+      callback(increased);
+    }
+  }, 1000);
 }
 
-function otherFunction() {
-  console.log('otherFunction: ');
-  const value = 'bye!';
-  console.log(value);
+increaseAndPrint(0, n => {
+  increaseAndPrint(n, n => {
+    increaseAndPrint(n, n => {
+      increaseAndPrint(n, n => {
+        increaseAndPrint(n, n => {
+          console.log('끝!');
+        });
+      });
+    });
+  });
+});
+코드 읽기가 복잡하죠? 이런 식의 코드를 Callback Hell (콜백지옥) 이라고 부릅니다.
+
+비동기적으로 처리해야 하는 일이 많아질수록, 코드의 깊이가 계속 깊어지는 현상이 있는데요, Promise 를 사용하면 이렇게 코드의 깊이가 깊어지는 현상을 방지 할 수 있습니다.
+
+Promise 만들기
+Promise 는 다음과 같이 만듭니다.
+
+const myPromise = new Promise((resolve, reject) => {
+  // 구현..
+})
+Promise 는 성공 할 수도 있고, 실패 할 수도 있습니다. 성공 할 때에는 resolve 를 호출해주면 되고, 실패할 때에는 reject 를 호출해주면 됩니다. 지금 당장은 실패하는 상황은 고려하지 않고, 1초 뒤에 성공시키는 상황에 대해서만 구현을 해보겠습니다.
+
+const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(1);
+  }, 1000);
+});
+
+myPromise.then(n => {
+  console.log(n);
+});
+resolve 를 호출 할 때 특정 값을 파라미터로 넣어주면, 이 값을 작업이 끝나고 나서 사용 할 수 있습니다. 작업이 끝나고 나서 또 다른 작업을 해야 할 때에는 Promise 뒤에 .then(...) 을 붙여서 사용하면 됩니다.
+
+이번에는, 1초뒤에 실패되게끔 해봅시다.
+
+const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    reject(new Error());
+  }, 1000);
+});
+
+myPromise
+  .then(n => {
+    console.log(n);
+  })
+  .catch(error => {
+    console.log(error);
+  });
+실패하는 상황에서는 reject 를 사용하고, .catch 를 통하여 실패했을시 수행 할 작업을 설정 할 수 있습니다.
+
+이제, Promise 를 만드는 함수를 작성해봅시다.
+
+function increaseAndPrint(n) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const value = n + 1;
+      if (value === 5) {
+        const error = new Error();
+        error.name = 'ValueIsFiveError';
+        reject(error);
+        return;
+      }
+      console.log(value);
+      resolve(value);
+    }, 1000);
+  });
 }
 
-myFunction();
-otherFunction();
-
-console.log('global scope: ');
-console.log(value);
-위 코드의 결과는 다음과 같습니다.
+increaseAndPrint(0).then((n) => {
+  console.log('result: ', n);
+})
 
 
+여기까지만 보면, 결국 함수를 전달하는건데, 뭐가 다르지 싶을수도 있습니다. 하지만, Promise 의 속성 중에는, 만약 then 내부에 넣은 함수에서 또 Promise 를 리턴하게 된다면, 연달아서 사용 할 수 있습니다. 다음과 같이 말이죠.
 
-코드의 맨 윗줄에서 선언된 value 값은 Global Scope 로 선언된 값입니다. Global Scope 로 선언된 값은 어디서든지 사용이 가능합니다. myFunction 에서 바로 사용을 할 수 있었지요?
-
-otherFunction 에서는 함수 내부에서 value 값을 'bye!' 로 새로 선언을 해주었습니다. 이렇게 되면, value 라는 값은 Function Scope 로 지정이 되서 해당 값은 otherFunction 내부에서만 유효한 값이 됩니다. 이렇게 값을 설정한다고 해서 기존에 Global Scope 로 선언된 value 값이 바뀌지 않습니다.
-
-또 다른 예시를 확인해봅시다.
-
-const value = 'hello!';
-
-function myFunction() {
-  const value = 'bye!';
-  const anotherValue = 'world';
-  function functionInside() {
-    console.log('functionInside: ');
-    console.log(value);
-    console.log(anotherValue);
-  }
-  functionInside();
+function increaseAndPrint(n) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const value = n + 1;
+      if (value === 5) {
+        const error = new Error();
+        error.name = 'ValueIsFiveError';
+        reject(error);
+        return;
+      }
+      console.log(value);
+      resolve(value);
+    }, 1000);
+  });
 }
 
+increaseAndPrint(0)
+  .then(n => {
+    return increaseAndPrint(n);
+  })
+  .then(n => {
+    return increaseAndPrint(n);
+  })
+  .then(n => {
+    return increaseAndPrint(n);
+  })
+  .then(n => {
+    return increaseAndPrint(n);
+  })
+  .then(n => {
+    return increaseAndPrint(n);
+  })
+  .catch(e => {
+    console.error(e);
+  });
 
-myFunction()
-console.log('global scope: ');
-console.log(value);
-console.log(anotherValue);
+  위 코드는 이렇게 정리를 할 수 있습니다.
 
-
-myFunction 내부에 anotherValue 라는 새로운 값을 선언했고, functionInside 라는 함수도 선언을 했습니다. functionInside 함수에서는 myFunction 에서 선언한 value 값과 anotherValue 값을 조회 할 수 있습니다.
-
-반면, myFunction 밖에서는 anotherValue 를 조회 할 수 없습니다.
-
-이제, 또 다른 예시를 알아봅시다.
-
-const value = 'hello!';
-
-function myFunction() {
-  const value = 'bye!';
-  if (true) {
-    const value = 'world';
-    console.log('block scope: ');
-    console.log(value);
-  }
-  console.log('function scope: ');
-  console.log(value);
+function increaseAndPrint(n) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const value = n + 1;
+      if (value === 5) {
+        const error = new Error();
+        error.name = 'ValueIsFiveError';
+        reject(error);
+        return;
+      }
+      console.log(value);
+      resolve(value);
+    }, 1000);
+  });
 }
 
-myFunction();
-console.log('global scope: ');
-console.log(value);
+increaseAndPrint(0)
+  .then(increaseAndPrint)
+  .then(increaseAndPrint)
+  .then(increaseAndPrint)
+  .then(increaseAndPrint)
+  .then(increaseAndPrint)
+  .catch(e => {
+    console.error(e);
+  });
+Promise 를 사용하면, 비동기 작업의 개수가 많아져도 코드의 깊이가 깊어지지 않게 됩니다.
 
-
-const 로 선언한 값은 Block Scope 로 선언이 됩니다. 따라서, if 문 같은 블록 내에서 새로운 변수/상수를 선언하게 된다면, 해당 블록 내부에서만 사용이 가능하며, 블록 밖의 범위에서 똑같은 이름을 가진 값이 있다고 해도 영향을 주지 않습니다.
-
-let 또한 마찬가지 입니다.
-
-하지만 var 는 어떨까요?
-
-var value = 'hello!';
-
-function myFunction() {
-  var value = 'bye!';
-  if (true) {
-    var value = 'world';
-    console.log('block scope: ');
-    console.log(value);
-  }
-  console.log('function scope: ');
-  console.log(value);
-}
-
-myFunction();
-console.log('global scope: ');
-console.log(value);
-var 는 Function Scope 로 선언이 되므로, if 문 블록 내부에서 선언한 value 값이 블록 밖의 value 에도 영향을 미치게 됩니다.
-
-
-
-Hoisting 이해하기
-Hoisting 이란, 자바스크립트에서 아직 선언되지 않은 함수/변수를 "끌어올려서" 사용 할 수 있는 자바스크립트의 작동 방식을 의미합니다.
-
-다음 코드를 확인해보세요.
-
-myFunction();
-
-function myFunction() {
-  console.log('hello world!');
-}
-위 코드에서는 myFunction 함수를 선언하기 전에, myFunction() 을 호출해주었습니다. 함수가 아직 선언되지 않았음에도 불구하고 코드는 정상적으로 작동하게 됩니다.
-
-이게 잘 작동하는 이유는, 자바스크립트 엔진이 위 코드를 해석하는 과정에서, 다음과 같이 받아들이게 되기 때문입니다.
-
-function myFunction() {
-  console.log('hello world!');
-}
-
-myFunction();
-이러한 현상을, Hoisting 이라고 부릅니다.
-
-변수 또한 Hoisting 됩니다.
-
-예를 들어서, 다음과 같은 코드를 실행한다면,
-
-console.log(number);
-
-
-이런 오류가 발생합니다.
-
-그렇지만, 다음과 같은 코드는
-
-console.log(number);
-var number = 2;
-
-
-undefined 가 출력됩니다.
-
-자바스크립트 엔진이 위 코드를 해석 할 때는 다음과 같이 받아들이게 됩니다.
-
-var number;
-console.log(number);
-number = 2;
-반면, const 와 let 은 hoisting 이 발생하지 않고, 에러가 발생하게 됩니다. Codesandbox 에서는 자바스크립트가 Babel 이라는 도구에 의하여 const 와 let 이 var 로 변환되기 때문에 오류가 발생하지 않습니다. Chrome 개발자 도구의 콘솔에서 다음 코드를 실행해보세요. (혹은 Codesandbox 의 설정에서 .babelrc 를 비워도 됩니다.
-
-function fn() {
-    console.log(a);
-    let a = 2;
-}
-fn();
-
-
-Hoisting 은 자바스크립트 엔진이 갖고 있는 성질이며, Hoisting 을 일부러 할 필요는 없지만, 방지하는 것이 좋습니다. 왜냐하면 Hoisting 이 발생하는 코드는 이해하기 어렵기 때문에 유지보수도 힘들어지고 의도치 않는 결과물이 나타나기 쉽기 때문입니다.
-
-Hoisting 을 방지하기 위해서, 함수의 경우 꼭 선언 후에 호출을 하도록 주의를 하시고, var 대신 const, let 을 위주로 사용하세요. 추가적으로, 나중에 자바스크립트 개발을 본격적으로 하게 될 때에는 ESLint 라는것을 사용하여 Hoisting 이 발생하는 코드는 에디터상에서 쉽게 발견해낼 수 있습니다.
+하지만, 이것도 불편한점이 있긴 합니다. 에러를 잡을 때 몇번째에서 발생했는지 알아내기도 어렵고 특정 조건에 따라 분기를 나누는 작업도 어렵고, 특정 값을 공유해가면서 작업을 처리하기도 까다롭습니다. 다음 섹션에서 배울 async/await 을 사용하면, 이러한 문제점을 깔끔하게 해결 할 수 있습니다.
