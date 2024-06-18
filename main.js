@@ -1,48 +1,115 @@
-04. 함수의 기본 파라미터
+특정 값이 여러 값중 하나인지 확인해야 할 때
+만약, 여러분이 특정 값이 여러 값 중 하나인지 확인을 해야 하는 상황이 생겼다고 해봅시다.
 
-이번에는 함수의 기본 파라미터를 설정하는 방법에 대해서 알아보겠습니다.
+그러면, 이러한 시도를 할 수도 있을 것입니다.
 
-
-한번, 우리가 원의 넓이를 구하는 함수를 만들어보겠습니다.
-
-function calculateCircleArea(r) {
-  return Math.PI * r * r;
-
-const area = calculateCircleArea(4);
-console.log(area); // 50.26548245743669
-여기서 Math.PI 는 원주율 파이(π) 값을 가르킵니다.
-
-만약 우리가 이 함수에 r 값을 넣어주지 않으면 어떤 결과가 나타날까요?
-
-function calculateCircleArea(r) {
-  return Math.PI * r * r;
+function isAnimal(text) {
+  return (
+    text === '고양이' || text === '개' || text === '거북이' || text === '너구리'
+  );
 }
 
-const area = calculateCircleArea();
-console.log(area); // NaN
+console.log(isAnimal('개')); // true
+console.log(isAnimal('노트북')); // false
+비교해야 할 값이 많아질 수록 코드는 길어집니다.
 
+이러한 코드를 간단하게 해결 할 수 있는방법은, 배열을 만들고 배열의 includes 함수를 사용하는 것 입니다.
 
-결과는 NaN 이 나옵니다. Not a Number 라는 의미로, 
-
-우리가 undefined * undefined 이렇게 숫자가 아닌 값에 곱셈을 하니까 이상한 결과물이 나와버렸습니다.
-
-이 함수에서 만약에 r 값이 주어지지 않았다면 기본 값을 1을 사용하도록 설정해봅시다.
-
-우리가 지금까지 배운 것들을 활용하면 이렇게 작성 할 수 있습니다.
-
-function calculateCircleArea(r) {
-  const radius = r || 1;
-  return Math.PI * radius * radius;
+function isAnimal(name) {
+  const animals = ['고양이', '개', '거북이', '너구리'];
+  return animals.includes(name);
 }
 
-const area = calculateCircleArea();
-console.log(area); // 3.141592653589793
+console.log(isAnimal('개')); // true
+console.log(isAnimal('노트북')); // false
 
-ES5 시절엔 위와 같이 하는게 최선이였는데, ES6 에선 다음과 같이 할 수 있게 되었습니다.
+원한다면, animals 배열을 선언하는 것도 생략하고, 화살표 함수로 작성할 수도 있습니다.
 
-function calculateCircleArea(r = 1) {
-  return Math.PI * r * r;
+const isAnimal = name => ['고양이', '개', '거북이', '너구리'].includes(name);
+
+console.log(isAnimal('개')); // true
+console.log(isAnimal('노트북')); // false
+물론, 코드가 짧다고 해서 무조건 좋은것은 아닙니다. 단, 코드가 짧으면서도 읽었을 때 어떤 역할을 하는지 잘 이해가 될 수 있어야 비로소 좋은 코드 입니다.
+
+값에 따라 다른 결과물을 반환 해야 할 때
+이번에는 주어진 값에 따라 다른 결과물을 반환해야 할 때 사용 할 수 있는 유용한 팁을 알아보겠습니다.
+
+예를 들어서, 동물 이름을 받아오면, 동물의 소리를 반환하는 함수를 만들고 싶다고 가정해보겠습니다.
+
+function getSound(animal) {
+  if (animal === '개') return '멍멍!';
+  if (animal === '고양이') return '야옹~';
+  if (animal === '참새') return '짹짹';
+  if (animal === '비둘기') return '구구 구 구';
+  return '...?';
 }
 
-const area = calculateCircleArea();
-console.log(area); // 3.141592653589793
+console.log(getSound('개')); // 멍멍!
+console.log(getSound('비둘기')); // 구구 구 구
+if 문의 코드 블록이 한줄짜리라면 { } 를 생략 할 수도 있습니다.
+
+만약 여기서 우리가 배운 switch case 문을 사용하여 다음과 같이 구현 할 수도 있습니다.
+
+function getSound(animal) {
+  switch (animal) {
+    case '개':
+      return '멍멍!';
+    case '고양이':
+      return '야옹~';
+    case '참새':
+      return '짹짹';
+    case '비둘기':
+      return '구구 구 구';
+    default:
+      return '...?';
+  }
+}
+
+console.log(getSound('개')); // 멍멍!
+console.log(getSound('비둘기')); // 구구 구 구
+참고로 switch 문에서 return 을 할 때에는 break 를 생략해도 됩니다.
+
+우리가 방금 구현한 코드는 큰 문제는 없지만, 이걸 깔끔하게 해결 할 방법을 알고 나면 좀 맘에 들지 않는 코드의 형태입니다.
+
+이 코드를 더욱 깔끔하게 작성하는 방법을 알려드리겠습니다.
+
+function getSound(animal) {
+  const sounds = {
+    개: '멍멍!',
+    고양이: '야옹~',
+    참새: '짹짹',
+    비둘기: '구구 구 구'
+  };
+  return sounds[animal] || '...?';
+}
+
+console.log(getSound('개')); // 멍멍!
+console.log(getSound('비둘기')); // 구구 구 구
+훨씬 더 간략하고 가독성도 좋지요? 이렇게 특정 값에 따라 반환해야 하는 값이 다른 조건이 여러가지 있을 때는 객체를 활용하면 좋습니다.
+
+반면, 값에 따라 실행해야 하는 코드 구문이 다를 때는 어떻게 해야 할까요?
+
+그럴 떄는 객체에 함수를 넣으면 됩니다.
+
+function makeSound(animal) {
+  const tasks = {
+    개() {
+      console.log('멍멍');
+    },
+    고양이() {
+      console.log('고양이');
+    },
+    비둘기() {
+      console.log('구구 구 구');
+    }
+  };
+  if (!tasks[animal]) {
+    console.log('...?');
+    return;
+  }
+  tasks[animal]();
+}
+
+getSound('개');
+getSound('비둘기');
+이것을 잘 알아두면, 앞으로 매우 쓸모 있을 것입니다.
