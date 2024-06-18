@@ -1,115 +1,182 @@
-특정 값이 여러 값중 하나인지 확인해야 할 때
-만약, 여러분이 특정 값이 여러 값 중 하나인지 확인을 해야 하는 상황이 생겼다고 해봅시다.
+06. 비구조화 할당 (구조분해) 문법
+이번에는 1장 섹션 6 에서도 배웠던 비구조화 할당 문법을 잘 활용하는 방법에 대해서 알아보겠습니다.
 
-그러면, 이러한 시도를 할 수도 있을 것입니다.
+이전에 배웠던것을 복습해보자면, 비구조화 할당 문법을 사용하면 다음과 같이 객체 안에 있는 값을 추출해서 변수 혹은 상수로 바로 선언해 줄 수있었죠?
 
-function isAnimal(text) {
-  return (
-    text === '고양이' || text === '개' || text === '거북이' || text === '너구리'
-  );
+const object = { a: 1, b: 2 };
+
+const { a, b } = object;
+
+console.log(a); // 1
+console.log(b); // 2
+그리고, 함수의 파라미터에서도 비구조화 할당을 할 수 있는것도 배웠습니다.
+
+const object = { a: 1, b: 2 };
+
+function print({ a, b }) {
+  console.log(a);
+  console.log(b);
 }
 
-console.log(isAnimal('개')); // true
-console.log(isAnimal('노트북')); // false
-비교해야 할 값이 많아질 수록 코드는 길어집니다.
+print(object);
+그런데 여기서 만약 b 값이 주어지지 않았다고 가정해봅시다.
 
-이러한 코드를 간단하게 해결 할 수 있는방법은, 배열을 만들고 배열의 includes 함수를 사용하는 것 입니다.
+const object = { a: 1 };
 
-function isAnimal(name) {
-  const animals = ['고양이', '개', '거북이', '너구리'];
-  return animals.includes(name);
+function print({ a, b }) {
+  console.log(a);
+  console.log(b);
 }
 
-console.log(isAnimal('개')); // true
-console.log(isAnimal('노트북')); // false
+print(object);
+// 1
+// undefined
+두번째 출력에서 undefined가 나타날 것입니다.
 
-원한다면, animals 배열을 선언하는 것도 생략하고, 화살표 함수로 작성할 수도 있습니다.
+비구조화 할당시 기본값 설정
+이러한 상황에 b 값에 기본 값을 주고 싶다면 이렇게 해줄 수 있습니다.
 
-const isAnimal = name => ['고양이', '개', '거북이', '너구리'].includes(name);
+const object = { a: 1 };
 
-console.log(isAnimal('개')); // true
-console.log(isAnimal('노트북')); // false
-물론, 코드가 짧다고 해서 무조건 좋은것은 아닙니다. 단, 코드가 짧으면서도 읽었을 때 어떤 역할을 하는지 잘 이해가 될 수 있어야 비로소 좋은 코드 입니다.
-
-값에 따라 다른 결과물을 반환 해야 할 때
-이번에는 주어진 값에 따라 다른 결과물을 반환해야 할 때 사용 할 수 있는 유용한 팁을 알아보겠습니다.
-
-예를 들어서, 동물 이름을 받아오면, 동물의 소리를 반환하는 함수를 만들고 싶다고 가정해보겠습니다.
-
-function getSound(animal) {
-  if (animal === '개') return '멍멍!';
-  if (animal === '고양이') return '야옹~';
-  if (animal === '참새') return '짹짹';
-  if (animal === '비둘기') return '구구 구 구';
-  return '...?';
+function print({ a, b = 2 }) {
+  console.log(a);
+  console.log(b);
 }
 
-console.log(getSound('개')); // 멍멍!
-console.log(getSound('비둘기')); // 구구 구 구
-if 문의 코드 블록이 한줄짜리라면 { } 를 생략 할 수도 있습니다.
+print(object);
+// 1
+// 2
+이는 꼭 함수의 파라미터에서만 할 수 있는 것은 아닙니다.
 
-만약 여기서 우리가 배운 switch case 문을 사용하여 다음과 같이 구현 할 수도 있습니다.
+const object = { a: 1 };
 
-function getSound(animal) {
-  switch (animal) {
-    case '개':
-      return '멍멍!';
-    case '고양이':
-      return '야옹~';
-    case '참새':
-      return '짹짹';
-    case '비둘기':
-      return '구구 구 구';
-    default:
-      return '...?';
-  }
-}
+const { a, b = 2 } = object;
 
-console.log(getSound('개')); // 멍멍!
-console.log(getSound('비둘기')); // 구구 구 구
-참고로 switch 문에서 return 을 할 때에는 break 를 생략해도 됩니다.
+console.log(a); // 1
+console.log(b); // 2
+비구조화 할당시 이름 바꾸기
+이번에는, 비구조화 할당을 하는 과정에서 선언 할 값의 이름을 바꾸는 방법을 알아보겠습니다.
 
-우리가 방금 구현한 코드는 큰 문제는 없지만, 이걸 깔끔하게 해결 할 방법을 알고 나면 좀 맘에 들지 않는 코드의 형태입니다.
+예를 들어서 다음과 같은 코드가 있다고 가정해봅시다.
 
-이 코드를 더욱 깔끔하게 작성하는 방법을 알려드리겠습니다.
+const animal = {
+  name: '멍멍이',
+  type: '개'
+};
 
-function getSound(animal) {
-  const sounds = {
-    개: '멍멍!',
-    고양이: '야옹~',
-    참새: '짹짹',
-    비둘기: '구구 구 구'
-  };
-  return sounds[animal] || '...?';
-}
+const nickname = animal.name;
 
-console.log(getSound('개')); // 멍멍!
-console.log(getSound('비둘기')); // 구구 구 구
-훨씬 더 간략하고 가독성도 좋지요? 이렇게 특정 값에 따라 반환해야 하는 값이 다른 조건이 여러가지 있을 때는 객체를 활용하면 좋습니다.
+console.log(nickname); // 멍멍이
+위 코드에서는 animal.name 값을 nickname 값에 담고 있는데요, 이름이 같다면 그냥 우리가 이전에 배웠던 대로 비구조화 할당을 쓰면 되는데 지금은 이름이 서로 다릅니다.
 
-반면, 값에 따라 실행해야 하는 코드 구문이 다를 때는 어떻게 해야 할까요?
+이러한 상황에서는 : 문자를 사용해서 이름을 바꿔줄 수 있습니다.
 
-그럴 떄는 객체에 함수를 넣으면 됩니다.
+const animal = {
+  name: '멍멍이',
+  type: '개'
+};
 
-function makeSound(animal) {
-  const tasks = {
-    개() {
-      console.log('멍멍');
-    },
-    고양이() {
-      console.log('고양이');
-    },
-    비둘기() {
-      console.log('구구 구 구');
+const { name: nickname } = animal
+console.log(nickname);
+위 코드는 'animal 객체 안에 있는 name 을 nickname 이라고 선언하겠다.' 라는 의미입니다.
+
+배열 비구조화 할당
+비구조화 할당은 객체에만 할 수 있는 것이 아닙니다. 배열에서 할 수 있어요.
+
+예시 코드를 봅시다.
+
+const array = [1, 2];
+const [one, two] = array;
+
+console.log(one);
+console.log(two);
+이 문법은 배열 안에 있는 원소를 다른 이름으로 새로 선언해주고 싶을 때 사용하면 매우 유용합니다.
+
+객체 비구조화 할당과 마찬가지로, 기본값 지정이 가능합니다.
+
+const array = [1];
+const [one, two = 2] = array;
+
+console.log(one);
+console.log(two);
+깊은 값 비구조화 할당
+객체의 깊숙한 곳에 들어있는 값을 꺼내는 방법을 알아봅시다.
+
+예를들어서 다음과 같은 객체가 있다고 가정해봅시다.
+
+const deepObject = {
+  state: {
+    information: {
+      name: 'velopert',
+      languages: ['korean', 'english', 'chinese']
     }
-  };
-  if (!tasks[animal]) {
-    console.log('...?');
-    return;
-  }
-  tasks[animal]();
-}
+  },
+  value: 5
+};
+여기서, name, languages, value 값들을 밖으로 꺼내주고 싶다면 어떻게 해야 할까요? 이럴땐 두가지 해결 방법이 있는데요, 첫번째는 비구조화 할당 문법을 두번 사용하는 것입니다.
 
-getSound('개');
-getSound('비둘기');
-이것을 잘 알아두면, 앞으로 매우 쓸모 있을 것입니다.
+const deepObject = {
+  state: {
+    information: {
+      name: 'velopert',
+      languages: ['korean', 'english', 'chinese']
+    }
+  },
+  value: 5
+};
+
+const { name, languages } = deepObject.state.information;
+const { value } = deepObject;
+
+const extracted = {
+  name,
+  languages,
+  value
+};
+
+console.log(extracted); // {name: "velopert", languages: Array[3], value: 5}
+그런데 잠깐! 지금 extracted 객체를 선언 할 때 이런식으로 했는데요
+
+const extracted = {
+  name,
+  languages,
+  value
+}
+이 코드는 다음 코드와 똑같습니다.
+
+const extracted = {
+  name: name,
+  languages: languages,
+  value: value
+}
+만약에 key 이름으로 선언된 값이 존재하다면, 바로 매칭시켜주는 문법입니다. 이 문법은 ES6 의 object-shorthand 문법이라고 부릅니다. (이름은 굳이 알아둘 필요는 없습니다..!)
+
+다시 본론으로 돌아와서, 아까 deepObject 객체에서 names, languages, value 를 추출하는 과정에서 비구조화 할당을 두번 했었죠?
+
+이번엔 두번째 방법, 한번에 모두 추출하는 방법을 알아보겠습니다.
+
+const deepObject = {
+  state: {
+    information: {
+      name: 'velopert',
+      languages: ['korean', 'english', 'chinese']
+    }
+  },
+  value: 5
+};
+
+const {
+  state: {
+    information: { name, languages }
+  },
+  value
+} = deepObject;
+
+const extracted = {
+  name,
+  languages,
+  value
+};
+
+console.log(extracted);
+이렇게 하면 깊숙히 안에 들어있는 값도 객체에서 바로 추출 할 수 있답니다.
