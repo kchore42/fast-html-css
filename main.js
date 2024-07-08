@@ -66,7 +66,7 @@ const increase = document.getElementById("increase");
 const decrease = document.getElementById("decrease");
 
 increase.onclick = () => {
-  const current = parseInt(number.innerText, 10);
+  const curreßnt = parseInt(number.innerText, 10);
   number.innerText = current + 1;
 };
 
@@ -76,4 +76,4 @@ decrease.onclick = () => {
 };
 parseInt 는 문자열을 숫자로 변환해주는 함수입니다. 두번째 10을 넣어준 것은, 10진수로 숫자를 받아오겠다는 의미입니다.
 test111sd
-sss
+ssssß
